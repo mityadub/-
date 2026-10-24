@@ -228,6 +228,116 @@ input[type=range]:focus-visible::-moz-range-thumb{outline:2px solid var(--text);
 .foot h4{margin:0 0 8px;font:500 .66rem/1.3 var(--font-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--text)}
 .foot ul{margin:0;padding-left:1.1em;display:grid;gap:8px}
 .foot .sign{font:300 italic 2rem/1 var(--font-display);color:var(--text)}
+
+/* ---------- quantum journey ---------- */
+.route{list-style:none;margin:22px 0 0;padding:0;display:none}
+@media (min-width:1040px){.route{display:grid}}
+.route a{display:grid;grid-template-columns:2.4em minmax(0,1fr);padding:7px 0 7px 12px;border-left:1px solid var(--line);font:500 .62rem/1.35 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s,border-color .2s}
+.route a:hover{color:var(--mute)}
+.route a.on{color:var(--text);border-left-color:var(--accent)}
+.route a.on span{color:var(--accent)}
+.stops{margin:40px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.stops li:last-child{grid-column:span 2}
+@media (min-width:700px){.stops{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:1180px){.stops{grid-template-columns:repeat(7,minmax(0,1fr))}.stops li:last-child{grid-column:auto}}
+.stops li{background:var(--void)}
+.stops a{display:grid;gap:8px;align-content:start;height:100%;padding:16px 16px 18px;text-decoration:none;transition:background .2s}
+.stops a:hover{background:rgba(var(--accent-rgb),.07)}
+.stops .no{font:300 italic 2.2rem/1 var(--font-display);color:var(--accent)}
+.stops .nm{font:400 1.15rem/1.2 var(--font-display);color:var(--text)}
+.stops .kd{font:500 .58rem/1.4 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.station{margin-top:clamp(84px,10vw,136px);scroll-margin-top:84px}
+.st-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;font:500 .64rem/1.3 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.st-head .no{font:300 italic 2.6rem/1 var(--font-display);letter-spacing:0;text-transform:none;color:var(--accent)}
+.station h3{margin:14px 0 0;max-width:19ch;font:300 clamp(2rem,4.4vw,3.4rem)/1.04 var(--font-display);letter-spacing:-.01em;text-wrap:balance}
+.station h3 em{font-style:italic;color:var(--accent)}
+.station .text{margin-top:22px}
+.station .fig{margin-top:32px}
+.paradox{margin-top:28px;display:grid;grid-template-columns:minmax(0,1fr);border:1px solid var(--line)}
+@media (min-width:860px){.paradox{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}}
+.paradox>div{padding:18px 20px 20px}
+.paradox>div+div{border-top:1px solid var(--line)}
+@media (min-width:860px){.paradox>div+div{border-top:0;border-left:1px solid var(--line)}}
+.paradox .q{background:linear-gradient(135deg,rgba(var(--matter-rgb),.08),transparent 65%)}
+.paradox .a{background:linear-gradient(135deg,rgba(var(--anti-rgb),.06),transparent 65%)}
+.paradox .lab,.riddles .lab{display:block;margin-bottom:10px;font:500 .62rem/1.3 var(--font-mono);letter-spacing:.18em;text-transform:uppercase}
+.paradox .q .lab,.riddles .lab.q{color:var(--matter)}
+.paradox .a .lab,.riddles .lab.a{color:var(--anti)}
+.paradox p{font-size:.95rem;line-height:1.62;color:rgba(235,233,245,.86)}
+.paradox .q p{font:400 1.28rem/1.38 var(--font-display);color:var(--text)}
+.riddles{margin-top:32px;display:grid;gap:1px;background:var(--line);border:1px solid var(--line);grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr))}
+.riddles>article{background:var(--void);padding:22px 20px 24px;display:grid;gap:16px;align-content:start}
+.riddles h4{margin:0;font:400 1.55rem/1.15 var(--font-display);color:var(--text);text-wrap:balance}
+.riddles p{font-size:.92rem;line-height:1.6;color:rgba(235,233,245,.84)}
+.fig>.chips{border-bottom:0;border-top:1px solid var(--line);align-items:center}
+.chips .lab{font:500 .6rem/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-right:2px}
+.chips .lab:not(:first-child){margin-left:12px}
+.fig .ctl .lab output{color:var(--text);font:500 .74rem/1 var(--font-mono)}
+@media (max-width:640px){.fig canvas.tall{height:460px}}
+.reads{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.reads .read{border-bottom:0;align-content:start}
+.reads .read+.read{border-left:1px solid var(--line)}
+@media (max-width:560px){.reads .read{padding:12px}.reads .read .v{font-size:1.15rem}.reads .read .v.xl{font-size:1.6rem}}
+/* cat */
+.catwrap{display:grid;grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){.catwrap{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}.catwrap>.side{border-left:1px solid var(--line)}}
+.scene-wrap{position:relative;background:radial-gradient(70% 60% at 50% 62%,#0d1329,#05070f 80%)}
+.scene{display:block;width:100%;height:auto}
+.scene-lab{position:absolute;left:16px;top:12px;right:16px;font:500 .6rem/1.4 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.scene .box{fill:rgba(20,26,52,.55);stroke:rgba(150,160,230,.35);stroke-width:1.2}
+#catFront{fill:rgba(6,9,20,.38);stroke:rgba(150,160,230,.5);stroke-width:1.2;stroke-dasharray:7 6;transition:fill .6s}
+.scene.opened #catFront{fill:rgba(6,9,20,0);stroke-dasharray:none}
+#catLid{fill:rgba(30,37,72,.92);stroke:rgba(150,160,230,.55);stroke-width:1.2}
+#catSplit{opacity:0;transition:opacity .6s .35s;pointer-events:none}
+#catSplit text{font:500 12px var(--font-mono);letter-spacing:.08em;text-anchor:middle}
+.branch{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:opacity .6s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+.branch.al{color:#ffb35e}
+.branch.de{color:#62e4ff}
+.branch .body{fill:currentColor;fill-opacity:.13}
+.branch .fc{fill:currentColor;stroke:none}
+.branch .thin{stroke-width:1}
+.branch .dash{stroke-dasharray:3 4}
+.branch .liquid{fill:currentColor;fill-opacity:.42;stroke:none}
+.branch .gas{fill:currentColor;fill-opacity:.25;stroke:none}
+.branch .dev{stroke:#9a9eba}
+.branch text{font:500 13px var(--font-mono);fill:currentColor;stroke:none;text-anchor:middle;letter-spacing:.12em}
+.branch.super{animation:ghost 1.3s ease-in-out infinite alternate}
+.branch.de.super{animation-delay:-.65s}
+@keyframes ghost{from{transform:translate(-2px,0)}to{transform:translate(2px,-1.5px)}}
+.tail{transform-origin:528px 348px;animation:sway 2.4s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-7deg)}to{transform:rotate(9deg)}}
+.orbit{transform-origin:185px 168px;animation:spin 7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.branch.super,.tail,.orbit{animation:none}}
+.ket{font:400 1.08rem/1.45 var(--font-mono)!important}
+.rho{display:grid;grid-template-columns:auto repeat(2,minmax(0,1fr));gap:5px 6px;align-items:center;padding:14px 18px 16px;border-bottom:1px solid var(--line);font:500 .6rem/1.2 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.rho .k{grid-column:1/-1;margin-bottom:4px;font-size:.64rem;letter-spacing:.16em}
+.rho .h{text-align:center}
+.rho .cell{height:40px;display:grid;place-items:center;font:500 .82rem/1 var(--font-mono);letter-spacing:0;color:var(--text);border:1px solid var(--line);background:rgba(var(--c),var(--a,.08));transition:background .25s}
+.rho .n{grid-column:1/-1;margin-top:6px;font:400 .8rem/1.5 var(--font-body);letter-spacing:0;text-transform:none;color:var(--mute)}
+/* bell */
+.angles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 24px;padding:14px 18px;border-top:1px solid var(--line)}
+@media (min-width:860px){.angles{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.angles>div{display:grid;gap:2px;min-width:0}
+.angles label{display:flex;justify-content:space-between;gap:8px;font:500 .62rem/1.3 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.angles output{color:var(--text);letter-spacing:0;font-variant-numeric:tabular-nums}
+.bell-panel{display:grid;grid-template-columns:minmax(0,1fr);border-top:1px solid var(--line)}
+@media (min-width:900px){.bell-panel{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}.bell-panel>div+div{border-left:1px solid var(--line)}}
+.tablewrap{overflow-x:auto;padding:4px 18px 12px}
+.btab{width:100%;border-collapse:collapse;font:400 .8rem/1.3 var(--font-mono);font-variant-numeric:tabular-nums;color:var(--text)}
+.btab th,.btab td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.btab th:first-child,.btab td:first-child{text-align:left;padding-left:0}
+.btab th{font-weight:500;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.sbox{padding:16px 18px 18px;display:grid;gap:10px;align-content:start}
+.sbox .k{font:500 .62rem/1.5 var(--font-mono);letter-spacing:.06em;color:var(--mute)}
+.sbox .v{font:400 clamp(2.2rem,4vw,3rem)/1 var(--font-display);color:var(--accent);font-variant-numeric:tabular-nums lining-nums}
+.sbox .v small{font:400 .9rem var(--font-mono);color:var(--mute)}
+.sbox .n{font-size:.84rem;line-height:1.55;color:var(--mute)}
+.gauge{position:relative;height:10px;margin:26px 0 30px;background:rgba(150,160,230,.12)}
+.gauge>i{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,rgba(var(--matter-rgb),.75),rgba(var(--anti-rgb),.95));transition:width .25s}
+.gauge .mk{position:absolute;top:-7px;bottom:-7px;width:1px;background:var(--text)}
+.gauge .mk span{position:absolute;top:28px;left:50%;transform:translateX(-50%);white-space:nowrap;font:400 .6rem/1.3 var(--font-mono);color:var(--mute)}
+.gauge .mk.q span{top:auto;bottom:28px;left:auto;right:-2px;transform:none}
 </style>
 </head>
 <body>
@@ -418,30 +528,294 @@ input[type=range]:focus-visible::-moz-range-thumb{outline:2px solid var(--text);
   </div>
 </section>
 
-<!-- IV. QUANTUM -->
+<!-- IV. QUANTUM JOURNEY -->
 <section class="chap" id="quantum" data-c="quant">
   <div class="wrap">
-    <div class="rail"><span class="num">IV</span><span class="tag">Квантовая физика</span><span class="key">Δx·Δp ≥ ħ/2</span></div>
+    <div class="rail">
+      <span class="num">IV</span><span class="tag">Квантовая физика</span><span class="key">Δx·Δp ≥ ħ/2</span>
+      <ol class="route" aria-label="Станции путешествия">
+        <li><a href="#q-slit"><span>01</span>Две щели</a></li>
+        <li><a href="#q-uncert"><span>02</span>Неопределённость</a></li>
+        <li><a href="#q-tunnel"><span>03</span>Туннель</a></li>
+        <li><a href="#q-cat"><span>04</span>Кот Шрёдингера</a></li>
+        <li><a href="#q-zeno"><span>05</span>Эффект Зенона</a></li>
+        <li><a href="#q-bell"><span>06</span>Запутанность</a></li>
+        <li><a href="#q-more"><span>07</span>Ещё загадки</a></li>
+      </ol>
+    </div>
     <div class="body">
       <h2>Мир, где <em>«где» — вопрос вероятности</em></h2>
       <p class="lede">На масштабах атома у частицы нет траектории, пока ничто не выяснило, где она. Есть волна амплитуды, и её квадрат даёт вероятность найти частицу в каждой точке.</p>
-      <div class="text-2">
-        <p>Опыт с двумя щелями — самый короткий путь в квантовую механику. Электроны посылают по одному. Впервые так сделал Акира Тономура в лаборатории Hitachi в 1989 году. Каждый электрон попадает в одну точку экрана, но из множества точек складываются полосы интерференции, как у волны. Через обе щели проходит не частица, а её амплитуда вероятности.</p>
-        <p>Если поставить детектор, который определяет щель, полосы исчезают. «Наблюдатель» здесь не человек и не сознание. Достаточно любого взаимодействия, которое оставляет информацию о пути. Похожая история с неопределённостью Гейзенберга Δx·Δp ≥ ħ/2: это свойство волн, а не неточность приборов. А запутанные частицы коррелируют сильнее, чем допускает любая локальная теория со скрытыми параметрами. Это показали опыты Аспе, Клаузера и Цайлингера, Нобелевская премия 2022 года.</p>
+      <div class="text">
+        <p>Дальше — путешествие из семи остановок. На каждой есть опыт, который можно запустить своими руками, и парадокс, который он порождает. Здравый смысл здесь будет ошибаться: он вырос среди камней и яблок, а не электронов. Это нормально, так ошибались и создатели квантовой механики.</p>
       </div>
+      <ol class="stops" aria-label="Карта путешествия">
+        <li><a href="#q-slit"><span class="no">01</span><span class="nm">Одна частица, две дороги</span><span class="kd">Опыт · две щели</span></a></li>
+        <li><a href="#q-uncert"><span class="no">02</span><span class="nm">Почему атом не схлопывается</span><span class="kd">Опыт · неопределённость</span></a></li>
+        <li><a href="#q-tunnel"><span class="no">03</span><span class="nm">Сквозь стену</span><span class="kd">Опыт · туннельный эффект</span></a></li>
+        <li><a href="#q-cat"><span class="no">04</span><span class="nm">Жив и мёртв?</span><span class="kd">Мысленный опыт · кот</span></a></li>
+        <li><a href="#q-zeno"><span class="no">05</span><span class="nm">Чайник не закипит</span><span class="kd">Опыт · эффект Зенона</span></a></li>
+        <li><a href="#q-bell"><span class="no">06</span><span class="nm">Жуткое дальнодействие</span><span class="kd">Опыт · запутанность</span></a></li>
+        <li><a href="#q-more"><span class="no">07</span><span class="nm">Ластик, друг Вигнера и мифы</span><span class="kd">Парадоксы</span></a></li>
+      </ol>
 
-      <figure class="fig">
-        <canvas id="slit" role="img" aria-label="Опыт с двумя щелями: частицы по одной летят от источника через две щели на экран, справа растёт гистограмма попаданий."></canvas>
-        <div class="ctl">
-          <div class="btns">
-            <button class="btn" id="slitObs" type="button" aria-pressed="false">Детектор щели: выключен</button>
-            <button class="btn" id="slitReset" type="button">Очистить экран</button>
+      <!-- 01 -->
+      <article class="station" id="q-slit">
+        <div class="st-head"><span class="no">01</span><span>Опыт · двойная щель</span></div>
+        <h3>Одна частица, <em>две дороги</em></h3>
+        <div class="text"><p>Электроны посылают к двум щелям по одному. Впервые так сделал Акира Тономура в лаборатории Hitachi в 1989 году. Каждый электрон оставляет на экране одну точку, но из тысяч точек складываются полосы, как от двух встретившихся волн. Включите детектор щели и посмотрите, что станет с полосами.</p></div>
+        <figure class="fig">
+          <canvas id="slit" role="img" aria-label="Опыт с двумя щелями: частицы по одной летят от источника через две щели на экран, справа растёт гистограмма попаданий."></canvas>
+          <div class="ctl">
+            <div class="btns">
+              <button class="btn" id="slitObs" type="button" aria-pressed="false">Детектор щели: выключен</button>
+              <button class="btn" id="slitReset" type="button">Очистить экран</button>
+            </div>
+            <div class="grow"><label for="slitRate">Частиц в секунду</label><input type="range" id="slitRate" min="1" max="400" value="30"><output id="slitRateOut" for="slitRate">30</output></div>
+            <span class="lab">На экране: <output id="slitCount">0</output></span>
           </div>
-          <div class="grow"><label for="slitRate">Частиц в секунду</label><input type="range" id="slitRate" min="1" max="400" value="30"><output id="slitRateOut" for="slitRate">30</output></div>
-          <span class="lab">На экране: <output id="slitCount">0</output></span>
+          <figcaption>Схема, масштабы подобраны для наглядности. Без детектора попадания распределены по формуле I ∝ cos²(πd·sinθ/λ)·sinc²(πa·sinθ/λ), где d — расстояние между щелями, a — их ширина. Тонкая линия на гистограмме — ожидаемое распределение. С детектором складываются два пятна от отдельных щелей, и интерференция пропадает. Волны за преградой показывают амплитуду: без детектора они складываются с учётом знака, с детектором — без него.</figcaption>
+        </figure>
+        <div class="paradox">
+          <div class="q"><span class="lab">Парадокс</span><p>Если электрон — частица, он проходит через одну щель. Откуда тогда полосы, которые получаются только от сложения двух волн?</p></div>
+          <div class="a"><span class="lab">Разгадка</span><p>Через обе щели проходит не частица, а её амплитуда вероятности. Две амплитуды складываются с учётом знака, и там, где они гасят друг друга, электрон не появляется никогда. Детектор оставляет «метку пути», и амплитуды перестают складываться. «Наблюдатель» здесь — любое взаимодействие, оставившее след, а не человек и не сознание.</p></div>
         </div>
-        <figcaption>Схема, масштабы подобраны для наглядности. Без детектора попадания распределены по формуле I ∝ cos²(πd·sinθ/λ)·sinc²(πa·sinθ/λ), где d — расстояние между щелями, a — их ширина. Тонкая линия на гистограмме показывает ожидаемое распределение. С детектором складываются два пятна от отдельных щелей, и интерференция пропадает. Волны за преградой изображают амплитуду: без детектора они складываются с учётом знака, с детектором — без него.</figcaption>
-      </figure>
+      </article>
+
+      <!-- 02 -->
+      <article class="station" id="q-uncert">
+        <div class="st-head"><span class="no">02</span><span>Опыт · принцип неопределённости</span></div>
+        <h3>Чем точнее «где», <em>тем хуже известно «куда»</em></h3>
+        <div class="text"><p>Волновой пакет — это сумма волн с разными импульсами. Чтобы сжать его в пространстве, приходится складывать всё более разные волны, и разброс импульса растёт. Это свойство любых волн, даже звуковых, а не несовершенство приборов. Для частицы оно записывается так: Δx·Δp ≥ ħ/2. Двигайте ползунок и следите за правым графиком.</p></div>
+        <figure class="fig">
+          <canvas id="uncert" class="tall" role="img" aria-label="Слева волновой пакет электрона в пространстве, справа распределение его скоростей. Чем уже пакет, тем шире распределение скоростей."></canvas>
+          <div class="ctl">
+            <div class="grow"><label for="uxRange">Ширина пакета Δx</label><input type="range" id="uxRange" min="0" max="1000" value="350"><output id="uxOut" for="uxRange">0,1 нм</output></div>
+          </div>
+          <div class="chips" role="group" aria-label="Готовые размеры">
+            <button class="chip" type="button" data-x="0.053">Атом водорода, 0,05 нм</button>
+            <button class="chip" type="button" data-x="0.5">Молекула, 0,5 нм</button>
+            <button class="chip" type="button" data-x="2">Наночастица, 2 нм</button>
+          </div>
+          <div class="status">Разброс скоростей электрона: <span id="uvOut">—</span>. Произведение Δx·Δp здесь равно ħ/2: это минимум, и его даёт только гауссов пакет.</div>
+          <figcaption>Расчёт для электрона: Δv = ħ/(2mΔx). Высота графиков нормирована, важна их ширина. Длина несущей волны выбрана для наглядности.</figcaption>
+        </figure>
+        <div class="paradox">
+          <div class="q"><span class="lab">Парадокс</span><p>По классической физике электрон, кружащий вокруг ядра, должен излучать и упасть на ядро примерно за 10<sup>−11</sup> секунды. Почему атомы вообще существуют?</p></div>
+          <div class="a"><span class="lab">Разгадка</span><p>Чтобы упасть на ядро, электрону пришлось бы сжаться в крошечную область. Тогда разброс его импульса, а с ним и кинетическая энергия, резко выросли бы. Размер атома, около 0,05 нм, — это равновесие между притяжением ядра и этой «квантовой теснотой». Нажмите «Атом водорода»: разброс скоростей выйдет около 1000 км/с. Это тот же порядок, что и скорость электрона в атоме водорода, около 2200 км/с.</p></div>
+        </div>
+      </article>
+
+      <!-- 03 -->
+      <article class="station" id="q-tunnel">
+        <div class="st-head"><span class="no">03</span><span>Опыт · туннельный эффект</span></div>
+        <h3>Сквозь стену, <em>которую нельзя перепрыгнуть</em></h3>
+        <div class="text"><p>Это не мультфильм, а решение уравнения Шрёдингера, которое браузер считает прямо сейчас. Волновой пакет налетает на барьер выше своей энергии. Мяч в такой ситуации отскакивает всегда, а волна частично проходит насквозь. Высота графика — вероятность найти частицу, цвет — фаза волны.</p></div>
+        <figure class="fig">
+          <canvas id="tunnel" role="img" aria-label="Волновой пакет налетает на потенциальный барьер: большая часть отражается, малая проходит насквозь."></canvas>
+          <div class="reads">
+            <div class="read"><span class="k">Прошло насквозь</span><span class="v xl" id="tunSim">0 %</span></div>
+            <div class="read"><span class="k">По формуле</span><span class="v" id="tunTh">—</span><span class="n">для энергии центра пакета</span></div>
+            <div class="read"><span class="k">Классический мяч</span><span class="v" id="tunCl">0 %</span></div>
+          </div>
+          <div class="ctl">
+            <div class="grow"><label for="tunH">Высота барьера</label><input type="range" id="tunH" min="50" max="300" value="150"><output id="tunHOut" for="tunH">1,5 E</output></div>
+            <div class="grow"><label for="tunW">Толщина</label><input type="range" id="tunW" min="10" max="120" value="35"><output id="tunWOut" for="tunW">0,35 λ</output></div>
+            <div class="btns"><button class="btn" id="tunGo" type="button">Запустить снова</button></div>
+          </div>
+          <figcaption>Одномерное уравнение Шрёдингера, схема Кранка — Николсон, 1000 точек сетки. Высота барьера задана в долях энергии частицы E, толщина — в длинах её волны λ. Если прошедшая волна слишком мала, справа от барьера она повторена пунктиром в увеличенном виде, с подписью масштаба. Пакет содержит небольшой разброс энергий, поэтому результат расчёта немного отличается от формулы для одной энергии.</figcaption>
+        </figure>
+        <div class="paradox">
+          <div class="q"><span class="lab">Парадокс</span><p>Энергии частицы не хватает даже на то, чтобы находиться внутри барьера. Как она оказывается по другую сторону?</p></div>
+          <div class="a"><span class="lab">Разгадка</span><p>Внутри барьера волна не обрывается, а затухает по экспоненте. Если стена тонкая, хвост волны успевает выйти наружу. Без этого не светило бы Солнце: протонам в его ядре не хватает энергии преодолеть взаимное отталкивание, и сливаются они благодаря туннелированию. На нём же работают альфа-распад, туннельный микроскоп и флеш-память. Нобелевскую премию 2025 года Кларк, Деворе и Мартинис получили за туннелирование в сверхпроводящей цепи на чипе размером около сантиметра.</p></div>
+        </div>
+      </article>
+
+      <!-- 04 -->
+      <article class="station" id="q-cat">
+        <div class="st-head"><span class="no">04</span><span>Мысленный опыт · 1935</span></div>
+        <h3>Кот, который жив <em>и мёртв одновременно?</em></h3>
+        <div class="text"><p>Эрвин Шрёдингер придумал этот опыт, чтобы показать абсурдность буквального прочтения квантовой механики. В закрытой коробке лежат радиоактивный атом, счётчик Гейгера, молоток и колба с ядом. Распадётся атом — счётчик щёлкнет, молоток разобьёт колбу, кот погибнет. Атом находится в суперпозиции «распался» и «не распался». Выходит, и кот тоже, пока коробку не открыли? Подождите немного и откройте коробку. Потом смените интерпретацию и повторите.</p></div>
+        <figure class="fig">
+          <div class="catwrap">
+            <div class="scene-wrap">
+              <svg class="scene" id="catScene" viewBox="0 0 720 392" role="img" aria-label="Коробка Шрёдингера: атом, счётчик Гейгера, молоток, колба с ядом и кот. Пока коробка закрыта, обе версии событий нарисованы полупрозрачными, с весами вероятностей.">
+                <defs><filter id="gasBlur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter></defs>
+                <polygon class="box" points="620,118 660,88 660,338 620,368"/>
+                <polygon class="box" points="150,88 660,88 660,338 150,338" style="fill:rgba(12,16,34,.6)"/>
+                <g id="catAlive" class="branch al">
+                  <g class="orbit"><ellipse cx="185" cy="168" rx="18" ry="6"/><ellipse cx="185" cy="168" rx="18" ry="6" transform="rotate(60 185 168)"/><ellipse cx="185" cy="168" rx="18" ry="6" transform="rotate(-60 185 168)"/></g>
+                  <circle cx="185" cy="168" r="5" class="fc"/>
+                  <g class="dev"><rect x="150" y="238" width="104" height="62" rx="4"/><rect x="160" y="224" width="66" height="14" rx="7"/><circle cx="228" cy="270" r="15"/><path d="M254 262 H286 V198"/></g>
+                  <line x1="228" y1="270" x2="216" y2="260"/>
+                  <g transform="rotate(-48 300 192)"><line x1="300" y1="192" x2="356" y2="192"/><rect x="352" y="181" width="18" height="22" rx="2" class="body"/></g>
+                  <circle cx="300" cy="192" r="4" class="fc"/>
+                  <path d="M342 236 h16 v24 a30 30 0 1 1 -16 0 z" class="body"/><path d="M324 298 a30 30 0 0 0 52 0 z" class="liquid"/>
+                  <path class="tail" d="M528 348 C560 348 570 322 556 300"/>
+                  <path d="M472 352 C464 318 472 282 500 274 C528 282 536 318 528 352 Z" class="body"/>
+                  <circle cx="500" cy="258" r="19" class="body"/>
+                  <path d="M485 247 L482 228 L497 241 Z" class="body"/><path d="M503 241 L518 228 L515 247 Z" class="body"/>
+                  <ellipse cx="493" cy="256" rx="2.2" ry="3.4" class="fc"/><ellipse cx="507" cy="256" rx="2.2" ry="3.4" class="fc"/>
+                  <path d="M497 264 l3 3 l3 -3"/>
+                  <path d="M488 265 l-16 -2 M488 268 l-16 3 M512 265 l16 -2 M512 268 l16 3" class="thin"/>
+                  <text x="474" y="386">жив</text>
+                </g>
+                <g id="catDead" class="branch de">
+                  <circle cx="185" cy="168" r="4" class="fc"/><path d="M190 173 L205 192" class="dash"/><circle cx="208" cy="196" r="3" class="fc"/>
+                  <g class="dev"><rect x="150" y="238" width="104" height="62" rx="4"/><rect x="160" y="224" width="66" height="14" rx="7"/><circle cx="228" cy="270" r="15"/><path d="M254 262 H286 V198"/></g>
+                  <line x1="228" y1="270" x2="240" y2="260"/>
+                  <path d="M230 214 q8 -8 16 0 M224 205 q14 -14 28 0" class="thin"/>
+                  <g transform="rotate(32 300 192)"><line x1="300" y1="192" x2="356" y2="192"/><rect x="352" y="181" width="18" height="22" rx="2" class="body"/></g>
+                  <circle cx="300" cy="192" r="4" class="fc"/>
+                  <path d="M342 238 h16 v14 l-5 6 l-6 -4 l-5 5 z" class="body"/>
+                  <path d="M326 320 l8 -14 l6 12 z M350 322 l6 -16 l9 13 z M368 314 l10 -9 l2 13 z" class="body"/>
+                  <g filter="url(#gasBlur)"><circle cx="338" cy="284" r="18" class="gas"/><circle cx="364" cy="268" r="22" class="gas"/><circle cx="352" cy="302" r="16" class="gas"/></g>
+                  <path d="M556 344 C576 346 594 348 610 344"/>
+                  <ellipse cx="510" cy="340" rx="48" ry="14" class="body"/>
+                  <circle cx="455" cy="340" r="15" class="body"/>
+                  <path d="M446 330 L431 322 L443 337 Z" class="body"/><path d="M452 326 L447 310 L461 326 Z" class="body"/>
+                  <path d="M445 336 l6 6 M451 336 l-6 6"/>
+                  <path d="M488 353 l-6 6 M506 354 l-3 7 M528 353 l3 7 M546 350 l6 6"/>
+                  <text x="552" y="386">мёртв</text>
+                </g>
+                <rect id="catFront" x="110" y="118" width="510" height="250"/>
+                <polygon id="catLid" points="110,118 150,88 660,88 620,118"/>
+                <g id="catSplit"><line x1="368" y1="128" x2="368" y2="362" stroke="rgba(235,233,245,.5)" stroke-dasharray="4 5"/><text id="branchA" x="240" y="168" fill="#ffb35e">ветвь 1</text><text id="branchD" x="496" y="168" fill="#62e4ff">ветвь 2</text></g>
+              </svg>
+              <p class="scene-lab" id="catLab">Коробка закрыта · так кота описывает волновая функция</p>
+            </div>
+            <div class="side">
+              <div class="read"><span class="k">Состояние</span><span class="v ket" id="catKet">|ψ⟩ = 1,00 |жив⟩ + 0,00 |мёртв⟩</span></div>
+              <div class="read"><span class="k">Кот жив с вероятностью</span><span class="v xl" id="catP">100 %</span></div>
+              <div class="rho" aria-label="Матрица плотности">
+                <span class="k">Матрица плотности</span>
+                <span></span><span class="h">жив</span><span class="h">мёртв</span>
+                <span>жив</span><span class="cell" id="rhoAA" style="--c:255,179,94">1,00</span><span class="cell" id="rhoAD" style="--c:158,138,255">0,00</span>
+                <span>мёртв</span><span class="cell" id="rhoDA" style="--c:158,138,255">0,00</span><span class="cell" id="rhoDD" style="--c:98,228,255">0,00</span>
+                <span class="n">На диагонали — вероятности. Вне диагонали — «квантовость»: пока эти числа не нули, кот в суперпозиции, а не просто неизвестно какой.</span>
+              </div>
+              <div class="read"><span class="k">Коробку открывали</span><span class="v" id="catStats">0 раз</span><span class="n" id="catStatsN">Откройте коробку несколько раз при одном и том же времени: доля живых котов приблизится к вероятности.</span></div>
+            </div>
+          </div>
+          <div class="chips" role="group" aria-label="Интерпретация">
+            <span class="lab">Интерпретация</span>
+            <button class="chip" type="button" data-i="copen" aria-pressed="true">Копенгагенская</button>
+            <button class="chip" type="button" data-i="mwi" aria-pressed="false">Многомировая</button>
+            <button class="chip" type="button" data-i="deco" aria-pressed="false">Декогеренция</button>
+          </div>
+          <div class="ctl">
+            <div class="grow"><label for="catT">Прошло времени</label><input type="range" id="catT" min="0" max="300" value="0"><output id="catTOut" for="catT">0,00 T½</output></div>
+            <div class="btns">
+              <button class="btn" id="catWait" type="button" aria-pressed="false">Ждать</button>
+              <button class="btn" id="catOpen" type="button">Открыть коробку</button>
+              <button class="btn" id="catReset" type="button">Закрыть и начать заново</button>
+            </div>
+          </div>
+          <div class="status" id="catStatus" aria-live="polite"></div>
+          <figcaption>T½ — период полураспада атома: за это время он распадается с вероятностью 50 %. Вероятность, что кот жив, равна 2<sup>−t/T½</sup>, а амплитуды — квадратным корням из вероятностей. Рисунок иллюстрирует мысленный опыт: пока коробка закрыта, обе версии событий показаны полупрозрачными, по весу каждой.</figcaption>
+        </figure>
+        <div class="paradox">
+          <div class="q"><span class="lab">Парадокс</span><p>Атом описывается суперпозицией, а кот связан с атомом цепочкой событий. Где кончается суперпозиция и начинается обычный мир, где коты либо живы, либо мертвы?</p></div>
+          <div class="a"><span class="lab">Разгадка — частичная</span><p>Это проблема измерения, и полного ответа нет до сих пор. Большую часть объясняет декогеренция: кот постоянно обменивается с воздухом, светом и теплом, и суперпозиция почти мгновенно расползается по окружению. Для любого наблюдателя кот становится просто живым или мёртвым, только неизвестно каким. Почему выпал именно этот исход, декогеренция не объясняет. Здесь интерпретации и расходятся.</p></div>
+        </div>
+        <dl class="facts">
+          <div><dt>2019 · Вена</dt><dd><span class="big">~2000 атомов</span>Столько атомов было в молекулах, которые прошли интерферометр в суперпозиции двух путей.</dd></div>
+          <div><dt>2023 · ETH Цюрих</dt><dd><span class="big">16 мкг</span>Масса кристалла, который удалось перевести в «кошачье» состояние — суперпозицию двух колебаний.</dd></div>
+          <div><dt>Честно</dt><dd><span class="big">0 котов</span>Опыт остался мысленным. С настоящими котами его никто не ставил.</dd></div>
+        </dl>
+      </article>
+
+      <!-- 05 -->
+      <article class="station" id="q-zeno">
+        <div class="st-head"><span class="no">05</span><span>Опыт · квантовый эффект Зенона</span></div>
+        <h3>Чайник, за которым следят, <em>и правда не закипает</em></h3>
+        <div class="text"><p>Излучение переводит атом из исходного состояния в возбуждённое: за время T переход происходит наверняка. А теперь будем проверять атом N раз за это время. Каждая проверка почти всегда находит его в исходном состоянии и возвращает процесс к началу. Чем чаще проверки, тем реже переход. Так и вышло в опыте Уэйна Итано и коллег (NIST, 1990) с ионами бериллия.</p></div>
+        <figure class="fig">
+          <canvas id="zeno" class="tall" role="img" aria-label="Слева состояние атома на круге, в центре вероятность перехода во времени с отметками проверок, справа итоговая вероятность в зависимости от числа проверок."></canvas>
+          <div class="ctl">
+            <div class="grow"><label for="zenoN">Проверок за время T</label><input type="range" id="zenoN" min="0" max="14" step="1" value="0"><output id="zenoNOut" for="zenoN">1</output></div>
+            <div class="btns"><button class="btn" id="zenoRun" type="button">Запустить атом</button><button class="btn" id="zenoBatch" type="button">+100 атомов</button></div>
+          </div>
+          <div class="status" id="zenoStatus" aria-live="polite"></div>
+          <figcaption>Вероятность перехода к моменту T при N равномерных проверках: P = ½·(1 − cos<sup>N</sup>(π/N)). Именно эту формулу проверяли в NIST, и измерения с ней согласились. На круге слева верхняя точка — исходное состояние, нижняя — возбуждённое. Белая линия на графике — путь одного атома: при каждой проверке он «перескакивает» на один из полюсов.</figcaption>
+        </figure>
+        <div class="paradox">
+          <div class="q"><span class="lab">Парадокс</span><p>Взгляд ничего не толкает. Как простое наблюдение может остановить процесс?</p></div>
+          <div class="a"><span class="lab">Разгадка</span><p>Сразу после проверки атом точно в исходном состоянии, а вероятность перехода растёт сначала очень медленно, как квадрат прошедшего времени. Если разделить время T на N частей, каждая даст вероятность порядка 1/N², а все вместе — порядка 1/N, и при частых проверках это стремится к нулю. Эффект назвали Мисра и Сударшан в 1977 году, в честь апории Зенона о летящей стреле, которая в каждый момент покоится.</p></div>
+        </div>
+      </article>
+
+      <!-- 06 -->
+      <article class="station" id="q-bell">
+        <div class="st-head"><span class="no">06</span><span>Опыт · запутанность</span></div>
+        <h3>«Жуткое дальнодействие» <em>и неравенство Белла</em></h3>
+        <div class="text"><p>Два фотона рождаются в общем состоянии. По отдельности каждый ведёт себя совершенно случайно, но их результаты связаны. Эйнштейн, Подольский и Розен в 1935 году решили, что ответы записаны в частицах заранее, в «скрытых параметрах». В 1964 году Джон Белл нашёл, как это проверить одним числом S. У любой теории с локальными скрытыми параметрами |S| ≤ 2, а квантовая механика даёт до 2√2 ≈ 2,83. Запустите поток пар, а потом переключитесь на модель со скрытыми параметрами.</p></div>
+        <figure class="fig">
+          <canvas id="bell" role="img" aria-label="Источник в центре посылает пары фотонов Алисе и Бобу. У каждого поляризатор с двумя настройками и две лампы: плюс один и минус один."></canvas>
+          <div class="chips" role="group" aria-label="Модель и углы">
+            <span class="lab">Модель</span>
+            <button class="chip" type="button" data-m="qm" aria-pressed="true">Квантовая механика</button>
+            <button class="chip" type="button" data-m="lhv" aria-pressed="false">Скрытые параметры</button>
+            <span class="lab">Углы</span>
+            <button class="chip" type="button" data-preset="opt" aria-pressed="true">Максимум нарушения</button>
+            <button class="chip" type="button" data-preset="same" aria-pressed="false">Совпадающие</button>
+          </div>
+          <div class="angles">
+            <div><label for="bA">Алиса, a <output id="bAOut" for="bA">0°</output></label><input type="range" id="bA" min="0" max="180" step="0.5" value="0"></div>
+            <div><label for="bA2">Алиса, a′ <output id="bA2Out" for="bA2">45°</output></label><input type="range" id="bA2" min="0" max="180" step="0.5" value="45"></div>
+            <div><label for="bB">Боб, b <output id="bBOut" for="bB">22,5°</output></label><input type="range" id="bB" min="0" max="180" step="0.5" value="22.5"></div>
+            <div><label for="bB2">Боб, b′ <output id="bB2Out" for="bB2">67,5°</output></label><input type="range" id="bB2" min="0" max="180" step="0.5" value="67.5"></div>
+          </div>
+          <div class="ctl">
+            <div class="btns">
+              <button class="btn" id="bellRun" type="button" aria-pressed="true">Пауза</button>
+              <button class="btn" id="bellFast" type="button">+1000 пар</button>
+              <button class="btn" id="bellReset" type="button">Сбросить</button>
+            </div>
+            <span class="lab">Пар измерено: <output id="bellTotal">0</output></span>
+          </div>
+          <div class="bell-panel">
+            <div class="tablewrap"><table class="btab">
+              <thead><tr><th>Углы</th><th>Пар</th><th>E, опыт</th><th>E, теория</th></tr></thead>
+              <tbody id="bellRows"></tbody>
+            </table></div>
+            <div class="sbox">
+              <span class="k">S = E(a,b) − E(a,b′) + E(a′,b) + E(a′,b′)</span>
+              <span class="v" id="bellS">—</span>
+              <div class="gauge"><i id="bellBar"></i><span class="mk" style="left:66.67%"><span>2 · предел скрытых параметров</span></span><span class="mk q" style="left:94.28%"><span>2,83 · квантовый предел</span></span></div>
+              <span class="n" id="bellAlice"></span>
+            </div>
+          </div>
+          <figcaption>E — корреляция: доля совпавших ответов минус доля несовпавших. Для запутанных фотонов квантовая механика даёт E = cos 2(a − b). Модель скрытых параметров здесь простейшая: каждая пара заранее несёт случайный угол, и ответы определены им. Честная оговорка: компьютер сам «знает» оба угла, поэтому эта симуляция только показывает предсказания. В настоящем опыте детекторы разнесены, и настройки выбираются так быстро, что сигнал между ними не успевает пройти.</figcaption>
+        </figure>
+        <div class="paradox">
+          <div class="q"><span class="lab">Парадокс</span><p>Алиса измерила свой фотон, и ответ Боба на другом краю Галактики тут же оказывается связан с её ответом. Это быстрее света?</p></div>
+          <div class="a"><span class="lab">Разгадка</span><p>Передать так ничего нельзя. Каждый из них по отдельности видит чистую случайность, 50 на 50, что бы ни делал другой: посмотрите на счётчик Алисы. Связь проявляется, только когда они сравнят записи, а для этого нужен обычный сигнал. Но и объяснить корреляции заранее записанными ответами нельзя: опыты дают |S| > 2. Последние лазейки закрыли опыты 2015 года в Делфте, Вене и NIST.</p></div>
+        </div>
+      </article>
+
+      <!-- 07 -->
+      <article class="station" id="q-more">
+        <div class="st-head"><span class="no">07</span><span>Парадоксы · без приборов</span></div>
+        <h3>Ещё три загадки, <em>которые часто пересказывают неправильно</em></h3>
+        <div class="riddles">
+          <article>
+            <h4>Квантовый ластик с отложенным выбором</h4>
+            <div><span class="lab q">Парадокс</span><p>Фотон уже попал в экран, а решение, узнавать ли его путь, принимается позже. И всё равно от этого решения зависит, будет ли интерференция. Будущее меняет прошлое?</p></div>
+            <div><span class="lab a">Разгадка</span><p>Нет. Картина на экране не меняется никогда: это всегда размытое пятно. Полосы появляются, только когда точки потом рассортируют по результатам второго фотона, а для этого нужны записи с обеих сторон. Влияния на прошлое нет, есть корреляции, которые видны задним числом.</p></div>
+          </article>
+          <article>
+            <h4>Друг Вигнера</h4>
+            <div><span class="lab q">Парадокс</span><p>Друг в закрытой лаборатории измерил частицу и видит определённый результат. Для Вигнера снаружи друг вместе с частицей всё ещё в суперпозиции. Кто из них прав?</p></div>
+            <div><span class="lab a">Разгадка — открытый вопрос</span><p>Загадку поставил Юджин Вигнер в 1961 году. В 2019–2020 годах провели упрощённые версии опыта на фотонах. Они показывают, что от одного из привычных допущений придётся отказаться: либо факты зависят от наблюдателя, либо нарушается локальность, либо нет свободы выбора настроек.</p></div>
+          </article>
+          <article>
+            <h4>Чего квантовая физика не утверждает</h4>
+            <div><span class="lab q">Миф</span><p>Наблюдение — это сознание, значит, мысль управляет реальностью. Запутанность позволяет мгновенно передавать сообщения. «Квантовые» браслеты лечат.</p></div>
+            <div><span class="lab a">На самом деле</span><p>Для коллапса не нужен человек: хватает любого взаимодействия, оставившего след. Запутанность не передаёт сигналов, это доказано и теоремой, и опытами. А слово «квантовый» на упаковке товара — маркетинг, а не физика.</p></div>
+          </article>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -509,11 +883,15 @@ input[type=range]:focus-visible::-moz-range-thumb{outline:2px solid var(--text);
             <li><span>1932</span>Позитрон в космических лучах (Карл Андерсон).</li>
             <li><span>1959</span>Гравитационное смещение частоты света на башне высотой 22,5 м (Паунд и Ребка).</li>
             <li><span>1989</span>Интерференция одиночных электронов, накопленная точка за точкой (Тономура).</li>
+            <li><span>1990</span>Квантовый эффект Зенона: частые проверки замораживают переход иона (Итано и коллеги, NIST).</li>
             <li><span>2015</span>Гравитационные волны от слияния двух чёрных дыр, LIGO. 36 и 29 масс Солнца слились в 62, около 3 масс Солнца ушло в волны.</li>
+            <li><span>2015</span>Опыты Белла без лазеек: Делфт, Вена, NIST.</li>
             <li><span>2019</span>Тень чёрной дыры M87*, Event Horizon Telescope. В 2022 году — тень Sgr A* в центре Млечного Пути.</li>
             <li><span>2020</span>Нобелевская премия: Пенроузу за доказательство того, что чёрные дыры следуют из общей теории относительности; Генцелю и Гез за орбиты звёзд вокруг Sgr A*.</li>
             <li><span>2022</span>Нарушение неравенств Белла (Аспе, Клаузер, Цайлингер).</li>
             <li><span>2023</span>Антиводород падает вниз (ALPHA-g).</li>
+            <li><span>2023</span>Кристалл массой 16 мкг в «кошачьей» суперпозиции (ETH Цюрих).</li>
+            <li><span>2025</span>Нобелевская премия за туннелирование в макроскопической электрической цепи (Кларк, Деворе, Мартинис).</li>
           </ul>
         </div>
         <div style="--c:var(--matter)">
@@ -521,6 +899,7 @@ input[type=range]:focus-visible::-moz-range-thumb{outline:2px solid var(--text);
           <ul>
             <li><span>1974</span>Излучение Хокинга: следует из теории, напрямую не наблюдалось.</li>
             <li><span>1976</span>Парадокс информации: что происходит со сведениями о том, что упало в дыру. Вопрос остаётся открытым.</li>
+            <li><span>—</span>Проблема измерения: почему из суперпозиции выпадает один исход. Интерпретации отвечают по-разному, опытом их пока не различить.</li>
             <li><span>—</span>Что в центре. Сингулярность показывает, что общая теория относительности там перестаёт работать.</li>
             <li><span>—</span>Квантовая гравитация: теория струн, петлевая гравитация. Опытных подтверждений пока нет.</li>
             <li><span>—</span>Природа тёмной материи и тёмной энергии.</li>
@@ -543,7 +922,8 @@ input[type=range]:focus-visible::-moz-range-thumb{outline:2px solid var(--text);
       <h4>Что здесь расчёт, а что рисунок</h4>
       <ul>
         <li>Чёрная дыра вверху посчитана, а не нарисована. Для каждого пикселя луч света проходит путь по уравнению геодезической в метрике Шварцшильда: d²u/dφ² = −u + 1,5·r<sub>s</sub>u², где u = 1/r. Диск тонкий, от 3 до 12,5 r<sub>s</sub>; его цвет и яркость учитывают доплеровское и гравитационное смещение. Настоящие дыры вращаются (метрика Керра), так что это модель, а не фотография.</li>
-        <li>Облако электрона, интерференция и формулы Хокинга посчитаны по настоящим формулам. Пузырьковая камера и пары у горизонта — схемы, их масштабы подобраны для наглядности.</li>
+        <li>Облако электрона, интерференция, эффект Зенона, неравенство Белла и формулы Хокинга посчитаны по настоящим формулам. Туннелирование — численное решение уравнения Шрёдингера прямо в браузере. Симуляция Белла сама «знает» углы обоих детекторов, поэтому она показывает предсказания, а не проверяет нелокальность.</li>
+        <li>Пузырьковая камера, пары у горизонта и коробка с котом — схемы и иллюстрации, их масштабы подобраны для наглядности.</li>
         <li>Константы взяты по CODATA, числа округлены.</li>
       </ul>
     </div>
@@ -608,7 +988,7 @@ function live(el, step) {
     const dt = last ? Math.min(0.05, (now - last) / 1000) : 1 / 60;
     last = now; t += dt;
     step(t, dt);
-    if (vis && !RM && !document.hidden) raf = requestAnimationFrame(run); else last = 0;
+    if (vis && !RM && !document.hidden) { if (!raf) raf = requestAnimationFrame(run); } else last = 0;
   };
   const kick = () => { if (!raf) raf = requestAnimationFrame(run); };
   new IntersectionObserver(es => { vis = es[0].isIntersecting; if (vis) { last = 0; kick(); } }, { rootMargin: '120px' }).observe(el);
@@ -636,13 +1016,16 @@ function dragger(el, onMove) {
   const top = $('#topbar');
   const links = $$('.top nav a');
   const secs = links.map(a => $(a.getAttribute('href')));
+  const rlinks = $$('.route a'), stops = rlinks.map(a => $(a.getAttribute('href')));
   let ticking = false;
   const upd = () => {
     ticking = false;
     top.classList.toggle('solid', window.scrollY > 40);
-    let cur = -1;
+    let cur = -1, rc = -1;
     secs.forEach((s, i) => { if (s && s.getBoundingClientRect().top < innerHeight * 0.35) cur = i; });
     links.forEach((a, i) => a.classList.toggle('on', i === cur));
+    stops.forEach((s, i) => { if (s && s.getBoundingClientRect().top < innerHeight * 0.45) rc = i; });
+    rlinks.forEach((a, i) => a.classList.toggle('on', i === rc));
   };
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
   upd();
@@ -1597,6 +1980,544 @@ void main(){
     ctx.fillText('образ, не расчёт: пары у горизонта', 14, H - 14);
   });
   update(12);
+})();
+
+/* ================= IV.2 Uncertainty: wave packet vs velocity spread ================= */
+(() => {
+  const cv = $('#uncert'); if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const rng = $('#uxRange'), oX = $('#uxOut'), oV = $('#uvOut');
+  const chips = $$('#q-uncert .chip');
+  const HB = 1.054571817e-34, ME = 9.1093837e-31;
+  const L0 = Math.log10(0.02), L1 = Math.log10(2);
+  const K0 = 2 * Math.PI / 0.6;               // carrier wavenumber, 1/nm
+  const VPK = HB * 1e9 / ME / 1000;           // km/s per 1/nm (≈ 115.8)
+  const VSPAN = 6500;                          // half-width of the velocity axis, km/s
+  let sx = 0.1, view = null;
+  function setX(v, fromSlider) {
+    sx = clamp(v, 0.02, 2);
+    if (!fromSlider) rng.value = Math.round((Math.log10(sx) - L0) / (L1 - L0) * 1000);
+    oX.textContent = `${num(sx)} нм`;
+    oV.textContent = `±${fmtInt(HB / (2 * ME * sx * 1e-9) / 1000)} км/с`;
+    chips.forEach(c => c.setAttribute('aria-pressed', String(Math.abs(Math.log10(+c.dataset.x / sx)) < 0.005)));
+    if (view) view.poke();
+  }
+  rng.addEventListener('input', () => setX(Math.pow(10, L0 + rng.value / 1000 * (L1 - L0)), true));
+  chips.forEach(c => c.addEventListener('click', () => setX(+c.dataset.x)));
+
+  function axis(P, ticks, unit, title) {
+    ctx.strokeStyle = 'rgba(150,160,230,.3)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(P.x, P.y + P.h + 0.5); ctx.lineTo(P.x + P.w, P.y + P.h + 0.5); ctx.stroke();
+    ctx.font = '500 10px "JetBrains Mono", monospace'; ctx.fillStyle = 'rgba(154,158,186,.9)'; ctx.textAlign = 'center';
+    ticks.forEach(([x, s]) => { ctx.fillRect(x, P.y + P.h, 1, 4); ctx.fillText(s, x, P.y + P.h + 16); });
+    ctx.textAlign = 'right'; ctx.fillText(unit, P.x + P.w, P.y + P.h + 30);
+    ctx.textAlign = 'left'; ctx.font = '500 11px "JetBrains Mono", monospace'; ctx.fillStyle = 'rgba(235,233,245,.85)';
+    ctx.fillText(title, P.x, P.y - 10);
+  }
+  function bracket(x0, x1, y, label, rgb) {
+    if (x1 - x0 < 4) { const m = (x0 + x1) / 2; x0 = m - 2; x1 = m + 2; }
+    ctx.strokeStyle = `rgba(${rgb},.9)`; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x0, y - 4); ctx.lineTo(x0, y); ctx.lineTo(x1, y); ctx.lineTo(x1, y - 4); ctx.stroke();
+    ctx.fillStyle = `rgba(${rgb},1)`; ctx.font = '500 11px "JetBrains Mono", monospace'; ctx.textAlign = 'center';
+    ctx.fillText(label, (x0 + x1) / 2, y - 8); ctx.textAlign = 'left';
+  }
+
+  view = live(cv, t => {
+    const { cw: W, ch: H, dpr } = sizeCanvas(cv);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = '#05070f'; ctx.fillRect(0, 0, W, H);
+    const st = W < 640, pad = 18, gap = 28;
+    const A = st ? { x: pad, y: 32, w: W - 2 * pad, h: (H - 32 - gap - 70) / 2 } : { x: pad, y: 34, w: (W - 2 * pad - gap) * 0.58, h: H - 34 - 44 };
+    const B = st ? { x: pad, y: A.y + A.h + gap + 38, w: A.w, h: A.h } : { x: A.x + A.w + gap, y: 34, w: (W - 2 * pad - gap) * 0.42, h: A.h };
+
+    // position space
+    const X = x => A.x + (x + 5) / 10 * A.w;
+    const ym = A.y + A.h * 0.5, aS = A.h * 0.44, ph = (RM ? 0 : t) * 6;
+    axis(A, [-4, -2, 0, 2, 4].map(v => [X(v), String(v).replace('-', '−')]), 'нм', 'где электрон');
+    ctx.beginPath();
+    const M = 700;
+    for (let i = 0; i <= M; i++) { const x = -5 + 10 * i / M, e = Math.exp(-x * x / (4 * sx * sx)); const px = X(x), py = ym - e * aS; i ? ctx.lineTo(px, py) : ctx.moveTo(px, py); }
+    for (let i = M; i >= 0; i--) { const x = -5 + 10 * i / M, e = Math.exp(-x * x / (4 * sx * sx)); ctx.lineTo(X(x), ym + e * aS); }
+    ctx.closePath(); ctx.fillStyle = 'rgba(255,179,94,.12)'; ctx.fill();
+    ctx.strokeStyle = 'rgba(255,179,94,.75)'; ctx.lineWidth = 1; ctx.stroke();
+    ctx.beginPath();
+    for (let i = 0; i <= M * 2; i++) {
+      const x = -5 + 10 * i / (M * 2), e = Math.exp(-x * x / (4 * sx * sx));
+      const py = ym - e * Math.cos(K0 * x - ph) * aS; i ? ctx.lineTo(X(x), py) : ctx.moveTo(X(x), py);
+    }
+    ctx.strokeStyle = 'rgba(98,228,255,.95)'; ctx.lineWidth = 1.4; ctx.stroke();
+    bracket(X(-sx), X(sx), A.y + A.h - 6, 'Δx', '255,179,94');
+
+    // velocity space
+    const v0 = K0 * VPK, sv = VPK / (2 * sx);
+    const V = v => B.x + (v - v0 + VSPAN) / (2 * VSPAN) * B.w;
+    axis(B, [-6000, -3000, 0, 3000, 6000].map(v => [V(v0 + v), v === 0 ? 'v₀' : (v > 0 ? '+' : '−') + Math.abs(v)]), 'км/с', 'какая у него скорость');
+    const pts = [];
+    for (let i = 0; i <= 300; i++) pts.push(v0 - VSPAN + 2 * VSPAN * i / 300);
+    for (let i = -60; i <= 60; i++) pts.push(v0 + sv * i / 15);
+    pts.sort((a, b) => a - b);
+    const base = B.y + B.h, hh = B.h * 0.86;
+    ctx.beginPath(); ctx.moveTo(V(pts[0]), base);
+    pts.forEach(v => { if (v < v0 - VSPAN || v > v0 + VSPAN) return; ctx.lineTo(V(v), base - Math.exp(-((v - v0) ** 2) / (2 * sv * sv)) * hh); });
+    ctx.lineTo(V(v0 + VSPAN), base); ctx.closePath();
+    ctx.fillStyle = 'rgba(98,228,255,.18)'; ctx.fill();
+    ctx.strokeStyle = 'rgba(98,228,255,.95)'; ctx.lineWidth = 1.3; ctx.stroke();
+    bracket(V(v0 - sv), V(v0 + sv), base - 6, 'Δv', '98,228,255');
+  });
+  setX(0.1);
+})();
+
+/* ================= IV.3 Tunnelling: Crank–Nicolson solution of the 1D Schrödinger equation ================= */
+(() => {
+  const cv = $('#tunnel'); if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const hIn = $('#tunH'), wIn = $('#tunW'), hOut = $('#tunHOut'), wOut = $('#tunWOut');
+  const oSim = $('#tunSim'), oTh = $('#tunTh'), oCl = $('#tunCl');
+  // units: ħ = m = 1
+  const N = 1000, L = 200, dx = L / (N - 1), dt = 0.04, K0 = 2, E = K0 * K0 / 2, SIG = 6, X0 = 50, XB = 100, STEPS = 1500;
+  const LAM = 2 * Math.PI / K0, AL = dt / (4 * dx * dx);
+  const re = new Float64Array(N), im = new Float64Array(N), beta = new Float64Array(N);
+  const cpR = new Float64Array(N), cpI = new Float64Array(N), ivR = new Float64Array(N), ivI = new Float64Array(N);
+  const dpR = new Float64Array(N), dpI = new Float64Array(N);
+  let V0 = 1.5 * E, Wd = 0.35 * LAM, step = 0, hold = 0, peak0 = 1, done = false, view = null, jb = 0, j0 = Math.round(XB / dx), mag = 20;
+  const pct = x => { const p = x * 100; return p < 0.01 ? "< 0,01 %" : `${dec(p, p < 1 ? 2 : p < 10 ? 1 : 0)} %`; };
+  function theoryT() {
+    const a = Wd;
+    if (Math.abs(V0 - E) < 1e-9) return 1 / (1 + E * a * a / 2);
+    if (V0 > E) { const k = Math.sqrt(2 * (V0 - E)), s = Math.sinh(k * a); return 1 / (1 + V0 * V0 * s * s / (4 * E * (V0 - E))); }
+    const k = Math.sqrt(2 * (E - V0)), s = Math.sin(k * a); return 1 / (1 + V0 * V0 * s * s / (4 * E * (E - V0)));
+  }
+  function setup() {
+    V0 = (+hIn.value / 100) * E;
+    const nW = Math.max(1, Math.round((+wIn.value / 100) * LAM / dx));
+    Wd = nW * dx; jb = j0 + nW - 1;   // barrier snapped to the grid, so the formula uses the same width
+    hOut.textContent = `${dec(+hIn.value / 100, 2)} E`; wOut.textContent = `${dec(Wd / LAM, 2)} λ`;
+    for (let j = 0; j < N; j++) beta[j] = dt / 2 * (1 / (dx * dx) + (j >= j0 && j <= jb ? V0 : 0));
+    // LU factorisation of (1 + i dt H / 2): diagonal 1 + i·beta_j, off-diagonals −i·AL
+    let pr = 0, pi = 0;
+    for (let j = 0; j < N; j++) {
+      const mr = 1 - AL * pi, mi = beta[j] + AL * pr, d = mr * mr + mi * mi;
+      ivR[j] = mr / d; ivI[j] = -mi / d;
+      pr = AL * ivI[j]; pi = -AL * ivR[j];
+      cpR[j] = pr; cpI[j] = pi;
+    }
+    const nrm = Math.pow(2 * Math.PI * SIG * SIG, -0.25);
+    peak0 = nrm * nrm;
+    for (let j = 0; j < N; j++) { const x = j * dx, e = nrm * Math.exp(-((x - X0) ** 2) / (4 * SIG * SIG)); re[j] = e * Math.cos(K0 * x); im[j] = e * Math.sin(K0 * x); }
+    step = 0; hold = 0; done = false;
+    const T0 = theoryT();
+    oTh.textContent = pct(T0);
+    mag = T0 < 0.005 ? 100 : T0 < 0.02 ? 20 : T0 < 0.08 ? 5 : 0;
+    oCl.textContent = V0 > E ? '0 %' : '100 %';
+    if (view) view.poke();
+  }
+  function stepCN() {
+    let pr = 0, pi = 0;
+    for (let j = 0; j < N; j++) {
+      const sr = (j > 0 ? re[j - 1] : 0) + (j < N - 1 ? re[j + 1] : 0), si = (j > 0 ? im[j - 1] : 0) + (j < N - 1 ? im[j + 1] : 0);
+      const nr = re[j] + beta[j] * im[j] - AL * si - AL * pi;
+      const ni = im[j] - beta[j] * re[j] + AL * sr + AL * pr;
+      pr = nr * ivR[j] - ni * ivI[j]; pi = nr * ivI[j] + ni * ivR[j];
+      dpR[j] = pr; dpI[j] = pi;
+    }
+    re[N - 1] = dpR[N - 1]; im[N - 1] = dpI[N - 1];
+    for (let j = N - 2; j >= 0; j--) {
+      const xr = re[j + 1], xi = im[j + 1];
+      re[j] = dpR[j] - (cpR[j] * xr - cpI[j] * xi);
+      im[j] = dpI[j] - (cpR[j] * xi + cpI[j] * xr);
+    }
+  }
+  hIn.addEventListener('input', setup); wIn.addEventListener('input', setup);
+  $('#tunGo').addEventListener('click', setup);
+  const NB = 24, buckets = Array.from({ length: NB }, () => []);
+  const bcol = Array.from({ length: NB }, (_, k) => {
+    const u = (1 + Math.cos(k / NB * TAU)) / 2;
+    return `rgb(${Math.round(lerp(98, 255, u))},${Math.round(lerp(228, 179, u))},${Math.round(lerp(255, 94, u))})`;
+  });
+
+  view = live(cv, (t, dtf) => {
+    if (!done) {
+      const n = RM ? STEPS : 9;
+      for (let k = 0; k < n && step < STEPS; k++, step++) stepCN();
+      if (step >= STEPS) done = true;
+    } else if (!RM) { hold += dtf; if (hold > 2.6) setup(); }
+    let tr = 0, tot = 0;
+    for (let j = 0; j < N; j++) { const p = re[j] * re[j] + im[j] * im[j]; tot += p; if (j > jb) tr += p; }
+    oSim.textContent = pct(tr / tot);
+
+    const { cw: W, ch: H, dpr } = sizeCanvas(cv);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = '#05070f'; ctx.fillRect(0, 0, W, H);
+    const pad = 14, X = x => pad + x / L * (W - 2 * pad), base = H - 26, hE = H * 0.3, sc = H * 0.52 / peak0;
+    // barrier and energy level
+    const bx0 = X((j0 - 0.5) * dx), bx1 = Math.max(X((jb + 0.5) * dx), bx0 + 2), bh = Math.min(hE * V0 / E, base - 20);
+    ctx.fillStyle = 'rgba(158,138,255,.16)'; ctx.fillRect(bx0, base - bh, bx1 - bx0, bh);
+    ctx.strokeStyle = 'rgba(158,138,255,.9)'; ctx.lineWidth = 1; ctx.strokeRect(bx0 + 0.5, base - bh + 0.5, bx1 - bx0 - 1, bh);
+    ctx.setLineDash([5, 6]); ctx.strokeStyle = 'rgba(255,179,94,.5)';
+    ctx.beginPath(); ctx.moveTo(pad, base - hE); ctx.lineTo(W - pad, base - hE); ctx.stroke(); ctx.setLineDash([]);
+    ctx.font = '500 11px "JetBrains Mono", monospace';
+    ctx.fillStyle = 'rgba(255,179,94,.85)'; ctx.fillText('энергия частицы E', pad + 4, base - hE - 8);
+    ctx.fillStyle = 'rgba(158,138,255,.95)'; ctx.fillText('барьер', bx1 + 8, base - bh + 12);
+    // probability density, coloured by phase
+    buckets.forEach(b => (b.length = 0));
+    for (let j = 0; j < N; j++) {
+      const p = re[j] * re[j] + im[j] * im[j], h = p * sc;
+      if (h < 0.4) continue;
+      const k = ((Math.round((Math.atan2(im[j], re[j]) + Math.PI) / TAU * NB) % NB) + NB) % NB;
+      buckets[k].push(j, h);
+    }
+    const bw = (W - 2 * pad) / N + 0.6;
+    buckets.forEach((b, k) => {
+      if (!b.length) return;
+      ctx.fillStyle = bcol[k];
+      for (let i = 0; i < b.length; i += 2) { const h = Math.min(b[i + 1], base - 8); ctx.fillRect(X(b[i] * dx), base - h, bw, h); }
+    });
+    // transmitted part, magnified when it is too small to see
+    if (mag) {
+      ctx.setLineDash([2, 3]); ctx.strokeStyle = 'rgba(98,228,255,.8)'; ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let j = jb + 1; j < N; j++) { const p = re[j] * re[j] + im[j] * im[j], y = base - Math.min(p * sc * mag, base - 12); j === jb + 1 ? ctx.moveTo(X(j * dx), y) : ctx.lineTo(X(j * dx), y); }
+      ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = 'rgba(98,228,255,.85)'; ctx.textAlign = 'right'; ctx.fillText(`прошедшая волна ×${mag}`, W - pad - 4, base - hE - 8); ctx.textAlign = 'left';
+    }
+    ctx.strokeStyle = 'rgba(150,160,230,.3)'; ctx.beginPath(); ctx.moveTo(pad, base + 0.5); ctx.lineTo(W - pad, base + 0.5); ctx.stroke();
+  });
+  setup();
+})();
+
+/* ================= IV.4 Schrödinger's cat ================= */
+(() => {
+  const svg = $('#catScene'); if (!svg) return;
+  const gA = $('#catAlive'), gD = $('#catDead'), lid = $('#catLid'), split = $('#catSplit'), brA = $('#branchA'), brD = $('#branchD');
+  const tIn = $('#catT'), tOut = $('#catTOut'), btnWait = $('#catWait');
+  const oKet = $('#catKet'), oP = $('#catP'), oSt = $('#catStats'), oStN = $('#catStatsN'), oStatus = $('#catStatus'), oLab = $('#catLab');
+  const cells = ['rhoAA', 'rhoAD', 'rhoDA', 'rhoDD'].map(id => $('#' + id));
+  const chips = $$('#q-cat .chip[data-i]');
+  const LC = [[110, 118], [150, 88], [660, 88], [620, 118]], LO = [[146, 30], [150, 88], [660, 88], [656, 30]];
+  let t = 0, flowing = false, open = false, outcome = null, interp = 'copen', D = 1, lidK = 0, nA = 0, nD = 0, lastTxt = '';
+  const pc = () => Math.pow(2, -t);
+  const pct0 = x => `${Math.round(x * 100)} %`;
+  const setCell = (el, v) => { el.textContent = dec(v, 2); el.style.setProperty('--a', (0.06 + 0.62 * v).toFixed(3)); };
+
+  function status() {
+    const p = pc(), w = open ? null : pct0(p);
+    let s;
+    if (!open) {
+      if (interp === 'copen') s = `Коробка закрыта. По копенгагенской интерпретации до измерения у кота нет определённого состояния, есть только амплитуды. Шанс найти его живым: ${w}.`;
+      else if (interp === 'mwi') s = `Коробка закрыта. По многомировой интерпретации волновая функция никогда не коллапсирует. Пока это одна ветвь мира, в которой кот в суперпозиции. Шанс оказаться в ветви с живым котом: ${w}.`;
+      else s = `Коробка закрыта, но кот не изолирован: воздух, свет и тепло внутри почти мгновенно «измеряют» его. Суперпозиция стала смесью: кот уже жив или мёртв, мы просто не знаем, каким. Шанс, что жив: ${w}.`;
+    } else {
+      const res = outcome === 'a' ? 'кот жив' : 'кот мёртв';
+      if (interp === 'copen') s = `Коллапс. Наблюдение выбрало один исход: ${res}. Второй вариант исчез.`;
+      else if (interp === 'mwi') s = `Мир разделился. В одной ветви вы видите живого кота, в другой ваша копия видит мёртвого, и обе ветви одинаково реальны. Вы оказались там, где ${res}.`;
+      else s = `Вы узнали ответ: ${res}. Декогеренция объясняет, почему суперпозиции не видно, но не почему выпал именно этот исход. Этот остаток загадки и называют проблемой измерения.`;
+    }
+    if (s !== lastTxt) { oStatus.textContent = s; lastTxt = s; }
+    oLab.textContent = !open ? 'Коробка закрыта · так кота описывает волновая функция' : interp === 'mwi' ? 'Коробка открыта · ветви мира разошлись' : 'Коробка открыта · что видит наблюдатель';
+  }
+  function render() {
+    const p = pc(), a = Math.sqrt(p), b = Math.sqrt(1 - p);
+    tOut.textContent = `${dec(t, 2)} T½`;
+    if (document.activeElement !== tIn) tIn.value = Math.round(t * 100);
+    if (!open) {
+      gA.style.opacity = p.toFixed(3); gD.style.opacity = (1 - p).toFixed(3);
+      const sup = interp !== 'deco' && p > 0.01 && p < 0.99;
+      gA.classList.toggle('super', sup); gD.classList.toggle('super', sup);
+      oKet.innerHTML = interp === 'deco' ? `смесь: ${pct0(p)} жив, ${pct0(1 - p)} мёртв` : `|ψ⟩ = ${dec(a, 2)} |жив⟩ + ${dec(b, 2)} |мёртв⟩`;
+      oP.textContent = pct0(p);
+      const coh = Math.sqrt(p * (1 - p)) * D;
+      setCell(cells[0], p); setCell(cells[1], coh); setCell(cells[2], coh); setCell(cells[3], 1 - p);
+    } else {
+      const al = outcome === 'a';
+      oKet.innerHTML = interp === 'mwi' ? `в вашей ветви: |${al ? 'жив' : 'мёртв'}⟩` : `|${al ? 'жив' : 'мёртв'}⟩`;
+      oP.textContent = al ? '100 %' : '0 %';
+      setCell(cells[0], al ? 1 : 0); setCell(cells[1], 0); setCell(cells[2], 0); setCell(cells[3], al ? 0 : 1);
+    }
+    const n = nA + nD;
+    oSt.textContent = `${n} ${n % 10 === 1 && n % 100 !== 11 ? 'раз' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 'раза' : 'раз'}`;
+    if (n) oStN.textContent = `Живым — ${nA}, мёртвым — ${nD}. Доля живых: ${pct0(nA / n)}.`;
+    const pts = LC.map((c, i) => `${lerp(c[0], LO[i][0], lidK).toFixed(1)},${lerp(c[1], LO[i][1], lidK).toFixed(1)}`).join(' ');
+    lid.setAttribute('points', pts);
+    status();
+  }
+  function syncWait() { btnWait.setAttribute('aria-pressed', String(flowing)); btnWait.textContent = flowing ? 'Пауза' : 'Ждать'; }
+  function reset() {
+    open = false; outcome = null; t = 0; flowing = false; syncWait();
+    svg.classList.remove('opened'); split.style.opacity = 0;
+    gA.style.transform = gD.style.transform = '';
+    view.poke();
+  }
+  function openBox() {
+    if (open) return;
+    flowing = false; syncWait();
+    const p = pc();
+    outcome = Math.random() < p ? 'a' : 'd';
+    outcome === 'a' ? nA++ : nD++;
+    open = true;
+    gA.classList.remove('super'); gD.classList.remove('super');
+    svg.classList.add('opened');
+    if (interp === 'mwi') {
+      gA.style.opacity = p > 0.005 ? 1 : 0; gD.style.opacity = p < 0.995 ? 1 : 0;
+      gA.style.transform = 'translate(42px,168px) scale(.52)'; gD.style.transform = 'translate(300px,168px) scale(.52)';
+      brA.textContent = `ветвь 1 · жив · ${pct0(p)}${outcome === 'a' ? ' · вы здесь' : ''}`;
+      brD.textContent = `ветвь 2 · мёртв · ${pct0(1 - p)}${outcome === 'd' ? ' · вы здесь' : ''}`;
+      split.style.opacity = 1;
+    } else {
+      gA.style.opacity = outcome === 'a' ? 1 : 0; gD.style.opacity = outcome === 'd' ? 1 : 0;
+    }
+    view.poke();
+  }
+  btnWait.addEventListener('click', () => { if (open) reset(); if (t >= 3) t = 0; flowing = !flowing; syncWait(); view.poke(); });
+  $('#catOpen').addEventListener('click', openBox);
+  $('#catReset').addEventListener('click', reset);
+  tIn.addEventListener('input', () => { if (open) reset(); t = tIn.value / 100; flowing = false; syncWait(); view.poke(); });
+  chips.forEach(c => c.addEventListener('click', () => {
+    interp = c.dataset.i;
+    chips.forEach(o => o.setAttribute('aria-pressed', String(o === c)));
+    if (open) { const keep = t; reset(); t = keep; }
+    view.poke();
+  }));
+
+  const view = live(svg, (tt, dt) => {
+    if (flowing && !open) { t = Math.min(3, t + dt * 0.4); if (t >= 3) { flowing = false; syncWait(); } }
+    const target = interp === 'deco' ? 0 : 1;
+    D += (target - D) * (RM ? 1 : Math.min(1, dt * 5));
+    const lt = open ? 1 : 0;
+    lidK += (lt - lidK) * (RM ? 1 : Math.min(1, dt * 6));
+    render();
+  });
+})();
+
+/* ================= IV.5 Quantum Zeno effect ================= */
+(() => {
+  const cv = $('#zeno'); if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const NS = [1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32, 48, 64];
+  const rng = $('#zenoN'), nOut = $('#zenoNOut'), oSt = $('#zenoStatus');
+  let N = 1, runs = 0, jumps = 0, run = null, theta = 0, path = [], flash = 0, view = null;
+  const pJ = n => 0.5 * (1 - Math.pow(Math.cos(Math.PI / n), n));
+  const pk = (k, n) => 0.5 * (1 - Math.pow(Math.cos(Math.PI / n), k));
+  const ens = (t, n) => { const tau = 1 / n, k = Math.min(Math.floor(t / tau), n - 1), c = Math.cos(Math.PI * (t - k * tau) / 2) ** 2, p = pk(k, n); return p * c + (1 - p) * (1 - c); };
+  const pct = x => { const p = x * 100; return `${dec(p, p < 10 ? 1 : 0)} %`; };
+  function text() {
+    oSt.innerHTML = `Без проверок атом к моменту T перешёл бы наверняка. При ${N} ${N === 1 ? 'проверке' : 'проверках'} — с вероятностью <span>${pct(pJ(N))}</span>.` +
+      (runs ? ` Ваши атомы: перешли ${jumps} из ${runs} (${pct(jumps / runs)}).` : '');
+  }
+  function setN(i) { N = NS[i]; nOut.textContent = N; runs = jumps = 0; run = null; path = []; theta = 0; text(); if (view) view.poke(); }
+  rng.addEventListener('input', () => setN(+rng.value));
+  $('#zenoRun').addEventListener('click', () => {
+    run = { t: 0, k: 0, base: 0, tk: 0 }; theta = 0; path = [[0, 0]];
+    if (RM) { while (run) advance(1); }
+    view.poke();
+  });
+  $('#zenoBatch').addEventListener('click', () => {
+    const s1 = Math.sin(Math.PI / (2 * N)) ** 2, c1 = 1 - s1;
+    for (let i = 0; i < 100; i++) { let s = 0; for (let k = 0; k < N; k++) s = Math.random() < (s ? c1 : s1) ? 1 : 0; runs++; jumps += s; }
+    text(); view.poke();
+  });
+  function advance(dt) {
+    const tNew = Math.min(1, run.t + dt);
+    while (run && run.k < N && (run.k + 1) / N <= tNew + 1e-9) {
+      const tm = (run.k + 1) / N, th = run.base + Math.PI * (tm - run.tk);
+      path.push([tm, Math.sin(th / 2) ** 2]);
+      const exc = Math.random() < Math.sin(th / 2) ** 2;
+      run.base = exc ? Math.PI : 0; run.tk = tm; run.k++;
+      path.push([tm, exc ? 1 : 0]);
+      flash = 1;
+      if (run.k === N) { runs++; jumps += exc ? 1 : 0; theta = run.base; run = null; text(); return; }
+    }
+    run.t = tNew;
+    theta = run.base + Math.PI * (run.t - run.tk);
+    path.push([run.t, Math.sin(theta / 2) ** 2]);
+  }
+
+  view = live(cv, (t, dt) => {
+    if (run) advance(dt / 4.5);
+    flash = Math.max(0, flash - dt * 2.5);
+    const { cw: W, ch: H, dpr } = sizeCanvas(cv);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = '#05070f'; ctx.fillRect(0, 0, W, H);
+    const wide = W >= 720, pad = 18;
+    const Bl = wide ? { x: pad, y: 34, w: W * 0.22, h: H - 70 } : { x: pad, y: 34, w: W * 0.4 - pad, h: H * 0.42 - 34 };
+    const G = wide ? { x: W * 0.28, y: 34, w: W * 0.42, h: H - 80 } : { x: pad + 30, y: H * 0.5 + 6, w: W - 2 * pad - 30, h: H * 0.5 - 56 };
+    const Br = wide ? { x: W * 0.76, y: 34, w: W * 0.24 - pad, h: H - 80 } : { x: W * 0.46, y: 34, w: W * 0.54 - pad, h: H * 0.42 - 54 };
+    ctx.font = '500 11px "JetBrains Mono", monospace';
+    const title = (P, s) => { ctx.fillStyle = 'rgba(235,233,245,.85)'; ctx.textAlign = 'left'; ctx.fillText(s, P.x, P.y - 12); };
+
+    // Bloch circle
+    title(Bl, 'состояние атома');
+    const cx = Bl.x + Bl.w / 2, cy = Bl.y + Bl.h / 2 + 4, R = Math.min(Bl.w, Bl.h) * 0.34;
+    ctx.strokeStyle = 'rgba(150,160,230,.35)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, TAU); ctx.stroke();
+    ctx.setLineDash([2, 4]); ctx.beginPath(); ctx.moveTo(cx, cy - R); ctx.lineTo(cx, cy + R); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = 'rgba(255,179,94,.9)'; ctx.beginPath(); ctx.arc(cx, cy - R, 4, 0, TAU); ctx.fill();
+    ctx.fillStyle = 'rgba(98,228,255,.9)'; ctx.beginPath(); ctx.arc(cx, cy + R, 4, 0, TAU); ctx.fill();
+    ctx.font = '500 10px "JetBrains Mono", monospace'; ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(255,179,94,.9)'; ctx.fillText('исходное', cx, cy - R - 10);
+    ctx.fillStyle = 'rgba(98,228,255,.9)'; ctx.fillText('возбуждённое', cx, cy + R + 18);
+    const ex = cx + R * Math.sin(theta), ey = cy - R * Math.cos(theta);
+    if (flash > 0) { ctx.strokeStyle = `rgba(255,255,255,${flash})`; ctx.beginPath(); ctx.arc(ex, ey, 6 + (1 - flash) * 18, 0, TAU); ctx.stroke(); }
+    ctx.strokeStyle = 'rgba(255,240,215,.95)'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(ex, ey); ctx.stroke();
+    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(ex, ey, 4, 0, TAU); ctx.fill();
+    ctx.lineWidth = 1;
+
+    // time graph
+    title(G, 'вероятность перехода');
+    const gx = u => G.x + u * G.w, gy = p => G.y + G.h - p * G.h;
+    ctx.strokeStyle = 'rgba(150,160,230,.25)';
+    [0, 0.5, 1].forEach(p => { ctx.beginPath(); ctx.moveTo(G.x, gy(p) + 0.5); ctx.lineTo(G.x + G.w, gy(p) + 0.5); ctx.stroke(); });
+    ctx.fillStyle = 'rgba(154,158,186,.9)'; ctx.font = '500 10px "JetBrains Mono", monospace'; ctx.textAlign = 'right';
+    ctx.fillText('100 %', G.x - 4, gy(1) + 4); ctx.fillText('50 %', G.x - 4, gy(0.5) + 4); ctx.fillText('0', G.x - 4, gy(0) + 4);
+    ctx.textAlign = 'center'; ctx.fillText('время', G.x + G.w / 2, G.y + G.h + 16); ctx.fillText('T', gx(1), G.y + G.h + 16);
+    if (N <= 64) { ctx.strokeStyle = 'rgba(98,228,255,.22)'; for (let k = 1; k <= N; k++) { ctx.beginPath(); ctx.moveTo(gx(k / N) + 0.5, G.y); ctx.lineTo(gx(k / N) + 0.5, G.y + G.h); ctx.stroke(); } }
+    ctx.setLineDash([4, 5]); ctx.strokeStyle = 'rgba(154,158,186,.8)';
+    ctx.beginPath(); for (let i = 0; i <= 200; i++) { const u = i / 200; i ? ctx.lineTo(gx(u), gy(Math.sin(Math.PI * u / 2) ** 2)) : ctx.moveTo(gx(u), gy(0)); } ctx.stroke(); ctx.setLineDash([]);
+    ctx.strokeStyle = 'rgba(255,179,94,1)'; ctx.lineWidth = 2;
+    ctx.beginPath(); for (let i = 0; i <= 600; i++) { const u = i / 600; i ? ctx.lineTo(gx(u), gy(ens(u, N))) : ctx.moveTo(gx(u), gy(0)); } ctx.stroke();
+    ctx.lineWidth = 1;
+    if (path.length > 1) {
+      ctx.strokeStyle = 'rgba(255,255,255,.85)'; ctx.beginPath();
+      path.forEach(([u, p], i) => (i ? ctx.lineTo(gx(u), gy(p)) : ctx.moveTo(gx(u), gy(p)))); ctx.stroke();
+    }
+    if (run) { ctx.strokeStyle = 'rgba(255,255,255,.4)'; ctx.beginPath(); ctx.moveTo(gx(run.t), G.y); ctx.lineTo(gx(run.t), G.y + G.h); ctx.stroke(); }
+    const pe = pJ(N);
+    ctx.fillStyle = '#ffb35e'; ctx.beginPath(); ctx.arc(gx(1), gy(pe), 4, 0, TAU); ctx.fill();
+    ctx.textAlign = 'right'; ctx.font = '500 11px "JetBrains Mono", monospace'; ctx.fillText(pct(pe), gx(1) - 8, gy(pe) - 8);
+    ctx.fillStyle = 'rgba(154,158,186,.9)'; ctx.textAlign = 'left'; ctx.font = '500 10px "JetBrains Mono", monospace';
+    ctx.fillText('— — без проверок', G.x + 6, G.y + 12);
+
+    // bars: final probability vs number of checks
+    title(Br, wide ? 'итог к моменту T' : 'итог к T');
+    const bw = Br.w / NS.length;
+    NS.forEach((n, i) => {
+      const h = pJ(n) * Br.h, x = Br.x + i * bw;
+      ctx.fillStyle = n === N ? 'rgba(255,179,94,.95)' : 'rgba(158,138,255,.45)';
+      ctx.fillRect(x + 1, Br.y + Br.h - h, Math.max(1, bw - 3), h);
+      if ([1, 4, 16, 64].includes(n)) { ctx.fillStyle = 'rgba(154,158,186,.9)'; ctx.textAlign = 'center'; ctx.fillText(String(n), x + bw / 2, Br.y + Br.h + 14); }
+    });
+    ctx.textAlign = 'right'; ctx.fillStyle = 'rgba(154,158,186,.9)'; ctx.fillText('проверок', Br.x + Br.w, Br.y + Br.h + 28);
+    ctx.textAlign = 'left';
+  });
+  setN(0);
+})();
+
+/* ================= IV.6 Entanglement: CHSH game ================= */
+(() => {
+  const cv = $('#bell'); if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const inp = { a: $('#bA'), a2: $('#bA2'), b: $('#bB'), b2: $('#bB2') };
+  const rows = $('#bellRows'), oS = $('#bellS'), bar = $('#bellBar'), oAl = $('#bellAlice'), oTot = $('#bellTotal');
+  const btnRun = $('#bellRun');
+  const mChips = $$('#q-bell .chip[data-m]'), pChips = $$('#q-bell .chip[data-preset]');
+  const LBL = ['a, b', 'a, b′', 'a′, b', 'a′, b′'], SG = [1, -1, 1, 1];
+  const PRESETS = { opt: [0, 45, 22.5, 67.5], same: [0, 45, 0, 45] };
+  let mode = 'qm', running = !RM, carry = 0, lastUi = -1, view = null;
+  let C = [], total = 0, aUp = 0;
+  const flights = [], lamps = { A: [0, 0], B: [0, 0] }, used = { A: -1, B: -1 };
+  const rad = k => +inp[k].value * Math.PI / 180;
+  const sgn = x => (x < 0 ? '−' : '') + dec(Math.abs(x), 2);
+  function reset() { C = [0, 1, 2, 3].map(() => ({ n: 0, s: 0 })); total = 0; aUp = 0; flights.length = 0; ui(); if (view) view.poke(); }
+  function theoryE(A, B) {
+    const d = A - B;
+    if (mode === 'qm') return Math.cos(2 * d);
+    let x = ((d % Math.PI) + Math.PI) % Math.PI; if (x > Math.PI / 2) x = Math.PI - x;
+    return 1 - 4 * x / Math.PI;
+  }
+  function measure() {
+    const ia = Math.random() < 0.5 ? 0 : 1, ib = Math.random() < 0.5 ? 0 : 1;
+    const A = rad(ia ? 'a2' : 'a'), B = rad(ib ? 'b2' : 'b');
+    let x, y;
+    if (mode === 'qm') { x = Math.random() < 0.5 ? 1 : -1; y = Math.random() < Math.cos(A - B) ** 2 ? x : -x; }
+    else { const l = Math.random() * Math.PI; x = Math.cos(2 * (A - l)) >= 0 ? 1 : -1; y = Math.cos(2 * (B - l)) >= 0 ? 1 : -1; }
+    const k = ia * 2 + ib; C[k].n++; C[k].s += x * y; total++; if (x > 0) aUp++;
+    return { ia, ib, x, y };
+  }
+  function ui() {
+    const pairs = [['a', 'b'], ['a', 'b2'], ['a2', 'b'], ['a2', 'b2']];
+    let S = 0, St = 0, v = 0, ok = true;
+    rows.innerHTML = C.map((c, k) => {
+      const Et = theoryE(rad(pairs[k][0]), rad(pairs[k][1])); St += SG[k] * Et;
+      let Es = '—';
+      if (c.n) { const E = c.s / c.n; S += SG[k] * E; v += (1 - E * E) / c.n; Es = sgn(E); } else ok = false;
+      return `<tr><td>${LBL[k]}</td><td>${fmtInt(c.n)}</td><td>${Es}</td><td>${sgn(Et)}</td></tr>`;
+    }).join('');
+    oS.innerHTML = ok ? `${sgn(S)} <small>± ${dec(Math.sqrt(v), 2)}</small>` : '—';
+    bar.style.width = ok ? `${clamp(Math.abs(S) / 3 * 100, 0, 100)}%` : '0';
+    oAl.textContent = (total ? `У Алисы «+1» выпало в ${dec(aUp / total * 100, 1)} % случаев, что бы ни выбирал Боб. ` : '') + `Теория для этих углов: S = ${sgn(St)}.`;
+    oTot.textContent = fmtInt(total);
+  }
+  function syncAngles() {
+    Object.entries(inp).forEach(([k, el]) => { $('#' + el.id + 'Out').textContent = `${dec(+el.value, +el.value % 1 ? 1 : 0)}°`; });
+    pChips.forEach(c => c.setAttribute('aria-pressed', String(PRESETS[c.dataset.preset].every((v, i) => +[inp.a, inp.a2, inp.b, inp.b2][i].value === v))));
+  }
+  Object.values(inp).forEach(el => el.addEventListener('input', () => { syncAngles(); reset(); }));
+  pChips.forEach(c => c.addEventListener('click', () => { PRESETS[c.dataset.preset].forEach((v, i) => ([inp.a, inp.a2, inp.b, inp.b2][i].value = v)); syncAngles(); reset(); }));
+  mChips.forEach(c => c.addEventListener('click', () => { mode = c.dataset.m; mChips.forEach(o => o.setAttribute('aria-pressed', String(o === c))); reset(); }));
+  const syncRun = () => { btnRun.setAttribute('aria-pressed', String(running)); btnRun.textContent = running ? 'Пауза' : 'Пуск'; };
+  btnRun.addEventListener('click', () => { running = !running; syncRun(); view.poke(); });
+  $('#bellFast').addEventListener('click', () => { for (let i = 0; i < 1000; i++) measure(); ui(); view.poke(); });
+  $('#bellReset').addEventListener('click', reset);
+
+  function detector(x, y, R, name, k1, k2, act, lamp, labels) {
+    ctx.strokeStyle = 'rgba(150,160,230,.45)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(x, y, R, 0, TAU); ctx.stroke();
+    [rad(k1), rad(k2)].forEach((th, i) => {
+      const on = act === i, dx = Math.cos(th) * R, dy = -Math.sin(th) * R;
+      ctx.strokeStyle = on ? 'rgba(235,233,245,.95)' : 'rgba(154,158,186,.45)'; ctx.lineWidth = on ? 2 : 1;
+      if (!on) ctx.setLineDash([3, 3]);
+      ctx.beginPath(); ctx.moveTo(x - dx, y - dy); ctx.lineTo(x + dx, y + dy); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = on ? 'rgba(235,233,245,.95)' : 'rgba(154,158,186,.7)'; ctx.font = '500 10px "JetBrains Mono", monospace'; ctx.textAlign = 'center';
+      ctx.fillText(labels[i], x + dx * 1.32, y + dy * 1.32 + 3);
+    });
+    ctx.lineWidth = 1;
+    ctx.fillStyle = 'rgba(235,233,245,.9)'; ctx.font = '500 11px "JetBrains Mono", monospace'; ctx.textAlign = 'center';
+    ctx.fillText(name, x, y - R - 22);
+    [['+1', '255,179,94', -16], ['−1', '98,228,255', 16]].forEach(([s, c, off], i) => {
+      const lx = x + off, ly = y + R + 30, g = lamp[i];
+      if (g > 0.02) { const gr = ctx.createRadialGradient(lx, ly, 0, lx, ly, 22); gr.addColorStop(0, `rgba(${c},${0.85 * g})`); gr.addColorStop(1, `rgba(${c},0)`); ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(lx, ly, 22, 0, TAU); ctx.fill(); }
+      ctx.strokeStyle = `rgba(${c},.8)`; ctx.beginPath(); ctx.arc(lx, ly, 8, 0, TAU); ctx.stroke();
+      ctx.fillStyle = `rgba(${c},1)`; ctx.font = '500 10px "JetBrains Mono", monospace'; ctx.fillText(s, lx, ly + 24);
+    });
+    ctx.textAlign = 'left';
+  }
+
+  view = live(cv, (t, dt) => {
+    const { cw: W, ch: H, dpr } = sizeCanvas(cv);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = '#05070f'; ctx.fillRect(0, 0, W, H);
+    const cy = H * 0.42, cx = W / 2, R = clamp(W * 0.06, 22, 36), ax = Math.max(R + 26, W * 0.13), bx = W - ax;
+    ctx.strokeStyle = 'rgba(158,138,255,.12)'; ctx.beginPath(); ctx.moveTo(ax + R, cy); ctx.lineTo(bx - R, cy); ctx.stroke();
+    if (running && !RM) { carry += dt * 9; while (carry >= 1) { carry -= 1; flights.push({ u: 0, r: measure() }); } }
+    ctx.globalCompositeOperation = 'lighter';
+    for (let i = flights.length - 1; i >= 0; i--) {
+      const f = flights[i]; f.u += dt / 0.8;
+      if (f.u >= 1) {
+        lamps.A[f.r.x > 0 ? 0 : 1] = 1; lamps.B[f.r.y > 0 ? 0 : 1] = 1; used.A = f.r.ia; used.B = f.r.ib;
+        flights.splice(i, 1); continue;
+      }
+      [[ax + R, -1], [bx - R, 1]].forEach(([end, s]) => {
+        const x = lerp(cx, end, f.u);
+        ctx.strokeStyle = 'rgba(200,190,255,.5)'; ctx.beginPath();
+        for (let j = 0; j <= 14; j++) { const xx = x - s * j * 2.2; const yy = cy + Math.sin(xx * 0.35 + t * 20) * 3 * (1 - j / 14); j ? ctx.lineTo(xx, yy) : ctx.moveTo(xx, yy); }
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(235,225,255,.95)'; ctx.beginPath(); ctx.arc(x, cy, 2.6, 0, TAU); ctx.fill();
+      });
+    }
+    const sg = ctx.createRadialGradient(cx, cy, 0, cx, cy, 30);
+    sg.addColorStop(0, 'rgba(255,255,255,.95)'); sg.addColorStop(0.3, 'rgba(158,138,255,.6)'); sg.addColorStop(1, 'rgba(158,138,255,0)');
+    ctx.fillStyle = sg; ctx.beginPath(); ctx.arc(cx, cy, 30, 0, TAU); ctx.fill();
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = 'rgba(154,158,186,.9)'; ctx.font = '500 10px "JetBrains Mono", monospace'; ctx.textAlign = 'center';
+    ctx.fillText('источник пар', cx, cy + 46);
+    ctx.textAlign = 'left';
+    ['A', 'B'].forEach(k => { lamps[k][0] = Math.max(0, lamps[k][0] - dt * 4); lamps[k][1] = Math.max(0, lamps[k][1] - dt * 4); });
+    detector(ax, cy, R, 'Алиса', 'a', 'a2', used.A, lamps.A, ['a', 'a′']);
+    detector(bx, cy, R, 'Боб', 'b', 'b2', used.B, lamps.B, ['b', 'b′']);
+    if (t - lastUi > 0.2 || t < lastUi) { lastUi = t; ui(); }
+  });
+  syncAngles(); syncRun(); reset();
+  if (RM) { for (let i = 0; i < 1000; i++) measure(); ui(); }
 })();
 </script>
 </body>
