@@ -1,0 +1,1603 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Горизонт событий</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Интерактивное путешествие: чёрные дыры, материя и антиматерия, пространство-время и квантовая физика.">
+<meta name="theme-color" content="#04050b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Golos+Text:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  /* Layout: cinematic hero with a live ray-traced black hole, then six chapters — sticky numeral rail + one wide column of text and instruments */
+  --void:#04050b;
+  --ink:#080b17;
+  --ink-2:#0d1224;
+  --line:rgba(150,160,230,.14);
+  --line-2:rgba(150,160,230,.28);
+  --text:#ebe9f5;
+  --mute:#9a9eba;
+  --dim:#666b8a;
+  --matter-rgb:255,179,94;
+  --anti-rgb:98,228,255;
+  --field-rgb:158,138,255;
+  --matter:rgb(var(--matter-rgb));
+  --anti:rgb(var(--anti-rgb));
+  --field:rgb(var(--field-rgb));
+  --hot:#ffe7c4;
+  --accent-rgb:var(--matter-rgb);
+  --accent:rgb(var(--accent-rgb));
+  --font-display:"Cormorant","Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --font-body:"Golos Text","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--void)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--void);color:var(--text);font:400 1.0625rem/1.7 var(--font-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip}
+a{color:inherit}
+sup,sub{font-size:.7em;line-height:0}
+p{margin:0}
+::selection{background:rgba(var(--accent-rgb),.35);color:#fff}
+.sun{display:inline-block;width:.62em;height:.62em;border:1px solid currentColor;border-radius:50%;position:relative;vertical-align:-.04em;margin-left:.06em}
+.sun::after{content:"";position:absolute;left:50%;top:50%;width:2px;height:2px;margin:-1px 0 0 -1px;border-radius:50%;background:currentColor}
+.wrap{width:100%;max-width:1320px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--font-mono)}
+
+/* ---------- top bar ---------- */
+.top{position:fixed;z-index:60;top:0;left:0;right:0;padding-top:env(safe-area-inset-top,0px);border-bottom:1px solid transparent;transition:background .35s,border-color .35s}
+.top.solid{background:rgba(4,5,11,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom-color:var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:20px;height:60px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font:500 .72rem/1 var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--text)}
+.brand svg{width:24px;height:24px;flex:none}
+.top nav{display:none;gap:2px}
+@media (min-width:960px){.top nav{display:flex}}
+.top nav a{font:500 .66rem/1 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mute);text-decoration:none;padding:9px 11px;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.top nav a:hover,.top nav a.on{color:var(--text);border-bottom-color:var(--matter)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;height:clamp(640px,96svh,980px);overflow:hidden;isolation:isolate;background:#02030a}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
+.hero canvas:active{cursor:grabbing}
+.hero-fallback{position:absolute;inset:0;display:none;background:
+  radial-gradient(circle at 62% 44%,#000 0 9%,rgba(255,214,160,.9) 9.6%,rgba(255,150,60,.35) 12%,transparent 22%),
+  radial-gradient(ellipse 48% 7% at 62% 46%,rgba(255,190,120,.55),transparent 70%),
+  radial-gradient(ellipse at 50% 50%,#0a0d1d,#02030a 70%)}
+.hero.no-gl .hero-fallback{display:block}
+.hero.no-gl canvas{display:none}
+.hero-shade{position:absolute;inset:0;pointer-events:none;background:
+  linear-gradient(to top,var(--void) 0%,rgba(4,5,11,.86) 16%,rgba(4,5,11,0) 48%),
+  linear-gradient(to right,rgba(2,3,10,.74) 0%,rgba(2,3,10,.35) 30%,rgba(2,3,10,0) 50%)}
+.hero-copy{position:absolute;left:0;right:0;bottom:0;pointer-events:none;padding-bottom:clamp(28px,6vw,72px)}
+@media (max-width:979px){
+  .hero{height:auto;min-height:100svh}
+  .hero-copy{position:relative;padding-top:min(56svh,520px)}
+  .hero-shade{background:linear-gradient(to top,var(--void) 0%,rgba(4,5,11,.9) 42%,rgba(4,5,11,0) 62%)}
+}
+.hero-grid{display:grid;gap:28px;align-items:end}
+@media (min-width:980px){.hero-grid{grid-template-columns:minmax(0,1fr) 330px}}
+.eyebrow{font:500 .68rem/1.6 var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.hero h1{margin:.28em 0 .22em;font:300 clamp(3.5rem,11vw,9.6rem)/.86 var(--font-display);letter-spacing:-.025em;text-wrap:balance;text-shadow:0 2px 28px rgba(2,3,10,.7)}
+.hero h1 em{display:block;font-style:italic;font-weight:300;padding-right:.08em;text-shadow:none;filter:drop-shadow(0 2px 22px rgba(2,3,10,.65));background:linear-gradient(92deg,var(--hot) 0%,var(--matter) 46%,#ff7d3a 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lede,.hero .eyebrow{text-shadow:0 1px 16px rgba(2,3,10,.85)}
+.hero .lede{max-width:34ch;font:400 clamp(1.18rem,2.1vw,1.55rem)/1.38 var(--font-display);color:rgba(235,233,245,.9)}
+.hud{pointer-events:auto;display:grid;gap:14px;padding:18px 18px 16px;border:1px solid var(--line);background:rgba(6,8,18,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.hud .row{display:flex;align-items:center;justify-content:space-between;gap:12px;font:500 .66rem/1.3 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.hud output{color:var(--text);font-variant-numeric:tabular-nums}
+.hud .spec{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font:400 .72rem/1.5 var(--font-mono);color:var(--mute);border-top:1px solid var(--line);padding-top:12px}
+.hud .spec b{font-weight:500;color:var(--text);text-align:right;font-variant-numeric:tabular-nums}
+.hint{font:400 .66rem/1.4 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+
+/* ---------- controls ---------- */
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;margin:0;background:transparent;cursor:pointer;touch-action:pan-y}
+input[type=range]::-webkit-slider-runnable-track{height:1px;background:var(--line-2)}
+input[type=range]::-moz-range-track{height:1px;background:var(--line-2)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;margin-top:-7px;border:0;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px rgba(var(--accent-rgb),.18),0 0 16px rgba(var(--accent-rgb),.8)}
+input[type=range]::-moz-range-thumb{width:15px;height:15px;border:0;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px rgba(var(--accent-rgb),.18),0 0 16px rgba(var(--accent-rgb),.8)}
+input[type=range]:focus{outline:none}
+input[type=range]:focus-visible::-webkit-slider-thumb{outline:2px solid var(--text);outline-offset:3px}
+input[type=range]:focus-visible::-moz-range-thumb{outline:2px solid var(--text);outline-offset:3px}
+.btn{font:500 .66rem/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--text);background:transparent;border:1px solid var(--line-2);padding:11px 14px;cursor:pointer;transition:border-color .2s,color .2s,background .2s;white-space:nowrap}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn[aria-pressed=true]{background:rgba(var(--accent-rgb),.12);border-color:var(--accent);color:var(--accent)}
+.btn:focus-visible,a:focus-visible,canvas:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* ---------- chapters ---------- */
+.chap{position:relative;border-top:1px solid var(--line);scroll-margin-top:60px}
+.chap::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(50% 32% at 12% 0%,rgba(var(--accent-rgb),.075),transparent 72%)}
+.chap[data-c=matter]{--accent-rgb:var(--matter-rgb)}
+.chap[data-c=anti]{--accent-rgb:var(--anti-rgb)}
+.chap[data-c=space]{--accent-rgb:var(--field-rgb)}
+.chap[data-c=quant]{--accent-rgb:var(--anti-rgb)}
+.chap[data-c=hawk]{--accent-rgb:var(--matter-rgb)}
+.chap[data-c=edge]{--accent-rgb:200,198,230}
+.chap{--accent:rgb(var(--accent-rgb))}
+.nt{text-transform:none;letter-spacing:.02em}
+.chap>.wrap{position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:22px 64px;padding-top:clamp(64px,9vw,136px);padding-bottom:clamp(64px,9vw,136px)}
+@media (min-width:1040px){.chap>.wrap{grid-template-columns:190px minmax(0,1fr)}}
+.rail{display:flex;align-items:baseline;gap:16px;align-self:start}
+@media (min-width:1040px){.rail{position:sticky;top:96px;flex-direction:column;gap:10px}}
+.rail .num{font:300 italic clamp(3.6rem,9vw,8.6rem)/.84 var(--font-display);background:linear-gradient(180deg,var(--accent) 10%,rgba(var(--accent-rgb),.05) 95%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.1em}
+.rail .tag{font:500 .7rem/1.3 var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.rail .key{font:400 .72rem/1.5 var(--font-mono);color:var(--mute)}
+.body{min-width:0}
+.body h2{margin:0;max-width:17ch;font:300 clamp(2.4rem,5.6vw,4.7rem)/1 var(--font-display);letter-spacing:-.015em;text-wrap:balance}
+.body h2 em{font-style:italic;color:var(--accent)}
+.body .lede{margin-top:26px;max-width:40ch;font:400 clamp(1.25rem,2.2vw,1.62rem)/1.4 var(--font-display);color:rgba(235,233,245,.92)}
+.text{margin-top:28px;display:grid;gap:18px;max-width:66ch;color:rgba(235,233,245,.84)}
+.text b{font-weight:500;color:var(--text)}
+.text-2{display:grid;gap:18px 48px;margin-top:28px;color:rgba(235,233,245,.84)}
+@media (min-width:860px){.text-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.formula{margin-top:28px;display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;padding:16px 20px;border-left:1px solid var(--accent);background:linear-gradient(90deg,rgba(var(--accent-rgb),.08),transparent);font:400 clamp(1.3rem,2.4vw,1.7rem)/1.3 var(--font-display)}
+.formula small{font:400 .7rem/1.4 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+
+/* ---------- figures ---------- */
+.fig{margin:44px 0 0;border:1px solid var(--line);background:linear-gradient(180deg,var(--ink),#050711);position:relative}
+.fig canvas{display:block;width:100%;height:clamp(320px,44vw,480px);touch-action:pan-y}
+.fig .ctl{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;padding:14px 18px;border-top:1px solid var(--line)}
+.fig .ctl label,.fig .ctl .lab{font:500 .66rem/1.3 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.fig .ctl output{font:500 .74rem/1 var(--font-mono);color:var(--text);font-variant-numeric:tabular-nums;min-width:6ch}
+.fig .ctl .grow{flex:1 1 220px;display:flex;align-items:center;gap:14px;min-width:0}
+.fig .ctl .grow input{flex:1;min-width:0}
+.fig .ctl .btns{display:flex;flex-wrap:wrap;gap:8px}
+.fig figcaption{padding:14px 18px 16px;border-top:1px solid var(--line);font-size:.86rem;line-height:1.6;color:var(--mute);max-width:none}
+.fig figcaption b{color:var(--text);font-weight:500}
+.status{padding:12px 18px;border-top:1px solid var(--line);font:400 .8rem/1.5 var(--font-mono);color:var(--text);min-height:3.2em}
+.status span{color:var(--accent)}
+
+/* facts */
+.facts{margin:44px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:0 36px}
+.facts>div{border-top:1px solid var(--line);padding:16px 0 22px}
+.facts dt{font:500 .66rem/1.3 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.facts dd{margin:10px 0 0;font-size:.95rem;line-height:1.6;color:rgba(235,233,245,.84)}
+.facts .big{display:block;margin-bottom:4px;font:400 1.9rem/1.1 var(--font-display);color:var(--text);font-variant-numeric:lining-nums}
+
+/* composition bar */
+.budget{margin-top:44px}
+.budget-title{font:500 .66rem/1.3 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.budget-bar{display:flex;gap:3px;height:12px;margin-top:14px}
+.budget-bar i{display:block;height:100%;transform-origin:left center}
+.budget-bar .b1{background:var(--matter);box-shadow:0 0 18px rgba(var(--matter-rgb),.7)}
+.budget-bar .b2{background:repeating-linear-gradient(135deg,rgba(158,138,255,.85) 0 3px,rgba(158,138,255,.35) 3px 6px)}
+.budget-bar .b3{background:linear-gradient(90deg,rgba(98,228,255,.32),rgba(98,228,255,.08))}
+.budget.in .budget-bar i{animation:grow 1.4s cubic-bezier(.2,.7,.2,1) both}
+.budget.in .budget-bar .b2{animation-delay:.12s}
+.budget.in .budget-bar .b3{animation-delay:.24s}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.budget.in .budget-bar i{animation:none}}
+.budget-key{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:12px 32px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));font-size:.9rem;line-height:1.5;color:var(--mute)}
+.budget-key b{display:block;font:400 1.6rem/1.1 var(--font-display);color:var(--text)}
+.budget-key li{border-left:2px solid var(--c);padding-left:12px}
+
+/* split figure (canvas + side panel) */
+.split{display:grid;grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){.split{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}.split>.side{border-left:1px solid var(--line)}.fig .split canvas{height:100%;min-height:360px}}
+.side{display:grid;align-content:start;gap:0;border-top:1px solid var(--line)}
+@media (min-width:900px){.side{border-top:0}}
+.read{display:grid;gap:6px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.read .k{font:500 .64rem/1.3 var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.read .v{font:400 1.5rem/1.15 var(--font-display);color:var(--text);font-variant-numeric:tabular-nums lining-nums;overflow-wrap:anywhere}
+.read .v.xl{font-size:clamp(2.2rem,4vw,3rem);color:var(--accent)}
+.read .n{font-size:.82rem;line-height:1.5;color:var(--mute)}
+.clocks{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
+.clocks .read{border-bottom:0}
+.clocks .read+.read{border-left:1px solid var(--line)}
+.clocks .v{font:500 1rem/1.3 var(--font-mono)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.chip{font:500 .62rem/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute);background:transparent;border:1px solid var(--line);padding:8px 10px;cursor:pointer;transition:color .2s,border-color .2s}
+.chip:hover,.chip[aria-pressed=true]{color:var(--accent);border-color:var(--accent)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;padding:12px 18px;border-top:1px solid var(--line);font:400 .7rem/1.4 var(--font-mono);color:var(--mute)}
+.legend i{display:inline-block;width:14px;height:2px;margin-right:8px;vertical-align:middle;background:var(--c)}
+
+/* temperature axis */
+.axis{padding:22px 18px 12px;border-top:1px solid var(--line)}
+.axis-track{position:relative;height:8px;background:linear-gradient(90deg,#2a1c66 0%,#5a3fd0 30%,#3fb8e8 55%,#ffb35e 75%,#fff3df 100%);opacity:.9}
+.axis-ticks{position:relative;height:58px;font:400 .62rem/1.25 var(--font-mono);color:var(--mute)}
+.axis-ticks span{position:absolute;top:6px;transform:translateX(-50%);white-space:nowrap;text-align:center}
+.axis-ticks span::before{content:"";display:block;width:1px;height:6px;margin:0 auto 4px;background:var(--line-2)}
+.axis-ticks span.low{top:30px}
+.axis-ticks span.low::before{height:30px;margin-top:-24px}
+.axis-mark{position:absolute;top:-30px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;font:500 .7rem/1 var(--font-mono);color:var(--text);white-space:nowrap;transition:left .15s ease-out}
+.axis-mark::after{content:"";width:2px;height:20px;background:var(--text);box-shadow:0 0 10px #fff}
+.axis-wrap{position:relative;margin-top:24px}
+
+/* feynman */
+.duo{display:grid;gap:28px;margin-top:44px;align-items:center}
+@media (min-width:860px){.duo{grid-template-columns:minmax(0,1fr) 300px}}
+.feyn{width:100%;max-width:300px;height:auto;justify-self:center}
+.feyn text{font:500 13px var(--font-mono);fill:var(--mute)}
+
+/* known / unknown */
+.ledger{margin-top:44px;display:grid;gap:0 48px}
+@media (min-width:860px){.ledger{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ledger h3{margin:0 0 6px;padding-bottom:12px;border-bottom:1px solid var(--line-2);font:500 .7rem/1.3 var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--c)}
+.ledger ul{list-style:none;margin:0 0 36px;padding:0}
+.ledger li{display:grid;grid-template-columns:4.6rem minmax(0,1fr);gap:14px;padding:13px 0;border-bottom:1px solid var(--line);font-size:.95rem;line-height:1.55;color:rgba(235,233,245,.84)}
+.ledger li span{font:500 .72rem/1.9 var(--font-mono);color:var(--c);font-variant-numeric:tabular-nums}
+.coda{margin-top:12px;max-width:44ch;font:300 italic clamp(1.5rem,3vw,2.3rem)/1.3 var(--font-display);color:var(--text)}
+
+/* footer */
+.foot{border-top:1px solid var(--line);padding-top:48px;padding-bottom:64px;color:var(--mute);font-size:.86rem;line-height:1.65}
+.foot .wrap{display:grid;gap:22px 48px}
+@media (min-width:860px){.foot .wrap{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}}
+.foot h4{margin:0 0 8px;font:500 .66rem/1.3 var(--font-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--text)}
+.foot ul{margin:0;padding-left:1.1em;display:grid;gap:8px}
+.foot .sign{font:300 italic 2rem/1 var(--font-display);color:var(--text)}
+</style>
+</head>
+<body>
+<header class="top" id="topbar">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="В начало">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12.6" rx="11" ry="2.6" fill="none" stroke="#ffb35e" stroke-width="1.1" opacity=".85"/><circle cx="12" cy="12" r="6.4" fill="none" stroke="#ffe7c4" stroke-width="1.2"/><circle cx="12" cy="12" r="5.2" fill="#000"/></svg>
+      <span>Горизонт событий</span>
+    </a>
+    <nav aria-label="Главы">
+      <a href="#matter">Материя</a>
+      <a href="#antimatter">Антиматерия</a>
+      <a href="#spacetime">Пространство-время</a>
+      <a href="#quantum">Кванты</a>
+      <a href="#hawking">Хокинг</a>
+      <a href="#edge">Граница</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top" aria-label="Чёрная дыра: интерактивная симуляция">
+  <canvas id="bh" role="img" aria-label="Расчётное изображение невращающейся чёрной дыры с аккреционным диском. Свет диска огибает дыру, поэтому дальняя сторона диска видна над тенью и под ней."></canvas>
+  <div class="hero-fallback" aria-hidden="true"></div>
+  <div class="hero-shade"></div>
+  <div class="hero-copy">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Чёрные дыры · материя · антиматерия · пространство · время · кванты</p>
+        <h1>Горизонт <em>событий</em></h1>
+        <p class="lede">Пять идей физики, которые сходятся в одной точке. Там гравитация так сильна, что не выпускает даже свет, а квантовая теория предсказывает, что эта тьма всё же слабо светится.</p>
+      </div>
+      <div class="hud">
+        <div class="row"><label for="incl">Наклон камеры</label><output id="inclOut" for="incl">10°</output></div>
+        <input type="range" id="incl" min="2" max="80" value="10" aria-label="Наклон камеры над плоскостью диска, градусы">
+        <div class="row"><span class="hint">Тяните изображение, чтобы повернуть</span><button class="btn" id="bhPlay" type="button" aria-pressed="true">Пауза</button></div>
+        <div class="spec">
+          <span>модель</span><b>Шварцшильд</b>
+          <span>диск</span><b>3–12,5 r<sub>s</sub></b>
+          <span>камера</span><b>19 r<sub>s</sub></b>
+          <span>Sgr A*</span><b>4,3 млн M<sub><i class="sun"></i></sub></b>
+          <span>её r<sub>s</sub></span><b>≈ 12,7 млн км</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+
+<!-- I. MATTER -->
+<section class="chap" id="matter" data-c="matter">
+  <div class="wrap">
+    <div class="rail"><span class="num">I</span><span class="tag">Материя</span><span class="key">10<sup>−10</sup> → 10<sup>−15</sup> м</span></div>
+    <div class="body">
+      <h2>Почти ничего, <em>что держится на энергии</em></h2>
+      <p class="lede">Атом водорода примерно в 60 000 раз шире своего ядра. Если раздуть атом до размеров стадиона, протон в центре окажется крупинкой около полутора миллиметров.</p>
+      <div class="text-2">
+        <p>Всё остальное пространство атома занимает облако электрона. Это не шарик на орбите: электрон описывается волной вероятности, и каждая точка на рисунке ниже показывает место, где его можно обнаружить. Двигайте ползунок к ядру. Облако быстро редеет, и между ним и протоном остаётся почти пустота.</p>
+        <p>Но и пустота здесь условная. Масса протона равна 938 МэВ/c², а три его валентных кварка вместе дают около 9 МэВ, то есть примерно 1 %. Остальные 99 % приходятся на энергию сильного взаимодействия: глюонное поле и движение кварков. Масса вашего тела в основном и есть энергия, по формуле <b>E = mc²</b>.</p>
+      </div>
+
+      <figure class="fig">
+        <canvas id="zoomCv" role="img" aria-label="Атом водорода: облако вероятности электрона и ядро. При увеличении видны три кварка протона, связанные глюонным полем, и виртуальные пары кварк–антикварк."></canvas>
+        <div class="status" id="zoomStage" aria-live="polite">Атом водорода. Электрон — облако вероятности, а не шарик на орбите.</div>
+        <div class="ctl">
+          <div class="grow"><label for="zoomRange">Увеличение</label><input type="range" id="zoomRange" min="0" max="1000" value="0"><output id="zoomMag" for="zoomRange">×1</output></div>
+          <div class="btns"><button class="btn" id="zoomPlay" type="button">Нырнуть к протону</button></div>
+        </div>
+        <figcaption>Облако электрона построено по настоящему распределению состояния 1s: плотность вероятности ∝ e<sup>−2r/a₀</sup>, где a₀ = 5,3·10<sup>−11</sup> м. Пока протон меньше пикселя, он нарисован светящейся точкой. Цвета кварков — условные названия «цветового заряда», а не цвет в обычном смысле. Голубые точки в протоне — виртуальные антикварки: антиматерия есть даже внутри обычного вещества.</figcaption>
+      </figure>
+
+      <div class="budget" id="budget">
+        <div class="budget-title">Из чего состоит Вселенная · данные спутника Planck, 2018</div>
+        <div class="budget-bar" role="img" aria-label="Обычное вещество около 5 процентов, тёмная материя около 27 процентов, тёмная энергия около 68 процентов">
+          <i class="b1" style="flex:5"></i><i class="b2" style="flex:27"></i><i class="b3" style="flex:68"></i>
+        </div>
+        <ul class="budget-key">
+          <li style="--c:var(--matter)"><b>≈ 5 %</b>обычное вещество: звёзды, газ, планеты, мы. Всё, что видно в телескопы.</li>
+          <li style="--c:var(--field)"><b>≈ 27 %</b>тёмная материя: заметна по притяжению, но не светит. Из чего она состоит, неизвестно.</li>
+          <li style="--c:var(--anti)"><b>≈ 68 %</b>тёмная энергия: ускоряет расширение Вселенной. Её природа тоже неизвестна.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- II. ANTIMATTER -->
+<section class="chap" id="antimatter" data-c="anti">
+  <div class="wrap">
+    <div class="rail"><span class="num">II</span><span class="tag">Антиматерия</span><span class="key">e<sup>−</sup> + e<sup>+</sup> → 2γ</span></div>
+    <div class="body">
+      <h2>Зеркальный двойник, <em>которого почти нет</em></h2>
+      <p class="lede">У каждой частицы есть античастица: та же масса, противоположные заряды. При встрече они исчезают, и вся их масса превращается в излучение.</p>
+      <div class="text-2">
+        <p>В 1928 году Поль Дирак записал уравнение электрона, совместимое с теорией относительности. В нём неожиданно нашлись решения для частицы с зарядом +e. Через четыре года Карл Андерсон увидел её след в камере Вильсона: так открыли позитрон. Сегодня антиматерию получают на ускорителях и даже хранят. Эксперимент ALPHA в ЦЕРНе удерживал атомы антиводорода в магнитной ловушке до 1000 секунд.</p>
+        <p>В 2023 году установка ALPHA-g выпустила антиводород из вертикальной ловушки. Атомы упали вниз, как обычное вещество, и с точностью около 20 % ускорение оказалось тем же. Главная загадка в другом. Большой взрыв должен был создать вещество и антивещество поровну, а вокруг нас почти одно вещество. Почему так вышло, пока не знает никто.</p>
+      </div>
+
+      <figure class="fig">
+        <canvas id="chamber" role="img" aria-label="Пузырьковая камера в магнитном поле: фотон рождает электрон и позитрон, их следы закручиваются в противоположные стороны."></canvas>
+        <div class="ctl">
+          <div class="btns">
+            <button class="btn" id="pairBtn" type="button">Родить пару <span class="nt">γ → e<sup>−</sup>e<sup>+</sup></span></button>
+            <button class="btn" id="annBtn" type="button">Аннигиляция <span class="nt">e<sup>−</sup>e<sup>+</sup> → 2γ</span></button>
+          </div>
+          <span class="lab">или щёлкните по камере</span>
+        </div>
+        <figcaption>Схема пузырьковой камеры. Магнитное поле перпендикулярно экрану, поэтому частицы с противоположными зарядами закручиваются в разные стороны: <b style="color:var(--matter)">электрон</b> в одну, <b style="color:var(--anti)">позитрон</b> в другую. Теряя энергию, они сворачиваются в спирали. Фотон следа не оставляет. Пара рождается в поле атомного ядра, если энергия фотона больше 2 × 511 кэВ = 1,022 МэВ.</figcaption>
+      </figure>
+
+      <div class="duo">
+        <dl class="facts" style="margin:0">
+          <div><dt>Аннигиляция</dt><dd><span class="big">1,8·10<sup>14</sup> Дж</span>выделится, если 1 г вещества встретит 1 г антивещества. Это около 43 килотонн в тротиловом эквиваленте.</dd></div>
+          <div><dt>Сколько сделано</dt><dd><span class="big">~ нанограммы</span>антипротонов получили ЦЕРН и Фермилаб за десятилетия работы. При таком темпе на один грамм ушёл бы примерно миллиард лет (оценка порядка величины).</dd></div>
+          <div><dt>Асимметрия</dt><dd><span class="big">1 : 1,6·10<sup>9</sup></span>Столько барионов приходится на фотоны во Вселенной сегодня. Это след крошечного избытка вещества над антивеществом, примерно одна частица на миллиард.</dd></div>
+          <div><dt>Ближе, чем кажется</dt><dd><span class="big">≈ раз в 2 часа</span>обычный банан испускает позитрон: так распадается калий-40, который в нём содержится.</dd></div>
+        </dl>
+        <svg class="feyn" viewBox="0 0 280 210" role="img" aria-label="Диаграмма Фейнмана аннигиляции: электрон и позитрон обмениваются виртуальным электроном и превращаются в два фотона">
+          <defs>
+            <marker id="arA" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9 z" fill="#ffb35e"/></marker>
+            <marker id="arC" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9 z" fill="#62e4ff"/></marker>
+            <marker id="arT" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,1 L9,5 L0,9 z" fill="#666b8a"/></marker>
+          </defs>
+          <path d="M28 170 L74 152 L120 134" stroke="#ffb35e" stroke-width="1.6" fill="none" marker-mid="url(#arA)"/>
+          <path d="M120 66 L74 48 L28 30" stroke="#62e4ff" stroke-width="1.6" fill="none" marker-mid="url(#arC)"/>
+          <path d="M120 134 L120 100 L120 66" stroke="#ebe9f5" stroke-width="1.3" fill="none" stroke-dasharray="0" marker-mid="url(#arA)" opacity=".75"/>
+          <path class="photon" data-a="120,134" data-b="236,170" stroke="#ebe9f5" stroke-width="1.4" fill="none"/>
+          <path class="photon" data-a="120,66" data-b="236,30" stroke="#ebe9f5" stroke-width="1.4" fill="none"/>
+          <circle cx="120" cy="134" r="3.2" fill="#ebe9f5"/><circle cx="120" cy="66" r="3.2" fill="#ebe9f5"/>
+          <text x="10" y="186" style="fill:#ffb35e">e−</text>
+          <text x="10" y="24" style="fill:#62e4ff">e+</text>
+          <text x="244" y="182">γ</text><text x="244" y="30">γ</text>
+          <path d="M28 202 H250" stroke="#666b8a" stroke-width="1" marker-end="url(#arT)"/>
+          <text x="196" y="198" style="font-size:10px">время →</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- III. SPACETIME -->
+<section class="chap" id="spacetime" data-c="space">
+  <div class="wrap">
+    <div class="rail"><span class="num">III</span><span class="tag">Пространство-время</span><span class="key">r<sub>s</sub> = 2GM / c²</span></div>
+    <div class="body">
+      <h2>Геометрия, <em>которая тянет и замедляет</em></h2>
+      <p class="lede">В 1915 году Эйнштейн показал, что гравитация — это кривизна пространства-времени. Масса задаёт геометрию, а свободное тело движется по самой прямой линии, какая в этой геометрии есть.</p>
+      <div class="text-2">
+        <p>Чёрная дыра — простейшее решение уравнений Эйнштейна. Его нашёл Карл Шварцшильд в 1916 году. У дыры есть радиус r<sub>s</sub> = 2GM/c²: у Солнца он был бы около 3 км, у Земли около 9 мм. Под горизонтом любое будущее направлено к центру, и выбраться оттуда не может даже свет.</p>
+        <p>Время искривляется вместе с пространством: чем глубже в поле тяжести, тем медленнее идут часы. Это измерено и учитывается каждый день. Часы спутников GPS спешат на 45 мкс в сутки из-за более слабой гравитации и отстают на 7 мкс из-за скорости, итого +38 мкс. Без поправки навигатор ошибался бы примерно на 10 км за сутки.</p>
+      </div>
+
+      <figure class="fig">
+        <div class="split">
+          <canvas id="funnel" role="img" aria-label="Воронка Фламма: форма пространства вокруг чёрной дыры. Линии краснеют ближе к горизонту, где время течёт медленнее. Отмечены горизонт, фотонная сфера, последняя устойчивая орбита и ваше положение."></canvas>
+          <div class="side">
+            <div class="read"><span class="k">Где вы</span><span class="v" id="rOut">r = 1,5 r<sub>s</sub></span><span class="n" id="hOut">для Sgr A*: 6,4 млн км над горизонтом</span></div>
+            <div class="read"><span class="k">Ход времени</span><span class="v xl" id="fOut">×1,73</span><span class="n">столько секунд проходит вдали за одну вашу секунду</span></div>
+            <div class="clocks">
+              <div class="read"><span class="k">Ваши часы</span><span class="v" id="clYou">0,0 с</span></div>
+              <div class="read"><span class="k">Часы вдали</span><span class="v" id="clFar">0,0 с</span></div>
+            </div>
+            <div class="chips" role="group" aria-label="Готовые положения">
+              <button class="chip" type="button" data-eps="2">ISCO, <span class="nt">3 r<sub>s</sub></span></button>
+              <button class="chip" type="button" data-eps="0.5">Фотонная сфера</button>
+              <button class="chip" type="button" data-eps="0.001">У горизонта</button>
+              <button class="chip" type="button" data-eps="2.66e-10">Планета Миллера</button>
+            </div>
+          </div>
+        </div>
+        <div class="ctl">
+          <div class="grow"><label for="depth">Расстояние до горизонта</label><input type="range" id="depth" min="0" max="1000" value="0"></div>
+        </div>
+        <div class="legend">
+          <span><i style="--c:#ff6a3d"></i>горизонт, 1 r<sub>s</sub></span>
+          <span><i style="--c:#fff1dc"></i>фотонная сфера, 1,5 r<sub>s</sub>: свет может кружить по орбите</span>
+          <span><i style="--c:#62e4ff"></i>ISCO, 3 r<sub>s</sub>: последняя устойчивая орбита</span>
+        </div>
+        <figcaption>Воронка Фламма показывает форму пространства вокруг невращающейся дыры (r ≥ r<sub>s</sub>). Её можно вращать мышью. Цвет линий показывает замедление часов: множитель 1/√(1 − r<sub>s</sub>/r). Это наглядная модель. Время на ней не изображено, и тела падают не потому, что воронка наклонная. Для падающего наблюдателя горизонт ничем не отмечен: он пересекает его за конечное время. А наблюдатель вдали видит, как падающий замедляется и краснеет, так и не достигнув горизонта. «Планета Миллера» из «Интерстеллара»: 1 час там равен 7 годам вдали, то есть множитель около 61 000. В фильме он получен у быстро вращающейся дыры, здесь его даёт неподвижный наблюдатель у самого горизонта.</figcaption>
+      </figure>
+
+      <dl class="facts">
+        <div><dt>Солнце как чёрная дыра</dt><dd><span class="big">r<sub>s</sub> ≈ 2,95 км</span>Солнце никогда не станет чёрной дырой: для этого ему не хватает массы.</dd></div>
+        <div><dt>Спагеттификация</dt><dd><span class="big">зависит от массы</span>У дыры в 10 масс Солнца приливные силы разорвали бы человека задолго до горизонта. У дыры в миллионы масс Солнца горизонт можно пересечь невредимым.</dd></div>
+        <div><dt>Проверено опытом</dt><dd><span class="big">22,5 м</span>Такой высоты была башня Гарварда, на которой Паунд и Ребка в 1959 году измерили гравитационное смещение частоты фотонов.</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- IV. QUANTUM -->
+<section class="chap" id="quantum" data-c="quant">
+  <div class="wrap">
+    <div class="rail"><span class="num">IV</span><span class="tag">Квантовая физика</span><span class="key">Δx·Δp ≥ ħ/2</span></div>
+    <div class="body">
+      <h2>Мир, где <em>«где» — вопрос вероятности</em></h2>
+      <p class="lede">На масштабах атома у частицы нет траектории, пока ничто не выяснило, где она. Есть волна амплитуды, и её квадрат даёт вероятность найти частицу в каждой точке.</p>
+      <div class="text-2">
+        <p>Опыт с двумя щелями — самый короткий путь в квантовую механику. Электроны посылают по одному. Впервые так сделал Акира Тономура в лаборатории Hitachi в 1989 году. Каждый электрон попадает в одну точку экрана, но из множества точек складываются полосы интерференции, как у волны. Через обе щели проходит не частица, а её амплитуда вероятности.</p>
+        <p>Если поставить детектор, который определяет щель, полосы исчезают. «Наблюдатель» здесь не человек и не сознание. Достаточно любого взаимодействия, которое оставляет информацию о пути. Похожая история с неопределённостью Гейзенберга Δx·Δp ≥ ħ/2: это свойство волн, а не неточность приборов. А запутанные частицы коррелируют сильнее, чем допускает любая локальная теория со скрытыми параметрами. Это показали опыты Аспе, Клаузера и Цайлингера, Нобелевская премия 2022 года.</p>
+      </div>
+
+      <figure class="fig">
+        <canvas id="slit" role="img" aria-label="Опыт с двумя щелями: частицы по одной летят от источника через две щели на экран, справа растёт гистограмма попаданий."></canvas>
+        <div class="ctl">
+          <div class="btns">
+            <button class="btn" id="slitObs" type="button" aria-pressed="false">Детектор щели: выключен</button>
+            <button class="btn" id="slitReset" type="button">Очистить экран</button>
+          </div>
+          <div class="grow"><label for="slitRate">Частиц в секунду</label><input type="range" id="slitRate" min="1" max="400" value="30"><output id="slitRateOut" for="slitRate">30</output></div>
+          <span class="lab">На экране: <output id="slitCount">0</output></span>
+        </div>
+        <figcaption>Схема, масштабы подобраны для наглядности. Без детектора попадания распределены по формуле I ∝ cos²(πd·sinθ/λ)·sinc²(πa·sinθ/λ), где d — расстояние между щелями, a — их ширина. Тонкая линия на гистограмме показывает ожидаемое распределение. С детектором складываются два пятна от отдельных щелей, и интерференция пропадает. Волны за преградой изображают амплитуду: без детектора они складываются с учётом знака, с детектором — без него.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- V. HAWKING -->
+<section class="chap" id="hawking" data-c="hawk">
+  <div class="wrap">
+    <div class="rail"><span class="num">V</span><span class="tag">Чёрные дыры и кванты</span><span class="key">T ∝ 1/M</span></div>
+    <div class="body">
+      <h2>Чёрная дыра <em>не совсем чёрная</em></h2>
+      <p class="lede">В 1974 году Стивен Хокинг применил квантовую теорию поля к окрестности горизонта и получил, что дыра излучает как нагретое тело. Чем дыра легче, тем она горячее.</p>
+      <div class="formula"><span>T = ħc³ / (8πGMk<sub>B</sub>)</span><small>≈ 6,2·10<sup>−8</sup> K × M<sub><i class="sun"></i></sub>/M</small></div>
+      <div class="text-2">
+        <p>Обычно это объясняют так: у горизонта рождаются пары «частица — античастица», одна падает внутрь, другая улетает. Это только образ, и сам Хокинг предупреждал, что он упрощает. Строгий вывод опирается на то, что наблюдатели вблизи горизонта и вдали от него по-разному определяют вакуум. Но результат тот же: дыра излучает, теряет массу и в теории со временем испаряется.</p>
+        <p>Для дыры массой с Солнце T ≈ 6·10<sup>−8</sup> K, это в 40 миллионов раз холоднее реликтового излучения (2,7 K). Такая дыра поглощает больше, чем излучает, и растёт. Испариться к нашему времени могли бы только первичные дыры легче примерно 10<sup>12</sup> кг, если они вообще существуют. Само излучение Хокинга пока никто не наблюдал.</p>
+      </div>
+
+      <figure class="fig">
+        <div class="split">
+          <canvas id="hawk" role="img" aria-label="Образ излучения Хокинга: у горизонта появляются пары частица–античастица, одна падает внутрь, другая улетает. Размер и цвет дыры зависят от выбранной массы."></canvas>
+          <div class="side">
+            <div class="read"><span class="k">Масса</span><span class="v" id="oM">—</span><span class="n" id="oMn"></span></div>
+            <div class="read"><span class="k">Радиус Шварцшильда</span><span class="v" id="oRs">—</span></div>
+            <div class="read"><span class="k">Температура Хокинга</span><span class="v xl" id="oT">—</span><span class="n" id="oTn"></span></div>
+            <div class="read"><span class="k">Время испарения</span><span class="v" id="oLife">—</span><span class="n" id="oLifen"></span></div>
+            <div class="read"><span class="k">Энтропия Бекенштейна — Хокинга</span><span class="v" id="oS">—</span><span class="n">S = k<sub>B</sub>A/(4l<sub>P</sub>²): пропорциональна площади горизонта, а не объёму</span></div>
+          </div>
+        </div>
+        <div class="axis">
+          <div class="axis-wrap">
+            <div class="axis-mark" id="axisMark" style="left:50%"><span id="axisVal">—</span></div>
+            <div class="axis-track"></div>
+          </div>
+          <div class="axis-ticks" id="axisTicks" aria-hidden="true"></div>
+        </div>
+        <div class="chips" role="group" aria-label="Готовые массы">
+          <button class="chip" type="button" data-logm="12">Гора, 10¹² кг</button>
+          <button class="chip" type="button" data-logm="22.866">Луна</button>
+          <button class="chip" type="button" data-logm="24.776">Земля</button>
+          <button class="chip" type="button" data-logm="30.2985">Солнце</button>
+          <button class="chip" type="button" data-logm="36.932">Sgr A*</button>
+          <button class="chip" type="button" data-logm="40.111">M87*</button>
+          <button class="chip" type="button" data-logm="41.118">TON 618</button>
+        </div>
+        <div class="ctl">
+          <div class="grow"><label for="massRange">Масса, <span class="nt">log<sub>10</sub> кг</span></label><input type="range" id="massRange" min="9" max="41.5" step="0.01" value="12"><output id="massOut" for="massRange">12,0</output></div>
+        </div>
+        <figcaption>Расчёт по формулам Хокинга без поправок на «серость» спектра и на число сортов частиц: время испарения t = 5120πG²M³/(ħc⁴). Анимация слева иллюстрирует популярный образ с парами и не является расчётом. Шкала температуры логарифмическая, от 10<sup>−20</sup> до 10<sup>15</sup> K.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- VI. EDGE -->
+<section class="chap" id="edge" data-c="edge">
+  <div class="wrap">
+    <div class="rail"><span class="num">VI</span><span class="tag">Граница знания</span><span class="key">l<sub>P</sub> = 1,6·10<sup>−35</sup> м</span></div>
+    <div class="body">
+      <h2>Что измерено, <em>а что пока нет</em></h2>
+      <p class="lede">Красивые идеи не равны проверенным фактам. Вот где проходит граница сегодня.</p>
+      <div class="ledger">
+        <div style="--c:var(--anti)">
+          <h3>Измерено</h3>
+          <ul>
+            <li><span>1932</span>Позитрон в космических лучах (Карл Андерсон).</li>
+            <li><span>1959</span>Гравитационное смещение частоты света на башне высотой 22,5 м (Паунд и Ребка).</li>
+            <li><span>1989</span>Интерференция одиночных электронов, накопленная точка за точкой (Тономура).</li>
+            <li><span>2015</span>Гравитационные волны от слияния двух чёрных дыр, LIGO. 36 и 29 масс Солнца слились в 62, около 3 масс Солнца ушло в волны.</li>
+            <li><span>2019</span>Тень чёрной дыры M87*, Event Horizon Telescope. В 2022 году — тень Sgr A* в центре Млечного Пути.</li>
+            <li><span>2020</span>Нобелевская премия: Пенроузу за доказательство того, что чёрные дыры следуют из общей теории относительности; Генцелю и Гез за орбиты звёзд вокруг Sgr A*.</li>
+            <li><span>2022</span>Нарушение неравенств Белла (Аспе, Клаузер, Цайлингер).</li>
+            <li><span>2023</span>Антиводород падает вниз (ALPHA-g).</li>
+          </ul>
+        </div>
+        <div style="--c:var(--matter)">
+          <h3>Пока теория или гипотеза</h3>
+          <ul>
+            <li><span>1974</span>Излучение Хокинга: следует из теории, напрямую не наблюдалось.</li>
+            <li><span>1976</span>Парадокс информации: что происходит со сведениями о том, что упало в дыру. Вопрос остаётся открытым.</li>
+            <li><span>—</span>Что в центре. Сингулярность показывает, что общая теория относительности там перестаёт работать.</li>
+            <li><span>—</span>Квантовая гравитация: теория струн, петлевая гравитация. Опытных подтверждений пока нет.</li>
+            <li><span>—</span>Природа тёмной материи и тёмной энергии.</li>
+            <li><span>—</span>Почему во Вселенной вещества больше, чем антивещества.</li>
+            <li><span>—</span>Кротовые норы и белые дыры: это решения уравнений, но их никто не видел. Для кротовой норы нужна экзотическая материя с отрицательной энергией.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="coda">Все эти вопросы сходятся на планковском масштабе: длина 1,6·10<sup>−35</sup> м, время 5,4·10<sup>−44</sup> с. Туда пока не дотягивается ни один эксперимент, и именно там начнётся следующая физика.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><p class="sign">Горизонт событий</p></div>
+    <div>
+      <h4>Что здесь расчёт, а что рисунок</h4>
+      <ul>
+        <li>Чёрная дыра вверху посчитана, а не нарисована. Для каждого пикселя луч света проходит путь по уравнению геодезической в метрике Шварцшильда: d²u/dφ² = −u + 1,5·r<sub>s</sub>u², где u = 1/r. Диск тонкий, от 3 до 12,5 r<sub>s</sub>; его цвет и яркость учитывают доплеровское и гравитационное смещение. Настоящие дыры вращаются (метрика Керра), так что это модель, а не фотография.</li>
+        <li>Облако электрона, интерференция и формулы Хокинга посчитаны по настоящим формулам. Пузырьковая камера и пары у горизонта — схемы, их масштабы подобраны для наглядности.</li>
+        <li>Константы взяты по CODATA, числа округлены.</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+'use strict';
+/* ================= helpers ================= */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const TAU = Math.PI * 2;
+const clamp = (x, a, b) => (x < a ? a : x > b ? b : x);
+const lerp = (a, b, t) => a + (b - a) * t;
+const fmtInt = n => Math.round(n).toLocaleString('ru-RU');
+const dec = (x, d) => x.toFixed(d).replace('.', ',');
+
+/* number → "6,2·10<sup>−8</sup>" (HTML) */
+function sci(x, d = 2) {
+  if (!isFinite(x) || x === 0) return '0';
+  let e = Math.floor(Math.log10(Math.abs(x)));
+  let m = x / Math.pow(10, e);
+  let ms = m.toFixed(d - 1);
+  if (parseFloat(ms) >= 10) { e += 1; ms = (m / 10).toFixed(d - 1); }
+  if (e === 0) return ms.replace('.', ',');
+  return `${ms.replace('.', ',')}·10<sup>${e < 0 ? '−' : ''}${Math.abs(e)}</sup>`;
+}
+/* readable number: plain in a sane range, scientific outside */
+function num(x, d = 2) {
+  const a = Math.abs(x);
+  if (a >= 0.01 && a < 1e6) {
+    const digits = a >= 100 ? 0 : a >= 10 ? 1 : d;
+    return x.toLocaleString('ru-RU', { maximumFractionDigits: digits, minimumFractionDigits: 0 });
+  }
+  return sci(x, d);
+}
+function fmtLen(m) {
+  if (m < 1e-12) return `${num(m / 1e-15)} фм`;
+  if (m < 1e-9) return `${num(m / 1e-12)} пм`;
+  if (m < 1e-6) return `${num(m / 1e-9)} нм`;
+  if (m < 1e-3) return `${num(m / 1e-6)} мкм`;
+  if (m < 1) return `${num(m * 1e3)} мм`;
+  if (m < 1e3) return `${num(m)} м`;
+  if (m < 1e9) return `${num(m / 1e3)} км`;
+  if (m < 1.5e13) return `${num(m / 1e9)} млн км`;
+  if (m < 9.46e15 * 0.5) return `${num(m / 1.496e11)} а. е.`;
+  return `${num(m / 9.4607e15)} св. лет`;
+}
+function sizeCanvas(c, dprMax = 2) {
+  const dpr = Math.min(window.devicePixelRatio || 1, dprMax);
+  const r = c.getBoundingClientRect();
+  const w = Math.max(1, Math.round(r.width * dpr)), h = Math.max(1, Math.round(r.height * dpr));
+  if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
+  return { w, h, dpr, cw: r.width, ch: r.height };
+}
+/* run step(t, dt) every frame while el is on screen; poke() forces one frame */
+function live(el, step) {
+  let vis = false, raf = 0, last = 0, t = 0;
+  const run = now => {
+    raf = 0;
+    const dt = last ? Math.min(0.05, (now - last) / 1000) : 1 / 60;
+    last = now; t += dt;
+    step(t, dt);
+    if (vis && !RM && !document.hidden) raf = requestAnimationFrame(run); else last = 0;
+  };
+  const kick = () => { if (!raf) raf = requestAnimationFrame(run); };
+  new IntersectionObserver(es => { vis = es[0].isIntersecting; if (vis) { last = 0; kick(); } }, { rootMargin: '120px' }).observe(el);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && vis) { last = 0; kick(); } });
+  window.addEventListener('resize', kick);
+  return { poke: kick, get visible() { return vis; } };
+}
+/* drag helper (mouse/pen/touch); vertical touch drags stay page scroll */
+function dragger(el, onMove) {
+  let d = null;
+  el.addEventListener('pointerdown', e => { d = { x: e.clientX, y: e.clientY }; el.setPointerCapture(e.pointerId); });
+  el.addEventListener('pointermove', e => {
+    if (!d) return;
+    const dx = e.clientX - d.x, dy = e.clientY - d.y;
+    d.x = e.clientX; d.y = e.clientY;
+    onMove(dx, dy);
+  });
+  const end = () => { d = null; };
+  el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end);
+  return () => !!d;
+}
+
+/* ================= top bar ================= */
+(() => {
+  const top = $('#topbar');
+  const links = $$('.top nav a');
+  const secs = links.map(a => $(a.getAttribute('href')));
+  let ticking = false;
+  const upd = () => {
+    ticking = false;
+    top.classList.toggle('solid', window.scrollY > 40);
+    let cur = -1;
+    secs.forEach((s, i) => { if (s && s.getBoundingClientRect().top < innerHeight * 0.35) cur = i; });
+    links.forEach((a, i) => a.classList.toggle('on', i === cur));
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+  upd();
+  const budget = $('#budget');
+  if (budget) new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { budget.classList.add('in'); io.disconnect(); } }, { threshold: 0.4 }).observe(budget);
+})();
+
+/* ================= HERO: ray-traced Schwarzschild black hole ================= */
+(() => {
+  const hero = $('.hero'), cv = $('#bh');
+  const incl = $('#incl'), inclOut = $('#inclOut'), playBtn = $('#bhPlay');
+  const gl = cv.getContext('webgl', { antialias: false, alpha: false, depth: false, stencil: false, powerPreference: 'high-performance' });
+  if (!gl) { hero.classList.add('no-gl'); return; }
+
+  const VS = `attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }`;
+  const FS = `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+uniform vec2 uRes;
+uniform float uTime;
+uniform vec3 uCam, uFwd, uRight, uUp;
+uniform float uTan;
+uniform vec2 uOff;
+#define MAXS 340
+const float RIN = 3.0;
+const float ROUT = 12.5;
+
+float h31(vec3 p){ p = fract(p * 0.1031); p += dot(p, p.zyx + 31.32); return fract((p.x + p.y) * p.z); }
+float n3(vec3 x){
+  vec3 i = floor(x); vec3 f = fract(x); f = f * f * (3.0 - 2.0 * f);
+  float a = h31(i), b = h31(i + vec3(1.0,0.0,0.0)), c = h31(i + vec3(0.0,1.0,0.0)), d = h31(i + vec3(1.0,1.0,0.0));
+  float e = h31(i + vec3(0.0,0.0,1.0)), g = h31(i + vec3(1.0,0.0,1.0)), h = h31(i + vec3(0.0,1.0,1.0)), k = h31(i + vec3(1.0,1.0,1.0));
+  return mix(mix(mix(a,b,f.x), mix(c,d,f.x), f.y), mix(mix(e,g,f.x), mix(h,k,f.x), f.y), f.z);
+}
+float fbm(vec3 p){ float s = 0.0, a = 0.5; for(int i = 0; i < 4; i++){ s += a * n3(p); p = p * 2.03 + vec3(1.7, 9.2, 3.1); a *= 0.5; } return s; }
+
+vec3 bb(float K){
+  float t = clamp(K, 1000.0, 40000.0) / 100.0;
+  float r = t <= 66.0 ? 1.0 : clamp(1.292936186 * pow(max(t - 60.0, 0.001), -0.1332047592), 0.0, 1.0);
+  float g = t <= 66.0 ? clamp(0.390081579 * log(t) - 0.631841444, 0.0, 1.0) : clamp(1.129890861 * pow(max(t - 60.0, 0.001), -0.0755148492), 0.0, 1.0);
+  float b = t >= 66.0 ? 1.0 : (t <= 19.0 ? 0.0 : clamp(0.543206789 * log(max(t - 10.0, 0.001)) - 1.196254089, 0.0, 1.0));
+  return vec3(r, g, b);
+}
+
+vec3 starLayer(vec3 d, float sc, float thr, float sz){
+  vec3 p = d * sc; vec3 ip = floor(p); vec3 f = fract(p);
+  float h = h31(ip);
+  if (h < thr) return vec3(0.0);
+  vec3 o = 0.25 + 0.5 * vec3(h31(ip + 3.1), h31(ip + 7.7), h31(ip + 11.3));
+  float k = (h - thr) / (1.0 - thr);
+  float br = smoothstep(sz, 0.0, length(f - o));
+  vec3 tint = mix(vec3(1.0, 0.74, 0.52), vec3(0.64, 0.80, 1.0), h31(ip + 5.5));
+  return tint * br * br * (0.25 + 2.4 * k * k);
+}
+
+vec3 sky(vec3 d){
+  vec3 c = vec3(0.0);
+  c += starLayer(d, 48.0, 0.93, 0.22) * 1.1;
+  c += starLayer(d, 96.0, 0.92, 0.22);
+  c += starLayer(d, 190.0, 0.93, 0.24) * 0.7;
+  vec3 ax = normalize(vec3(0.35, 0.85, 0.4));
+  float b = dot(d, ax);
+  float band = exp(-b * b * 9.0);
+  float n = fbm(d * 2.6 + vec3(4.0, 1.0, 2.0));
+  float m = fbm(d * 8.0 + 2.0);
+  vec3 neb = mix(vec3(0.018, 0.026, 0.075), vec3(0.10, 0.05, 0.035), n);
+  c += neb * band * (0.3 + 1.7 * n * n) * (0.4 + m);
+  c += starLayer(d, 420.0, 0.80, 0.26) * 0.45 * band;
+  return c + vec3(0.002, 0.003, 0.008);
+}
+
+vec4 disk(vec3 hp, float r, vec3 rd){
+  float v = sqrt(0.5 / (r - 1.0));
+  vec3 vd = normalize(vec3(hp.z, 0.0, -hp.x));
+  float gam = 1.0 / sqrt(1.0 - v * v);
+  float g = sqrt(1.0 - 1.0 / r) / (gam * (1.0 + v * dot(vd, rd)));
+  float ang = atan(hp.z, hp.x);
+  float a = ang - uTime * 0.5 * pow(RIN / r, 1.5);
+  float n1 = fbm(vec3(cos(a) * 3.0, sin(a) * 3.0, r * 2.6));
+  float n2 = fbm(vec3(cos(a * 2.0) * 5.0, sin(a * 2.0) * 5.0, r * 7.5 + 3.0));
+  float tex = 0.25 + 1.05 * n1 * n1 * 1.6 + 0.45 * n2;
+  float T = pow(RIN / r, 0.75);
+  vec3 col = pow(bb(1250.0 + 4300.0 * T * g), vec3(2.2));
+  float bright = pow(g, 3.0) * pow(RIN / r, 1.7) * tex * 1.5;
+  float edge = smoothstep(RIN, RIN + 0.45, r) * (1.0 - smoothstep(ROUT - 5.5, ROUT, r));
+  float al = clamp(edge * (0.35 + 0.65 * tex), 0.0, 0.95);
+  return vec4(col * bright, al);
+}
+
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5 * uRes) / uRes.y - uOff;
+  vec3 rd = normalize(uFwd + 2.0 * uTan * (uv.x * uRight + uv.y * uUp));
+  vec3 P = uCam;
+  float D = length(P);
+  vec3 e1 = P / D;
+  float cp = dot(rd, e1);
+  vec3 tg = rd - cp * e1;
+  float sp = length(tg);
+  vec3 e2 = sp > 1e-5 ? tg / sp : normalize(cross(e1, vec3(0.0, 1.0, 0.0)));
+  float u = 1.0 / D;
+  float du = -u * sqrt(1.0 - u) * cp / max(sp, 1e-4);
+  float phi = 0.0;
+  vec3 pp = P;
+  vec3 col = vec3(0.0);
+  float tr = 1.0;
+  float rmin = D;
+  bool esc = false;
+  vec3 dir = rd;
+  for (int i = 0; i < MAXS; i++) {
+    float h = clamp(0.07 * u / max(abs(du), 1e-4), 0.004, 0.05);
+    du += (-u + 1.5 * u * u) * h;
+    u += du * h;
+    phi += h;
+    if (u >= 1.0) break;
+    vec3 rh = cos(phi) * e1 + sin(phi) * e2;
+    if (u < 0.02 && du < 0.0) {
+      vec3 ph = -sin(phi) * e1 + cos(phi) * e2;
+      dir = normalize(-du * rh + u * ph);
+      esc = true;
+      break;
+    }
+    vec3 pn = rh / u;
+    if (pp.y * pn.y < 0.0 && tr > 0.03) {
+      float t = pp.y / (pp.y - pn.y);
+      vec3 hp = mix(pp, pn, t);
+      float r = length(hp.xz);
+      if (r > RIN && r < ROUT) {
+        vec4 dk = disk(hp, r, normalize(pn - pp));
+        col += tr * dk.rgb * dk.a;
+        tr *= 1.0 - dk.a;
+      }
+    }
+    pp = pn;
+    rmin = min(rmin, 1.0 / u);
+  }
+  if (esc) {
+    col += tr * sky(dir);
+    col += tr * vec3(1.0, 0.55, 0.26) * 0.32 * exp(-(rmin - 1.5) * 4.5);
+  }
+  col *= 1.15;
+  float L = dot(col, vec3(0.2126, 0.7152, 0.0722));
+  vec3 keepHue = col * (1.0 - exp(-L)) / max(L, 1e-4);
+  col = clamp(mix(keepHue, 1.0 - exp(-col), 0.4), 0.0, 1.0);
+  col = pow(col, vec3(1.0 / 2.2));
+  col += (h31(vec3(gl_FragCoord.xy, 7.0)) - 0.5) / 255.0;
+  gl_FragColor = vec4(col, 1.0);
+}`;
+
+  function sh(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.warn(gl.getShaderInfoLog(s)); return null; }
+    return s;
+  }
+  const vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);
+  if (!vs || !fs) { hero.classList.add('no-gl'); return; }
+  const pr = gl.createProgram();
+  gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr);
+  if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) { console.warn(gl.getProgramInfoLog(pr)); hero.classList.add('no-gl'); return; }
+  gl.useProgram(pr);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(pr, 'p');
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  const U = {};
+  ['uRes', 'uTime', 'uCam', 'uFwd', 'uRight', 'uUp', 'uTan', 'uOff'].forEach(n => U[n] = gl.getUniformLocation(pr, n));
+  cv.addEventListener('webglcontextlost', e => { e.preventDefault(); hero.classList.add('no-gl'); });
+
+  const DIST = 19;
+  let az = 0.9, el = 10 * Math.PI / 180, tAz = az, tEl = el;
+  let simT = 8, playing = !RM;
+  let scale = innerWidth < 700 ? 0.6 : 0.8, ema = 16, lastFrame = 0, framesSinceResize = 0;
+  const roll = -7 * Math.PI / 180;
+
+  const norm = v => { const l = Math.hypot(v[0], v[1], v[2]); return [v[0] / l, v[1] / l, v[2] / l]; };
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+
+  function setIncl(deg, fromSlider) {
+    tEl = clamp(deg, 2, 80) * Math.PI / 180;
+    if (!fromSlider) incl.value = Math.round(tEl * 180 / Math.PI);
+    inclOut.textContent = Math.round(tEl * 180 / Math.PI) + '°';
+  }
+  incl.addEventListener('input', () => { setIncl(+incl.value, true); view.poke(); });
+  playBtn.addEventListener('click', () => {
+    playing = !playing;
+    playBtn.setAttribute('aria-pressed', String(playing));
+    playBtn.textContent = playing ? 'Пауза' : 'Пуск';
+    view.poke();
+  });
+  if (!playing) { playBtn.setAttribute('aria-pressed', 'false'); playBtn.textContent = 'Пуск'; }
+  dragger(cv, (dx, dy) => { tAz -= dx * 0.005; setIncl(tEl * 180 / Math.PI + dy * 0.25); view.poke(); });
+
+  function render(dt) {
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const r = cv.getBoundingClientRect();
+    const w = Math.max(2, Math.round(r.width * dpr * scale)), h = Math.max(2, Math.round(r.height * dpr * scale));
+    if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; framesSinceResize = 0; }
+    gl.viewport(0, 0, w, h);
+    const k = 1 - Math.pow(0.0015, dt);
+    az += (tAz - az) * k; el += (tEl - el) * k;
+    if (playing) { tAz += dt * 0.025; simT += dt; }
+    const ce = Math.cos(el), se = Math.sin(el);
+    const cam = [DIST * ce * Math.sin(az), DIST * se, DIST * ce * Math.cos(az)];
+    const fwd = norm([-cam[0], -cam[1], -cam[2]]);
+    const rt0 = norm(cross(fwd, [0, 1, 0]));
+    const up0 = cross(rt0, fwd);
+    const cr = Math.cos(roll), sr = Math.sin(roll);
+    const rt = [rt0[0] * cr + up0[0] * sr, rt0[1] * cr + up0[1] * sr, rt0[2] * cr + up0[2] * sr];
+    const up = [up0[0] * cr - rt0[0] * sr, up0[1] * cr - rt0[1] * sr, up0[2] * cr - rt0[2] * sr];
+    const aspect = r.width / Math.max(1, r.height);
+    const tanV = Math.max(0.42, 0.4 / aspect);
+    let ox = 0, oy = 0.05;
+    if (aspect > 1.1) ox = (lerp(0.5, 0.655, clamp((aspect - 1.1) / 0.5, 0, 1)) - 0.5) * aspect;
+    else oy = 0.5 - Math.min(r.height * 0.5, innerHeight * 0.3 + 30) / r.height;
+    gl.uniform2f(U.uRes, w, h);
+    gl.uniform1f(U.uTime, simT);
+    gl.uniform3fv(U.uCam, cam);
+    gl.uniform3fv(U.uFwd, fwd);
+    gl.uniform3fv(U.uRight, rt);
+    gl.uniform3fv(U.uUp, up);
+    gl.uniform1f(U.uTan, tanV);
+    gl.uniform2f(U.uOff, ox, oy);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+
+  const view = live(hero, (t, dt) => {
+    const now = performance.now();
+    if (lastFrame) {
+      ema = ema * 0.9 + (now - lastFrame) * 0.1;
+      framesSinceResize++;
+      if (framesSinceResize > 30) {
+        if (ema > 30 && scale > 0.32) { scale *= 0.85; framesSinceResize = 0; }
+        else if (ema < 17.5 && scale < 1) { scale = Math.min(1, scale * 1.08); framesSinceResize = 0; }
+      }
+    }
+    lastFrame = now;
+    render(dt);
+    if (RM || !playing) lastFrame = 0;
+  });
+  setIncl(10);
+})();
+
+/* ================= I. Atom → proton zoom ================= */
+(() => {
+  const cv = $('#zoomCv'); if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const rng = $('#zoomRange'), stage = $('#zoomStage'), mag = $('#zoomMag'), play = $('#zoomPlay');
+  const A0 = 5.29177e-11, RP = 0.84e-15, ZMAX = 6e4;
+  const N = 1800, P = new Float32Array(N * 3);
+  const samp = i => {
+    const r = -0.5 * Math.log(Math.random() * Math.random() * Math.random() + 1e-12);
+    const u = Math.random() * 2 - 1, ph = Math.random() * TAU, s = Math.sqrt(1 - u * u);
+    P[i * 3] = r * s * Math.cos(ph); P[i * 3 + 1] = r * u; P[i * 3 + 2] = r * s * Math.sin(ph);
+  };
+  for (let i = 0; i < N; i++) samp(i);
+  const sea = Array.from({ length: 18 }, () => ({ a: Math.random() * TAU, r: Math.sqrt(Math.random()), ph: Math.random(), sp: 0.5 + Math.random() * 0.9, o: Math.random() * TAU }));
+  const QC = ['255,110,110', '120,255,160', '120,180,255'];
+  let s = 0, dir = 0, lastStage = '';
+
+  const niceLen = m => { const e = Math.floor(Math.log10(m)); const b = m / Math.pow(10, e); const n = b >= 5 ? 5 : b >= 2 ? 2 : 1; return n * Math.pow(10, e); };
+  const lenLabel = L => {
+    if (L >= 1e-9) return `${+(L / 1e-9).toPrecision(2)} нм`.replace('.', ',');
+    if (L >= 1e-12) return `${+(L / 1e-12).toPrecision(2)} пм`.replace('.', ',');
+    return `${+(L / 1e-15).toPrecision(2)} фм`.replace('.', ',');
+  };
+  function setStage(z, rp) {
+    let txt;
+    if (z < 6) txt = 'Атом водорода. Электрон — облако вероятности, а не шарик на орбите.';
+    else if (rp < 1.2) txt = 'Приближаемся к центру. Электрон встречается всё реже, а ядро всё ещё точка.';
+    else if (rp < 14) txt = 'Ядро уже видно. Оно в десятки тысяч раз меньше атома, и почти весь путь до него пуст.';
+    else txt = 'Протон: три кварка, склеенные глюонным полем, и «море» виртуальных пар кварк–антикварк.';
+    if (txt !== lastStage) { stage.textContent = txt; lastStage = txt; }
+  }
+  rng.addEventListener('input', () => { s = rng.value / 1000; dir = 0; play.textContent = s > 0.5 ? 'Вернуться к атому' : 'Нырнуть к протону'; view.poke(); });
+  play.addEventListener('click', () => { dir = s > 0.5 ? -1 : 1; play.textContent = dir > 0 ? 'Вернуться к атому' : 'Нырнуть к протону'; if (RM) { s = dir > 0 ? 1 : 0; rng.value = s * 1000; dir = 0; } view.poke(); });
+
+  const view = live(cv, (t, dt) => {
+    if (dir) {
+      s = clamp(s + dir * dt / 8, 0, 1); rng.value = Math.round(s * 1000);
+      if (s === 0 || s === 1) dir = 0;
+    }
+    const { cw: W, ch: H, dpr } = sizeCanvas(cv);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = '#05070f'; ctx.fillRect(0, 0, W, H);
+    const cx = W / 2, cy = H / 2, R0 = 0.3 * Math.min(W, H);
+    const z = Math.pow(ZMAX, s), k = R0 * z;
+    const rp = RP / A0 * k;
+    mag.textContent = '×' + fmtInt(z);
+    setStage(z, rp);
+
+    for (let j = 0; j < 14; j++) samp((Math.random() * N) | 0);
+    const ang = t * 0.12, ca = Math.cos(ang), sa = Math.sin(ang);
+    ctx.globalCompositeOperation = 'lighter';
+    const fog = clamp(1 - Math.log10(z) / 2, 0, 1);
+    if (fog > 0) {
+      const dg = ctx.createRadialGradient(cx, cy, 0, cx, cy, k * 2.6);
+      dg.addColorStop(0, `rgba(255,179,94,${0.2 * fog})`); dg.addColorStop(0.2, `rgba(255,160,80,${0.11 * fog})`); dg.addColorStop(0.5, `rgba(255,140,70,${0.035 * fog})`); dg.addColorStop(1, 'rgba(255,140,70,0)');
+      ctx.fillStyle = dg; ctx.fillRect(0, 0, W, H);
+    }
+    ctx.fillStyle = 'rgba(255,186,110,.55)';
+    for (let i = 0; i < N; i++) {
+      const x = P[i * 3], y = P[i * 3 + 1], zz = P[i * 3 + 2];
+      const X = cx + (x * ca + zz * sa) * k, Y = cy + y * k;
+      if (X < -3 || X > W + 3 || Y < -3 || Y > H + 3) continue;
+      ctx.fillRect(X - 0.8, Y - 0.8, 1.7, 1.7);
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    if (k < Math.max(W, H)) {
+      ctx.setLineDash([3, 6]); ctx.strokeStyle = 'rgba(255,179,94,.28)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(cx, cy, k, 0, TAU); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = 'rgba(255,179,94,.8)'; ctx.font = '500 11px "JetBrains Mono", monospace';
+      const al = 'a₀ = 5,3·10⁻¹¹ м', tw = ctx.measureText(al).width;
+      ctx.fillText(al, Math.min(cx + k * 0.72 + 6, W - tw - 10), Math.max(18, cy - k * 0.72));
+    }
+
+    // nucleus / proton
+    ctx.globalCompositeOperation = 'lighter';
+    const rr = Math.max(rp, 2.2);
+    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rr * 1.8);
+    g.addColorStop(0, 'rgba(255,240,215,.95)'); g.addColorStop(0.45, 'rgba(255,179,94,.35)'); g.addColorStop(1, 'rgba(255,140,60,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, rr * 1.8, 0, TAU); ctx.fill();
+    if (rp > 6) {
+      ctx.strokeStyle = 'rgba(255,200,140,.35)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(cx, cy, rp, 0, TAU); ctx.stroke();
+    }
+    const qa = clamp((rp - 12) / 40, 0, 1);
+    if (qa > 0) {
+      const q = [0, 1, 2].map(i => {
+        const f = 0.75 + 0.25 * Math.sin(t * 0.9 + i * 1.7);
+        return [cx + rp * 0.5 * f * Math.cos(t * (0.9 + 0.23 * i) + i * 2.094), cy + rp * 0.5 * f * Math.sin(t * (1.15 + 0.19 * i) + i * 2.094)];
+      });
+      const jx = (q[0][0] + q[1][0] + q[2][0]) / 3 + Math.sin(t * 3.1) * rp * 0.03;
+      const jy = (q[0][1] + q[1][1] + q[2][1]) / 3 + Math.cos(t * 2.7) * rp * 0.03;
+      for (let i = 0; i < 3; i++) {
+        const mx = (jx + q[i][0]) / 2 + Math.sin(t * 6 + i * 2) * rp * 0.06, my = (jy + q[i][1]) / 2 + Math.cos(t * 5 + i) * rp * 0.06;
+        for (const [lw, al] of [[Math.max(2, rp * 0.09), 0.12], [Math.max(1, rp * 0.025), 0.75]]) {
+          ctx.strokeStyle = `rgba(255,232,200,${al * qa})`; ctx.lineWidth = lw;
+          ctx.beginPath(); ctx.moveTo(jx, jy); ctx.quadraticCurveTo(mx, my, q[i][0], q[i][1]); ctx.stroke();
+        }
+      }
+      for (const p of sea) {
+        p.ph += dt * p.sp; if (p.ph > 1) { p.ph -= 1; p.a = Math.random() * TAU; p.r = Math.sqrt(Math.random()); p.o = Math.random() * TAU; }
+        const al = Math.sin(Math.PI * p.ph) * qa * 0.9;
+        const x = cx + Math.cos(p.a) * p.r * rp * 0.92, y = cy + Math.sin(p.a) * p.r * rp * 0.92;
+        const d = rp * 0.06 * Math.sin(Math.PI * p.ph), rad = Math.max(1.1, rp * 0.016);
+        ctx.fillStyle = `rgba(255,179,94,${al})`; ctx.beginPath(); ctx.arc(x - Math.cos(p.o) * d, y - Math.sin(p.o) * d, rad, 0, TAU); ctx.fill();
+        ctx.fillStyle = `rgba(98,228,255,${al})`; ctx.beginPath(); ctx.arc(x + Math.cos(p.o) * d, y + Math.sin(p.o) * d, rad, 0, TAU); ctx.fill();
+      }
+      q.forEach((p, i) => {
+        const r = Math.max(3, rp * 0.1);
+        const gq = ctx.createRadialGradient(p[0], p[1], 0, p[0], p[1], r * 2.4);
+        gq.addColorStop(0, `rgba(255,255,255,${qa})`); gq.addColorStop(0.35, `rgba(${QC[i]},${0.9 * qa})`); gq.addColorStop(1, `rgba(${QC[i]},0)`);
+        ctx.fillStyle = gq; ctx.beginPath(); ctx.arc(p[0], p[1], r * 2.4, 0, TAU); ctx.fill();
+      });
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = `rgba(235,233,245,${0.75 * qa})`; ctx.font = '500 11px "JetBrains Mono", monospace';
+      ctx.fillText('u   u   d  — валентные кварки', 16, 26);
+      ctx.fillStyle = `rgba(98,228,255,${0.85 * qa})`;
+      ctx.fillText('•  виртуальные антикварки', 16, 44);
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    if (rp < 1.5) {
+      ctx.fillStyle = 'rgba(235,233,245,.85)'; ctx.font = '500 11px "JetBrains Mono", monospace';
+      const pl = W < 560 ? 'протон (увеличен)' : 'протон (увеличен: иначе меньше пикселя)';
+      ctx.fillText(pl, Math.min(cx + 12, W - ctx.measureText(pl).width - 10), cy + 4);
+    }
+    // scale bar
+    const pxPerM = k / A0, L = niceLen(120 / pxPerM), Lpx = L * pxPerM;
+    ctx.strokeStyle = 'rgba(235,233,245,.75)'; ctx.lineWidth = 1;
+    const by = H - 22;
+    ctx.beginPath(); ctx.moveTo(16, by); ctx.lineTo(16 + Lpx, by); ctx.moveTo(16, by - 4); ctx.lineTo(16, by + 4); ctx.moveTo(16 + Lpx, by - 4); ctx.lineTo(16 + Lpx, by + 4); ctx.stroke();
+    ctx.fillStyle = 'rgba(235,233,245,.85)'; ctx.font = '500 11px "JetBrains Mono", monospace';
+    ctx.fillText(lenLabel(L), 16 + Lpx + 10, by + 4);
+  });
+})();
+
+/* ================= II. Bubble chamber ================= */
+(() => {
+  const cv = $('#chamber'); if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const AMB = '255,179,94', CYA = '98,228,255';
+  let W = 300, H = 300;
+  const evs = [];
+  let nextAuto = 0.4, quietUntil = 0, autoN = 0, clock = 0;
+  const gauss = () => (Math.random() + Math.random() + Math.random() + Math.random() - 2) * 0.8;
+  const hash = i => { const x = Math.sin(i * 12.9898) * 43758.5453; return x - Math.floor(x); };
+
+  function track(x, y, th, p0, q, rgb) {
+    const m = Math.min(W, H), K = 0.5 * m, LAM = 0.7 * m, ds = 2.2;
+    const pts = [x, y]; let p = p0;
+    for (let i = 0; i < 1800; i++) {
+      const R = Math.max(p * K, 1e-3);
+      th += q * ds / R + gauss() * 0.004;
+      x += Math.cos(th) * ds; y += Math.sin(th) * ds;
+      p *= Math.exp(-ds / LAM);
+      pts.push(x, y);
+      if (R < 2.2) break;
+    }
+    return { pts, rgb, n: pts.length / 2, drawn: 0, seed: Math.random() * 1000 };
+  }
+  function pair(x, y, ang) {
+    if (ang === undefined) ang = (Math.random() - 0.5) * 1.2;
+    const P = 0.5 + Math.random() * 0.55, f = 0.22 + Math.random() * 0.56;
+    evs.push({
+      kind: 'pair', x, y, ang, age: 0, fade: 0,
+      tr: [track(x, y, ang + 0.03 + Math.random() * 0.15, P * f, -1, AMB), track(x, y, ang - 0.03 - Math.random() * 0.15, P * (1 - f), 1, CYA)]
+    });
+  }
+  function annih(x, y) {
+    evs.push({ kind: 'ann', x, y, a: Math.random() * TAU, d: 0.32 * Math.min(W, H), c: (Math.random() < 0.5 ? 1 : -1) * (0.25 + Math.random() * 0.2), ga: Math.random() * TAU, age: 0 });
+  }
+  const rndPt = () => [W * (0.2 + Math.random() * 0.6), H * (0.25 + Math.random() * 0.5)];
+  $('#pairBtn').addEventListener('click', () => { const [x, y] = rndPt(); pair(x, y); quietUntil = clock + 5; view.poke(); });
+  $('#annBtn').addEventListener('click', () => { const [x, y] = rndPt(); annih(x, y); quietUntil = clock + 5; view.poke(); });
+  cv.addEventListener('click', e => { const r = cv.getBoundingClientRect(); pair(e.clientX - r.left, e.clientY - r.top); quietUntil = clock + 5; view.poke(); });
+
+  function drawTrack(tr, alpha) {
+    const n = Math.min(tr.n, Math.floor(tr.drawn));
+    if (n < 2) return;
+    const p = tr.pts;
+    ctx.beginPath(); ctx.moveTo(p[0], p[1]);
+    for (let i = 1; i < n; i++) ctx.lineTo(p[i * 2], p[i * 2 + 1]);
+    ctx.strokeStyle = `rgba(${tr.rgb},${0.1 * alpha})`; ctx.lineWidth = 5; ctx.stroke();
+    ctx.strokeStyle = `rgba(${tr.rgb},${0.55 * alpha})`; ctx.lineWidth = 1; ctx.stroke();
+    ctx.fillStyle = `rgba(${tr.rgb},${0.8 * alpha})`;
+    for (let i = 0; i < n; i += 3) {
+      const h = hash(i + tr.seed);
+      ctx.beginPath(); ctx.arc(p[i * 2] + (h - 0.5) * 1.6, p[i * 2 + 1] + (hash(i + tr.seed + 7) - 0.5) * 1.6, 0.7 + h * 0.9, 0, TAU); ctx.fill();
+    }
+    if (n < tr.n) {
+      const x = p[n * 2 - 2], y = p[n * 2 - 1];
+      const g = ctx.createRadialGradient(x, y, 0, x, y, 10);
+      g.addColorStop(0, `rgba(255,255,255,${alpha})`); g.addColorStop(0.3, `rgba(${tr.rgb},${0.7 * alpha})`); g.addColorStop(1, `rgba(${tr.rgb},0)`);
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 10, 0, TAU); ctx.fill();
+    }
+  }
+  function label(txt, x, y, rgb, al) { ctx.fillStyle = `rgba(${rgb},${al})`; ctx.fillText(txt, x, y); }
+
+  const view = live(cv, (t, dt) => {
+    clock += dt;
+    const d = sizeCanvas(cv); W = d.cw; H = d.ch;
+    ctx.setTransform(d.dpr, 0, 0, d.dpr, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    const bg = ctx.createRadialGradient(W * 0.5, H * 0.5, 0, W * 0.5, H * 0.5, Math.max(W, H) * 0.7);
+    bg.addColorStop(0, '#0a1020'); bg.addColorStop(1, '#04060d');
+    ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(150,160,230,.05)'; ctx.lineWidth = 1; ctx.beginPath();
+    for (let x = 40; x < W; x += 40) { ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, H); }
+    for (let y = 40; y < H; y += 40) { ctx.moveTo(0, y + 0.5); ctx.lineTo(W, y + 0.5); }
+    ctx.stroke();
+    ctx.font = '500 11px "JetBrains Mono", monospace';
+    label('B ⊙  поле направлено к вам', 14, 22, '154,158,186', 0.9);
+    label('● e−  электрон', 14, H - 30, AMB, 0.95);
+    label('● e+  позитрон', 14, H - 14, CYA, 0.95);
+
+    if (!RM && clock > nextAuto && clock > quietUntil) {
+      autoN++;
+      const [x, y] = rndPt();
+      if (autoN % 5 === 0) annih(x, y); else pair(x, y);
+      nextAuto = clock + 2.6 + Math.random() * 1.6;
+    }
+    if (RM && evs.length === 0) { pair(W * 0.35, H * 0.5, 0.1); pair(W * 0.62, H * 0.4, -0.3); evs.forEach(e => e.tr && e.tr.forEach(tr => tr.drawn = tr.n)); }
+
+    ctx.globalCompositeOperation = 'lighter';
+    for (let i = evs.length - 1; i >= 0; i--) {
+      const ev = evs[i]; ev.age += dt;
+      if (ev.kind === 'pair') {
+        const pg = Math.min(1, ev.age / 0.3);
+        let done = true;
+        ev.tr.forEach(tr => { if (pg >= 1) tr.drawn = Math.min(tr.n, tr.drawn + dt * 520); if (tr.drawn < tr.n) done = false; });
+        if (done) ev.fade += dt / 6;
+        const al = 1 - clamp(ev.fade, 0, 1);
+        const L = 0.5 * Math.max(W, H);
+        const gx0 = ev.x - Math.cos(ev.ang) * L, gy0 = ev.y - Math.sin(ev.ang) * L;
+        ctx.setLineDash([3, 7]); ctx.strokeStyle = `rgba(235,233,245,${0.28 * al})`; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(gx0, gy0); ctx.lineTo(lerp(gx0, ev.x, pg), lerp(gy0, ev.y, pg)); ctx.stroke(); ctx.setLineDash([]);
+        if (pg >= 1) {
+          ctx.fillStyle = `rgba(235,233,245,${0.6 * al})`;
+          ctx.fillText('γ', ev.x - Math.cos(ev.ang) * 34 - 4, ev.y - Math.sin(ev.ang) * 34 - 6);
+        }
+        ev.tr.forEach(tr => drawTrack(tr, al));
+        if (ev.fade >= 1) evs.splice(i, 1);
+      } else {
+        const T = 1.3, s = Math.min(1, ev.age / T);
+        const pos = (side, u) => {
+          const a = ev.a + (side < 0 ? Math.PI : 0), dd = ev.d * (1 - u);
+          const px = -Math.sin(a) * ev.c * ev.d * Math.sin(Math.PI * u) * side, py = Math.cos(a) * ev.c * ev.d * Math.sin(Math.PI * u) * side;
+          return [ev.x + Math.cos(a) * dd + px, ev.y + Math.sin(a) * dd + py];
+        };
+        const fadeAll = 1 - clamp((ev.age - T - 1.2) / 1.2, 0, 1);
+        [[-1, AMB], [1, CYA]].forEach(([side, rgb]) => {
+          ctx.beginPath();
+          for (let j = 0; j <= 40; j++) { const u = s * j / 40; const p = pos(side, u); j ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); }
+          ctx.strokeStyle = `rgba(${rgb},${0.6 * fadeAll})`; ctx.lineWidth = 1.2; ctx.stroke();
+          if (s < 1) { const p = pos(side, s); ctx.fillStyle = `rgba(${rgb},.95)`; ctx.beginPath(); ctx.arc(p[0], p[1], 3, 0, TAU); ctx.fill(); }
+        });
+        if (ev.age > T) {
+          const e = ev.age - T;
+          const fl = Math.max(0, 1 - e / 0.6);
+          const g = ctx.createRadialGradient(ev.x, ev.y, 0, ev.x, ev.y, 18 + e * 140);
+          g.addColorStop(0, `rgba(255,255,255,${0.9 * fl})`); g.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = g; ctx.beginPath(); ctx.arc(ev.x, ev.y, 18 + e * 140, 0, TAU); ctx.fill();
+          const len = Math.min(1, e / 0.5) * Math.max(W, H) * 0.6;
+          for (const sg of [1, -1]) {
+            const dx = Math.cos(ev.ga) * sg, dy = Math.sin(ev.ga) * sg;
+            const lg = ctx.createLinearGradient(ev.x, ev.y, ev.x + dx * len, ev.y + dy * len);
+            lg.addColorStop(0, `rgba(255,255,255,${0.1 * fadeAll})`); lg.addColorStop(1, `rgba(255,250,235,${0.95 * fadeAll})`);
+            ctx.strokeStyle = lg; ctx.lineWidth = 1.6;
+            ctx.beginPath(); ctx.moveTo(ev.x, ev.y); ctx.lineTo(ev.x + dx * len, ev.y + dy * len); ctx.stroke();
+            const lx = ev.x + dx * Math.min(len, 90), ly = ev.y + dy * Math.min(len, 90);
+            ctx.fillStyle = `rgba(235,233,245,${0.85 * fadeAll * Math.min(1, e * 3)})`;
+            ctx.fillText('γ 511 кэВ', lx + 8, ly - 6);
+          }
+        }
+        if (ev.age > T + 2.6) evs.splice(i, 1);
+      }
+    }
+    ctx.globalCompositeOperation = 'source-over';
+  });
+  // wavy photon lines in the Feynman diagram
+  $$('.feyn .photon').forEach(p => {
+    const [ax, ay] = p.dataset.a.split(',').map(Number), [bx, by] = p.dataset.b.split(',').map(Number);
+    const L = Math.hypot(bx - ax, by - ay), ux = (bx - ax) / L, uy = (by - ay) / L, nx = -uy, ny = ux;
+    let d = `M${ax} ${ay}`;
+    for (let i = 1; i <= 120; i++) { const s = i / 120 * L, w = Math.sin(s / L * TAU * 7) * 5; d += ` L${(ax + ux * s + nx * w).toFixed(2)} ${(ay + uy * s + ny * w).toFixed(2)}`; }
+    p.setAttribute('d', d);
+  });
+})();
+
+/* ================= III. Flamm funnel + gravitational time dilation ================= */
+(() => {
+  const cv = $('#funnel'); if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const rng = $('#depth');
+  const o = { r: $('#rOut'), h: $('#hOut'), f: $('#fOut'), you: $('#clYou'), far: $('#clFar') };
+  const chips = $$('#spacetime .chip');
+  const RS_SGR = 1.27e10;
+  const A = -9.8, B = Math.log10(19);
+  let eps = 0.5, F = Math.sqrt(1.5 / 0.5), t0 = performance.now(), lastTxt = 0;
+  let yaw = 0.6, pitch = 0.95;
+  const RMAX = 9;
+  const RADII = [1, 1.03, 1.08, 1.16, 1.3, 1.5, 1.75, 2.05, 2.45, 3, 3.6, 4.3, 5.1, 6, 7, 8, 9];
+  const NA = 72;
+  const hY = r => 2 * Math.sqrt(Math.max(r - 1, 0)) - 2 * Math.sqrt(RMAX - 1);
+  const ringCol = r => {
+    const t = Math.pow((r - 1) / (RMAX - 1), 0.55);
+    return `hsl(${lerp(14, 258, t).toFixed(0)},${lerp(95, 80, t).toFixed(0)}%,${lerp(60, 72, t).toFixed(0)}%)`;
+  };
+  const special = { 1: ['#ff6a3d', 2.2], 1.5: ['#fff1dc', 1.6], 3: ['#62e4ff', 1.6] };
+
+  function fmtDur(S) {
+    if (S < 60) return dec(S, 1) + ' с';
+    if (S < 3600) return `${Math.floor(S / 60)} мин ${Math.floor(S % 60)} с`;
+    if (S < 86400) return `${Math.floor(S / 3600)} ч ${Math.floor(S % 3600 / 60)} мин`;
+    const d = S / 86400;
+    if (d < 365.25) return `${Math.floor(d)} сут ${Math.floor((d % 1) * 24)} ч`;
+    const y = d / 365.25;
+    if (y < 1000) return `${Math.floor(y)} г. ${Math.floor((y % 1) * 365.25)} сут`;
+    return `${fmtInt(y)} лет`;
+  }
+  function setEps(e, fromSlider) {
+    eps = clamp(e, Math.pow(10, A), Math.pow(10, B));
+    F = Math.sqrt((1 + eps) / eps);
+    if (!fromSlider) rng.value = Math.round((Math.log10(eps) - A) / (B - A) * 1000);
+    o.r.innerHTML = eps < 0.01 ? `r = r<sub>s</sub>·(1 + ${sci(eps)})` : `r = ${num(1 + eps)} r<sub>s</sub>`;
+    o.h.innerHTML = `для Sgr A*: ${fmtLen(eps * RS_SGR)} над горизонтом`;
+    o.f.innerHTML = '×' + (F < 10 ? dec(F, 2) : fmtInt(F));
+    chips.forEach(c => c.setAttribute('aria-pressed', String(Math.abs(Math.log10(+c.dataset.eps) - Math.log10(eps)) < 0.01)));
+    t0 = performance.now();
+    view.poke();
+  }
+  rng.addEventListener('input', () => setEps(Math.pow(10, A + (rng.value / 1000) * (B - A)), true));
+  chips.forEach(c => c.addEventListener('click', () => setEps(+c.dataset.eps)));
+  const dragging = dragger(cv, (dx, dy) => { yaw += dx * 0.008; pitch = clamp(pitch + dy * 0.005, 0.3, 1.35); view.poke(); });
+
+  const view = live(cv, (t, dt) => {
+    const now = performance.now();
+    if (now - lastTxt > 90) {
+      const el = (now - t0) / 1000;
+      o.you.textContent = fmtDur(el); o.far.textContent = fmtDur(el * F); lastTxt = now;
+    }
+    if (!dragging() && !RM) yaw += dt * 0.1;
+    const { cw: W, ch: H, dpr } = sizeCanvas(cv);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = '#05070f'; ctx.fillRect(0, 0, W, H);
+    const cyw = Math.cos(yaw), syw = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
+    const camD = 30, focal = Math.min(W * 1.35, H * 2.25);
+    const cx = W / 2, cy0 = H * 0.45;
+    const proj = (x, y, z) => {
+      const X = x * cyw - z * syw, Z = x * syw + z * cyw;
+      const Y2 = y * cp + Z * sp, Z2 = -y * sp + Z * cp;
+      const k = focal / (camD + Z2);
+      return [cx + X * k, cy0 - Y2 * k, Z2];
+    };
+    const pts = RADII.map(r => { const y = hY(r); const a = []; for (let j = 0; j < NA; j++) { const f = j / NA * TAU; a.push(proj(r * Math.cos(f), y, r * Math.sin(f))); } return a; });
+    const bucket = z => clamp(Math.floor((1 - (z + 10) / 20) * 4), 0, 3);
+    const BA = [0.22, 0.42, 0.68, 1];
+    // glow at the throat
+    const th = proj(0, hY(1), 0);
+    const tg = ctx.createRadialGradient(th[0], th[1], 0, th[0], th[1], H * 0.3);
+    tg.addColorStop(0, 'rgba(255,106,61,.16)'); tg.addColorStop(1, 'rgba(255,106,61,0)');
+    ctx.fillStyle = tg; ctx.fillRect(0, 0, W, H);
+    ctx.lineCap = 'round';
+    // meridians
+    for (let k = 0; k < RADII.length - 1; k++) {
+      const paths = [new Path2D(), new Path2D(), new Path2D(), new Path2D()];
+      for (let j = 0; j < NA; j += 2) {
+        const a = pts[k][j], b = pts[k + 1][j];
+        const p = paths[bucket((a[2] + b[2]) / 2)];
+        p.moveTo(a[0], a[1]); p.lineTo(b[0], b[1]);
+      }
+      ctx.strokeStyle = ringCol((RADII[k] + RADII[k + 1]) / 2); ctx.lineWidth = 0.9;
+      paths.forEach((p, b) => { ctx.globalAlpha = BA[b] * 0.8; ctx.stroke(p); });
+    }
+    // rings
+    RADII.forEach((r, k) => {
+      const sp_ = special[r];
+      const paths = [new Path2D(), new Path2D(), new Path2D(), new Path2D()];
+      for (let j = 0; j < NA; j++) {
+        const a = pts[k][j], b = pts[k][(j + 1) % NA];
+        const p = paths[bucket((a[2] + b[2]) / 2)];
+        p.moveTo(a[0], a[1]); p.lineTo(b[0], b[1]);
+      }
+      ctx.strokeStyle = sp_ ? sp_[0] : ringCol(r); ctx.lineWidth = sp_ ? sp_[1] : 0.9;
+      paths.forEach((p, b) => { ctx.globalAlpha = BA[b] * (sp_ ? 1 : 0.85); ctx.stroke(p); });
+    });
+    ctx.globalAlpha = 1;
+    // orbiters
+    ctx.globalCompositeOperation = 'lighter';
+    [[1.5, '255,241,220'], [3, '98,228,255'], [6, '158,138,255']].forEach(([r, c], i) => {
+      const a = (RM ? 1 : t) * 1.6 * Math.pow(r, -1.5) + i * 2.1;
+      const p = proj(r * Math.cos(a), hY(r), r * Math.sin(a));
+      const g = ctx.createRadialGradient(p[0], p[1], 0, p[0], p[1], 9);
+      g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(0.3, `rgba(${c},.9)`); g.addColorStop(1, `rgba(${c},0)`);
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p[0], p[1], 9, 0, TAU); ctx.fill();
+    });
+    // you
+    const rm = Math.min(1 + eps, RMAX), am = 2.2 - yaw;
+    const m = proj(rm * Math.cos(am), hY(rm), rm * Math.sin(am));
+    const rim = proj(rm * Math.cos(am), 0, rm * Math.sin(am));
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.setLineDash([2, 4]); ctx.strokeStyle = 'rgba(235,233,245,.45)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(rim[0], rim[1]); ctx.lineTo(m[0], m[1]); ctx.stroke(); ctx.setLineDash([]);
+    const pulse = RM ? 0.5 : (t * 0.8) % 1;
+    ctx.strokeStyle = `rgba(235,233,245,${0.8 * (1 - pulse)})`; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.arc(m[0], m[1], 5 + pulse * 16, 0, TAU); ctx.stroke();
+    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(m[0], m[1], 4, 0, TAU); ctx.fill();
+    ctx.font = '500 11px "JetBrains Mono", monospace'; ctx.fillStyle = 'rgba(235,233,245,.95)';
+    ctx.fillText('вы', m[0] + 10, m[1] - 8);
+    const lg = ctx.createLinearGradient(14, 0, 164, 0);
+    [1, 1.5, 2.5, 4.5, 9].forEach(r => lg.addColorStop((r - 1) / 8, ringCol(r)));
+    ctx.fillStyle = lg; ctx.fillRect(14, H - 30, 150, 3);
+    ctx.fillStyle = 'rgba(154,158,186,.9)';
+    ctx.fillText('часы медленнее', 14, H - 12);
+    ctx.textAlign = 'right'; ctx.fillText('быстрее', 164, H - 12); ctx.textAlign = 'left';
+  });
+  setEps(0.5);
+})();
+
+/* ================= IV. Double slit ================= */
+(() => {
+  const cv = $('#slit'); if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const rate = $('#slitRate'), rateOut = $('#slitRateOut'), obsBtn = $('#slitObs'), cnt = $('#slitCount');
+  let W = 0, H = 0, DPR = 1, observer = false, total = 0, carry = 0, norm = 1, flash = [0, 0];
+  const NB = 96, bins = new Float32Array(NB);
+  const acc = document.createElement('canvas'), actx = acc.getContext('2d');
+  const fld = document.createElement('canvas'), fctx = fld.getContext('2d');
+  let img = null;
+  const parts = [];
+  const g = {};
+  const sinc = x => (Math.abs(x) < 1e-6 ? 1 : Math.sin(x) / x);
+  function single(y, ys) { const s = (y - ys) / Math.hypot(y - ys, g.L); const v = sinc(Math.PI * g.a * s / g.lam); return v * v; }
+  function pdf(y) {
+    if (!observer) {
+      const s = y / Math.hypot(y, g.L);
+      const c = Math.cos(Math.PI * g.d * s / g.lam), e = sinc(Math.PI * g.a * s / g.lam);
+      return c * c * e * e;
+    }
+    return 0.5 * (single(y, -g.d / 2) + single(y, g.d / 2));
+  }
+  function layout(w, h) {
+    W = w; H = h;
+    g.xs = W * 0.06; g.xb = W * 0.34; g.xScr = W * 0.7; g.yc = H * 0.5;
+    g.half = H * 0.42; g.lam = Math.max(7, H * 0.026); g.d = H * 0.2; g.a = 1.3 * g.lam; g.L = g.xScr - g.xb;
+    g.hx0 = g.xScr + 22; g.hx1 = W - 14; g.u = clamp(W / 900, 0.55, 1);
+    acc.width = Math.round(W * DPR); acc.height = Math.round(H * DPR);
+    actx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    const fs = FS;
+    fld.width = Math.max(1, Math.ceil((g.xScr - g.xb) / fs)); fld.height = Math.max(1, Math.ceil(H / fs));
+    img = fctx.createImageData(fld.width, fld.height);
+    computeNorm(); reset();
+  }
+  function computeNorm() { let s = 0; const n = 400; for (let i = 0; i < n; i++) s += pdf(-g.half + (i + 0.5) / n * 2 * g.half); norm = s / n * 2 * g.half; }
+  function reset() { bins.fill(0); total = 0; parts.length = 0; actx.clearRect(0, 0, W, H); cnt.textContent = '0'; }
+  function sampleY() { for (let k = 0; k < 400; k++) { const y = (Math.random() * 2 - 1) * g.half; if (Math.random() < pdf(y)) return y; } return 0; }
+  function deposit(y) {
+    const x = g.xScr + 2 + Math.random() * 7;
+    actx.globalCompositeOperation = 'lighter';
+    actx.fillStyle = 'rgba(255,186,110,.55)'; actx.fillRect(x, g.yc + y - 0.8, 1.6, 1.6);
+    const b = Math.floor((y + g.half) / (2 * g.half) * NB);
+    if (b >= 0 && b < NB) bins[b]++;
+    total++;
+  }
+  function spawn(animated) {
+    const y = sampleY();
+    let slit = 0;
+    if (observer) { const p1 = single(y, -g.d / 2), p2 = single(y, g.d / 2); slit = Math.random() * (p1 + p2) < p1 ? -1 : 1; }
+    if (animated) parts.push({ age: 0, y, slit }); else deposit(y);
+  }
+  obsBtn.addEventListener('click', () => {
+    observer = !observer;
+    obsBtn.setAttribute('aria-pressed', String(observer));
+    obsBtn.textContent = observer ? 'Детектор щели: включён' : 'Детектор щели: выключен';
+    computeNorm(); reset(); view.poke();
+  });
+  $('#slitReset').addEventListener('click', () => { reset(); view.poke(); });
+  rate.addEventListener('input', () => { rateOut.textContent = rate.value; });
+  const T1 = 0.4, T2 = 0.5, FS = 2;
+
+  const view = live(cv, (t, dt) => {
+    const d = sizeCanvas(cv); DPR = d.dpr;
+    if (Math.abs(d.cw - W) > 0.5 || Math.abs(d.ch - H) > 0.5 || !img) layout(d.cw, d.ch);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = '#05070f'; ctx.fillRect(0, 0, W, H);
+
+    // spawn
+    const r = +rate.value;
+    if (RM) { if (total < 3000) for (let i = 0; i < 3000; i++) spawn(false); }
+    else {
+      carry += r * dt;
+      while (carry >= 1) { carry -= 1; spawn(parts.length < 46 && r <= 120); }
+    }
+    cnt.textContent = fmtInt(total);
+
+    // wave field behind the barrier
+    const fw = fld.width, fh = fld.height, data = img.data, fs = FS;
+    const kk = TAU / g.lam, wt = (RM ? 0 : t) * 7;
+    const y1 = g.yc - g.d / 2, y2 = g.yc + g.d / 2;
+    for (let j = 0; j < fh; j++) {
+      const Y = j * fs;
+      for (let i = 0; i < fw; i++) {
+        const X = i * fs + 1;
+        const r1 = Math.hypot(X, Y - y1) + 2, r2 = Math.hypot(X, Y - y2) + 2;
+        const a1 = Math.cos(kk * r1 - wt) / Math.sqrt(r1), a2 = Math.cos(kk * r2 - wt) / Math.sqrt(r2);
+        let v, R, G, Bc, A;
+        const fade = Math.min(1, X / 30);
+        if (!observer) {
+          v = (a1 + a2) * 5;
+          if (v > 0) { R = 98; G = 228; Bc = 255; } else { R = 158; G = 138; Bc = 255; }
+          A = Math.min(1, Math.abs(v)) * 150 * fade;
+        } else {
+          v = (a1 * a1 + a2 * a2) * 18;
+          R = 158; G = 138; Bc = 255; A = Math.min(1, v) * 120 * fade;
+        }
+        const o = (j * fw + i) * 4;
+        data[o] = R; data[o + 1] = G; data[o + 2] = Bc; data[o + 3] = A;
+      }
+    }
+    fctx.putImageData(img, 0, 0);
+    ctx.imageSmoothingEnabled = true;
+    ctx.globalAlpha = 0.6; ctx.drawImage(fld, g.xb, 0, fw * fs, fh * fs); ctx.globalAlpha = 1;
+
+    // barrier with slits
+    ctx.fillStyle = '#1a2040';
+    const sh = g.a / 2;
+    ctx.fillRect(g.xb - 2, 0, 4, y1 - sh);
+    ctx.fillRect(g.xb - 2, y1 + sh, 4, (y2 - sh) - (y1 + sh));
+    ctx.fillRect(g.xb - 2, y2 + sh, 4, H - (y2 + sh));
+    // detectors
+    if (observer) {
+      [y1, y2].forEach((yy, i) => {
+        const f = flash[i];
+        ctx.strokeStyle = `rgba(98,228,255,${0.5 + 0.5 * f})`; ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.arc(g.xb + 14, yy, 6 + f * 5, 0, TAU); ctx.stroke();
+        ctx.fillStyle = `rgba(98,228,255,${0.3 + 0.7 * f})`; ctx.beginPath(); ctx.arc(g.xb + 14, yy, 2.2, 0, TAU); ctx.fill();
+        flash[i] = Math.max(0, f - dt * 3);
+      });
+    }
+    // source
+    const sg = ctx.createRadialGradient(g.xs, g.yc, 0, g.xs, g.yc, 22);
+    sg.addColorStop(0, 'rgba(255,240,215,1)'); sg.addColorStop(0.3, 'rgba(255,179,94,.7)'); sg.addColorStop(1, 'rgba(255,179,94,0)');
+    ctx.fillStyle = sg; ctx.beginPath(); ctx.arc(g.xs, g.yc, 22, 0, TAU); ctx.fill();
+    // screen
+    ctx.fillStyle = 'rgba(150,160,230,.18)'; ctx.fillRect(g.xScr, g.yc - g.half, 11, 2 * g.half);
+    ctx.drawImage(acc, 0, 0, W, H);
+
+    // particles in flight
+    ctx.globalCompositeOperation = 'lighter';
+    for (let i = parts.length - 1; i >= 0; i--) {
+      const p = parts[i]; p.age += dt;
+      const hitX = g.xScr + 5, hitY = g.yc + p.y;
+      const dot = (x, y, a, rad) => {
+        rad *= g.u;
+        const gg = ctx.createRadialGradient(x, y, 0, x, y, rad);
+        gg.addColorStop(0, `rgba(255,250,235,${a})`); gg.addColorStop(0.35, `rgba(255,179,94,${0.6 * a})`); gg.addColorStop(1, 'rgba(255,179,94,0)');
+        ctx.fillStyle = gg; ctx.beginPath(); ctx.arc(x, y, rad, 0, TAU); ctx.fill();
+      };
+      if (p.age < T1) {
+        const u = p.age / T1;
+        const ty = p.slit ? (p.slit < 0 ? y1 : y2) : g.yc;
+        dot(lerp(g.xs, g.xb, u), lerp(g.yc, ty, u), 1, p.slit ? 6 : 6 + u * 12);
+      } else if (p.age < T1 + T2) {
+        const u = (p.age - T1) / T2;
+        if (p.slit) {
+          if (!p.flashed) { flash[p.slit < 0 ? 0 : 1] = 1; p.flashed = true; }
+          const sy = p.slit < 0 ? y1 : y2;
+          dot(lerp(g.xb, hitX, u), lerp(sy, hitY, u), 1, 6);
+        } else {
+          dot(lerp(g.xb, hitX, u), lerp(y1, hitY, u), 0.5 + 0.5 * u, 6 + (1 - u) * 6);
+          dot(lerp(g.xb, hitX, u), lerp(y2, hitY, u), 0.5 + 0.5 * u, 6 + (1 - u) * 6);
+        }
+      } else {
+        deposit(p.y);
+        dot(hitX, hitY, 1, 12);
+        parts.splice(i, 1);
+      }
+    }
+    ctx.globalCompositeOperation = 'source-over';
+
+    // histogram + expected curve
+    let mx = 0; for (let i = 0; i < NB; i++) mx = Math.max(mx, bins[i]);
+    const bw = 2 * g.half / NB;
+    const expMax = total * bw / norm;
+    const disp = Math.max(mx, expMax * 1.0, 1) * 1.08;
+    const hw = g.hx1 - g.hx0;
+    ctx.fillStyle = 'rgba(255,179,94,.55)';
+    for (let i = 0; i < NB; i++) { if (!bins[i]) continue; const y = g.yc - g.half + i * bw; ctx.fillRect(g.hx0, y + 0.3, bins[i] / disp * hw, Math.max(1, bw - 0.6)); }
+    if (total > 0) {
+      ctx.strokeStyle = 'rgba(98,228,255,.85)'; ctx.lineWidth = 1; ctx.beginPath();
+      for (let i = 0; i <= 160; i++) { const y = -g.half + i / 160 * 2 * g.half; const x = g.hx0 + pdf(y) * total * bw / norm / disp * hw; i ? ctx.lineTo(x, g.yc + y) : ctx.moveTo(x, g.yc + y); }
+      ctx.stroke();
+    }
+    ctx.strokeStyle = 'rgba(150,160,230,.25)'; ctx.beginPath(); ctx.moveTo(g.hx0 + 0.5, g.yc - g.half); ctx.lineTo(g.hx0 + 0.5, g.yc + g.half); ctx.stroke();
+    // labels
+    ctx.font = '500 11px "JetBrains Mono", monospace'; ctx.fillStyle = 'rgba(154,158,186,.9)';
+    if (W > 520) {
+      ctx.fillText('источник', g.xs - 18, g.yc + 36);
+      ctx.fillText('две щели', g.xb - 26, 18);
+      ctx.textAlign = 'right'; ctx.fillText('экран', g.xScr + 11, 18); ctx.textAlign = 'left';
+      ctx.fillText('попадания', g.hx0 + 14, 18);
+    }
+  });
+})();
+
+/* ================= V. Hawking radiation calculator ================= */
+(() => {
+  const cv = $('#hawk'); if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const C = { G: 6.6743e-11, c: 299792458, hb: 1.054571817e-34, kB: 1.380649e-23, Ms: 1.98847e30, Me: 5.9722e24, Mm: 7.342e22, yr: 3.15576e7, age: 1.38e10, cmb: 2.725 };
+  const rng = $('#massRange'), out = $('#massOut');
+  const el = id => $('#' + id);
+  const chips = $$('#hawking .chip');
+  const mark = el('axisMark'), markVal = el('axisVal');
+  const TMIN = -20, TMAX = 15;
+  const tpos = lt => clamp((lt - TMIN) / (TMAX - TMIN) * 100, 0, 100);
+  el('axisTicks').innerHTML = [
+    [-18.97, 'TON 618'], [-7.21, 'Солнце-дыра'], [0.435, 'реликтовое<br>излучение 2,7 K', 1], [3.76, 'поверхность<br>Солнца'], [7.19, 'центр Солнца', 1], [11.09, 'дыра 10¹² кг']
+  ].map(([lt, txt, low]) => `<span class="${low ? 'low' : ''}" style="left:${tpos(lt)}%">${txt}</span>`).join('');
+  let logM = 12, logT = 0, hot = 0;
+  const pairs = [];
+  let carry = 0;
+
+  function update(v, fromSlider) {
+    logM = clamp(v, 9, 41.5);
+    if (!fromSlider) rng.value = logM;
+    out.textContent = dec(logM, 1);
+    const M = Math.pow(10, logM);
+    const rs = 2 * C.G * M / (C.c * C.c);
+    const T = C.hb * Math.pow(C.c, 3) / (8 * Math.PI * C.G * M * C.kB);
+    const life = 5120 * Math.PI * C.G * C.G * M * M * M / (C.hb * Math.pow(C.c, 4)) / C.yr;
+    const S = 4 * Math.PI * C.G * M * M / (C.hb * C.c);
+    logT = Math.log10(T); hot = clamp((logT + 10) / 22, 0, 1);
+    el('oM').innerHTML = `${sci(M)} кг`;
+    let rel;
+    if (M >= 0.05 * C.Ms) rel = `≈ ${num(M / C.Ms)} массы Солнца`;
+    else if (M >= 0.05 * C.Me) rel = `≈ ${num(M / C.Me)} массы Земли`;
+    else if (M >= 0.05 * C.Mm) rel = `≈ ${num(M / C.Mm)} массы Луны`;
+    else rel = 'масса горы или астероида';
+    el('oMn').innerHTML = rel;
+    el('oRs').innerHTML = fmtLen(rs);
+    el('oT').innerHTML = `${sci(T)} K`;
+    el('oTn').innerHTML = T > C.cmb
+      ? `в ${sci(T / C.cmb)} раз горячее реликтового излучения: излучает больше, чем поглощает, и испаряется`
+      : `в ${sci(C.cmb / T)} раз холоднее реликтового излучения: поглощает больше, чем излучает, и растёт`;
+    el('oLife').innerHTML = `${sci(life)} лет`;
+    el('oLifen').innerHTML = life > C.age
+      ? `в ${sci(life / C.age)} раз дольше нынешнего возраста Вселенной (13,8 млрд лет)`
+      : 'меньше возраста Вселенной: если такие дыры родились в Большом взрыве, они уже испарились';
+    el('oS').innerHTML = `${sci(S)} k<sub>B</sub>`;
+    mark.style.left = tpos(logT) + '%';
+    markVal.innerHTML = `${sci(T, 2)} K`;
+    chips.forEach(c => c.setAttribute('aria-pressed', String(Math.abs(+c.dataset.logm - logM) < 0.02)));
+    view.poke();
+  }
+  rng.addEventListener('input', () => update(+rng.value, true));
+  chips.forEach(c => c.addEventListener('click', () => update(+c.dataset.logm)));
+
+  const view = live(cv, (t, dt) => {
+    const { cw: W, ch: H, dpr } = sizeCanvas(cv);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = '#05070f'; ctx.fillRect(0, 0, W, H);
+    const cx = W * 0.5, cy = H * 0.52;
+    const R = Math.min(W, H) * lerp(0.07, 0.36, (logM - 9) / 32.5);
+    const hue = lerp(6, 205, hot), light = lerp(42, 88, hot);
+    // halo
+    const halo = ctx.createRadialGradient(cx, cy, R * 0.9, cx, cy, R * (2.2 + hot * 1.5));
+    halo.addColorStop(0, `hsla(${hue},95%,${light}%,${lerp(0.12, 0.45, hot)})`); halo.addColorStop(1, `hsla(${hue},95%,${light}%,0)`);
+    ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(cx, cy, R * 4, 0, TAU); ctx.fill();
+    // pairs
+    if (!RM) {
+      carry += dt * lerp(0.8, 9, hot);
+      while (carry >= 1) {
+        carry -= 1;
+        const a = Math.random() * TAU, r0 = R * (1.04 + Math.random() * 0.12), out = Math.random() < 0.5;
+        pairs.push({ a, r0, age: 0, life: 1 + Math.random() * 0.6, out, tw: (Math.random() - 0.5) * 0.8 });
+      }
+    } else if (pairs.length === 0) {
+      for (let i = 0; i < 9; i++) pairs.push({ a: i * 0.7, r0: R * 1.08, age: 0.5, life: 1.2, out: i % 2 === 0, tw: 0.2 });
+    }
+    ctx.globalCompositeOperation = 'lighter';
+    for (let i = pairs.length - 1; i >= 0; i--) {
+      const p = pairs[i]; if (!RM) p.age += dt;
+      const u = p.age / p.life;
+      if (u >= 1) { pairs.splice(i, 1); continue; }
+      const sx = cx + Math.cos(p.a) * p.r0, sy = cy + Math.sin(p.a) * p.r0;
+      const sep = Math.min(1, u * 5);
+      const esc = [cx + Math.cos(p.a + p.tw * u) * (p.r0 + u * R * 1.8 + u * 60), cy + Math.sin(p.a + p.tw * u) * (p.r0 + u * R * 1.8 + u * 60)];
+      const fall = [cx + Math.cos(p.a - 0.3 * sep) * lerp(p.r0, R * 0.92, Math.min(1, u * 2.2)), cy + Math.sin(p.a - 0.3 * sep) * lerp(p.r0, R * 0.92, Math.min(1, u * 2.2))];
+      const cOut = p.out ? '255,179,94' : '98,228,255', cIn = p.out ? '98,228,255' : '255,179,94';
+      const al = Math.sin(Math.PI * Math.min(1, u * 1.2)) * lerp(0.55, 1, hot);
+      ctx.strokeStyle = `rgba(${cOut},${0.45 * al})`; ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(esc[0], esc[1]); ctx.stroke();
+      ctx.fillStyle = `rgba(${cOut},${al})`; ctx.beginPath(); ctx.arc(esc[0], esc[1], 2.4, 0, TAU); ctx.fill();
+      if (u < 0.5) { const a2 = al * (1 - u * 2); ctx.fillStyle = `rgba(${cIn},${a2})`; ctx.beginPath(); ctx.arc(fall[0], fall[1], 2.2, 0, TAU); ctx.fill(); }
+    }
+    ctx.globalCompositeOperation = 'source-over';
+    // the hole
+    ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(cx, cy, R, 0, TAU); ctx.fill();
+    ctx.strokeStyle = `hsla(${hue},95%,${light}%,${lerp(0.35, 1, hot)})`; ctx.lineWidth = lerp(1, 2.2, hot);
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, TAU); ctx.stroke();
+    ctx.font = '500 11px "JetBrains Mono", monospace'; ctx.fillStyle = 'rgba(154,158,186,.9)';
+    ctx.fillText('образ, не расчёт: пары у горизонта', 14, H - 14);
+  });
+  update(12);
+})();
+</script>
+</body>
+</html>
