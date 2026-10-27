@@ -1,0 +1,11 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+html,body{margin:0;background:#000;overflow:hidden}
+#w{position:relative;width:1280px;height:720px}
+canvas{position:absolute;left:0;top:0;width:1280px;height:720px}
+#flash,#fade{position:absolute;inset:0;opacity:0;pointer-events:none}
+#flash{background:#fff7e6}#fade{background:#000}
+</style></head><body><div id="w"><canvas id="c" width="1280" height="720"></canvas><div id="flash"></div><div id="fade"></div></div>
+<script src="node_modules/three/build/three.min.js"></script> <!-- npm i three@0.160.0 -->
+<script src="scene.js"></script>
+</body></html>
